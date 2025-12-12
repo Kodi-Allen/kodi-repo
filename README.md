@@ -1,84 +1,84 @@
 # Kodi Allen Repository
 
-Kodi Omega (v21) kompatibles Add-on Repository.
+Kodi Omega (v21) compatible add-on repository.
 
 ## 📦 Installation
 
-### Methode 1: Über ZIP-Datei
+### Method 1: Via ZIP File
 
-1. **Repository ZIP herunterladen:**
-   - Gehe zu [Releases](https://github.com/kodiallen/kodi-repo/releases)
-   - Lade `repository.kodiallen-1.0.0.zip` herunter
+1. **Download the repository ZIP:**
+   - Go to [Releases](https://github.com/Kodi-Allen/kodi-repo/releases)
+   - Download `repository.kodiallen-1.0.0.zip`
 
-2. **In Kodi installieren:**
-   - Öffne Kodi
-   - Gehe zu: **Einstellungen** → **Add-ons** → **Aus ZIP-Datei installieren**
-   - Wähle die heruntergeladene `repository.kodiallen-1.0.0.zip`
-   - Warte auf Bestätigung
+2. **Install in Kodi:**
+   - Open Kodi
+   - Go to: **Settings** → **Add-ons** → **Install from zip file**
+   - Select the downloaded `repository.kodiallen-1.0.0.zip`
+   - Wait for confirmation
 
-3. **Add-ons installieren:**
-   - Gehe zu: **Einstellungen** → **Add-ons** → **Aus Repository installieren**
-   - Wähle **Kodi Allen Repository**
-   - Wähle dein gewünschtes Add-on und installiere es
+3. **Install add-ons:**
+   - Go to: **Settings** → **Add-ons** → **Install from repository**
+   - Select **Kodi Allen Repository**
+   - Choose your desired add-on and install
 
 ---
 
-## 📋 Verfügbare Add-ons
+## 📋 Available Add-ons
 
 ### Script: Artwork Beef (v0.28.6)
-**Automatisches Artwork Management für deine Kodi Bibliothek**
+**Automatic artwork management for your Kodi library**
 
-- ✅ Kodi Omega (v21) kompatibel
-- ✅ Vollständig zu Python 3 migriert
-- ✅ Alle GUI-Dialoge funktionieren
-- ✅ Unterstützt: fanart.tv, TheTVDB.com, The Movie Database, TheAudioDB
+- ✅ Kodi Omega (v21) compatible
+- ✅ Fully migrated to Python 3
+- ✅ All GUI dialogs working
+- ✅ Supports: fanart.tv, TheTVDB.com, The Movie Database, TheAudioDB
 
 **Features:**
-- Automatisches Herunterladen von Artwork für Filme, Serien und Musik
-- Manuelle Artwork-Auswahl mit GUI
-- Kontext-Menü Integration (Rechtsklick)
-- Hintergrund-Service für automatische Updates
-- Lokales Artwork Caching
+- Automatic artwork download for movies, TV shows and music
+- Manual artwork selection with GUI
+- Context menu integration (right-click menu)
+- Background service for automatic updates
+- Local artwork caching
 
 ---
 
-## 🛠️ Für Entwickler
+## 🛠️ For Developers
 
-### Repository aktualisieren
+### Updating the Repository
 
-Um ein Add-on hinzuzufügen oder zu aktualisieren:
+To add or update an add-on:
 
-1. **Add-on hinzufügen:**
+1. **Add an add-on:**
    ```bash
-   cp -r /pfad/zu/script.meinaddon ./
+   cp -r /path/to/script.myaddon ./
    ```
 
-2. **Repository generieren:**
+2. **Generate repository:**
    ```bash
    cd tools
    python3 generate_repo.py
    ```
 
-3. **Zu GitHub pushen:**
+3. **Push to GitHub:**
    ```bash
    git add .
-   git commit -m "Add/Update: script.meinaddon v1.0.0"
+   git commit -m "Add/Update: script.myaddon v1.0.0"
    git push
    ```
 
 ---
 
-## 📜 Lizenz
+## 📜 License
 
-Jedes Add-on hat seine eigene Lizenz. Siehe die jeweiligen LICENSE.txt Dateien.
+Each add-on has its own license. See the respective LICENSE.txt files.
 
 ---
 
 ## 🙏 Credits
 
-- **Artwork Beef:** Basiert auf [script.artwork.beef](https://github.com/rmrector/script.artwork.beef) von rmrector
+- **Artwork Beef:** Based on [script.artwork.beef](https://github.com/rmrector/script.artwork.beef) by rmrector
 - **Maintainer:** Kodi Allen
 
 ---
 
-**Viel Spaß mit deinen Add-ons! 🎉**
+**Enjoy your add-ons! 🎉**
