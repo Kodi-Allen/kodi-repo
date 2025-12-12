@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+    <category label="General Settings">
+        <setting id="show_notifications" type="bool" label="Show notifications" help="Display notifications when fixing playback" default="true" />
+        <setting id="strm_folder1" type="folder" label=".STRM Directory #1" help="Main folder containing your .strm files" default="" />
+        <setting id="strm_folder2" type="folder" label=".STRM Directory #2" help="Additional .strm folder" default="" visible="!eq(-1,)" />
+        <setting id="strm_folder3" type="folder" label=".STRM Directory #3" help="Additional .strm folder" default="" visible="!eq(-1,)" />
+        <setting id="strm_folder4" type="folder" label=".STRM Directory #4" help="Additional .strm folder" default="" visible="!eq(-1,)" />
+        <setting id="strm_folder5" type="folder" label=".STRM Directory #5" help="Additional .strm folder" default="" visible="!eq(-1,)" />
+        <setting id="strm_folder6" type="folder" label=".STRM Directory #6" help="Additional .strm folder" default="" visible="!eq(-1,)" />
+        <setting id="strm_folder7" type="folder" label=".STRM Directory #7" help="Additional .strm folder" default="" visible="!eq(-1,)" />
+        <setting id="strm_folder8" type="folder" label=".STRM Directory #8" help="Additional .strm folder" default="" visible="!eq(-1,)" />
+        <setting id="strm_folder9" type="folder" label=".STRM Directory #9" help="Additional .strm folder" default="" visible="!eq(-1,)" />
+        <setting id="strm_folder10" type="folder" label=".STRM Directory #10" help="Additional .strm folder" default="" visible="!eq(-1,)" />
+    </category>
+</settings>

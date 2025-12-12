@@ -25,6 +25,23 @@ Kodi Omega (v21) compatible add-on repository.
 
 ## 📋 Available Add-ons
 
+### Plugin: Universal STRM Fixer (v3.2.0)
+**Universal fix for .strm file playback from library**
+
+- ✅ Kodi Omega (v21) compatible
+- ✅ Python 3 compatible
+- ✅ Works for ALL .strm files
+- ✅ Fixes library playback issues
+
+**Features:**
+- Fixes Kodi library bug where .strm files are not played correctly
+- Works for Blu-ray MPLS, DVD ISOs, regular videos, streaming URLs, etc.
+- Makes library playback work exactly like file manager playback
+- Background service that intercepts .strm playback
+- No configuration needed - works automatically
+
+---
+
 ### Script: Artwork Beef (v0.28.6)
 **Automatic artwork management for your Kodi library**
 

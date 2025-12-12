@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.mpls.strm.player" name="Universal STRM Fixer" version="3.2.0" provider-name="Kodi Allen">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.service" library="service.py" start="startup"/>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Universal fix for .strm file playback from library</summary>
+        <description lang="en_GB">Fixes Kodi library bug where .strm files are not played correctly. Works for ALL .strm files: Blu-ray MPLS, DVD ISOs, regular videos, streaming URLs, etc. Makes library playback work exactly like file manager playback.</description>
+        <platform>all</platform>
+        <license>GPL-2.0-or-later</license>
+        <source>https://github.com/Kodi-Allen/kodi-repo</source>
+    </extension>
+</addon>
