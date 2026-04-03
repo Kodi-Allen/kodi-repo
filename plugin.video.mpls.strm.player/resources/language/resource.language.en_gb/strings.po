@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <strings>
-    <string id="30001">General</string>
+    <string id="30001">STRM Browser</string>
     <string id="30002">Folder with .strm files</string>
+    <string id="30010">STRM Creator</string>
+    <string id="30011">UHD Series STRM Output</string>
+    <string id="30012">BD Series STRM Output</string>
+    <string id="30013">Show notifications</string>
 </strings>
