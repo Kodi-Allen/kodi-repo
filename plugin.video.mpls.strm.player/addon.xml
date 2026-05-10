@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.mpls.strm.player" name="MPLS STRM Player" version="4.1.0" provider-name="Kodi Allen">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Play Blu-ray MPLS playlists from .strm files and create them via thediscdb.com</summary>
+        <description lang="en_GB">Plays Blu-ray/UHD MPLS playlists via plugin:// URLs in .strm files. Built-in STRM Creator with two modes: enter a thediscdb.com URL for a single disc, or enter an EAN/UPC barcode to auto-scan and process all discs in a folder. Creates .strm files organized by show and season, works with any Kodi source (NFS, SMB, WebDAV, local).</description>
+        <platform>all</platform>
+        <license>GPL-2.0-or-later</license>
+        <source>https://github.com/Kodi-Allen/kodi-repo</source>
+    </extension>
+</addon>
