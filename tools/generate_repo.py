@@ -94,7 +94,7 @@ def generate_addons_xml():
     pretty_xml = '\n'.join([line for line in pretty_xml.split('\n') if line.strip()])
     
     # Write addons.xml
-    with open('addons.xml', 'w', encoding='utf-8') as f:
+    with open('addons.xml', 'w', encoding='utf-8', newline='\n') as f:
         f.write(pretty_xml)
     
     print("\n" + "=" * 50)

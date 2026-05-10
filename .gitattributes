@@ -1,2 +1,8 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+addons.xml text eol=lf
+addons.xml.md5 text eol=lf
+*.zip binary
+*.png binary
+*.jpg binary
