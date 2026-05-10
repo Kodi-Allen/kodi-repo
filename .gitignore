@@ -1,3 +1,7 @@
 /repository.uhd100/
 /SCHNELLSTART.md
 /STRUKTUR.md
+@eaDir/
+Thumbs.db
+*.pyc
+__pycache__/

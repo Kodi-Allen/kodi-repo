@@ -14,6 +14,16 @@ SKIP_ADDONS = {
     'repository.uhd100',
 }
 
+SKIP_DIRS = {
+    '@eaDir',
+    '__pycache__',
+}
+
+SKIP_FILES = {
+    'Thumbs.db',
+    '.DS_Store',
+}
+
 def get_addon_dirs():
     """Find all addon directories"""
     addons = []
@@ -40,11 +50,16 @@ def create_addon_zip(addon_dir):
     # Create ZIP
     with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
         for root_dir, dirs, files in os.walk(addon_dir):
+            dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
+
             # Skip existing ZIP files
             if root_dir == addon_dir:
                 files = [f for f in files if not f.endswith('.zip')]
             
             for file in files:
+                if file in SKIP_FILES or file.endswith('.pyc'):
+                    continue
+
                 file_path = os.path.join(root_dir, file)
                 arcname = os.path.join(addon_id, os.path.relpath(file_path, addon_dir))
                 zipf.write(file_path, arcname)
