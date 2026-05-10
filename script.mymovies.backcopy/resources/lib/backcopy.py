@@ -16,6 +16,37 @@ SOURCE_FILENAME = "mymovies-back.jpg"
 TARGET_FILENAME = "back.jpg"
 PAGE_SIZE = 1000
 RUNNING_PROPERTY = "{}.running".format(ADDON_ID)
+SKIP_DIRECTORY_NAMES = (
+    "@eadir",
+    "__pycache__",
+    ".git",
+    ".svn",
+    ".appledouble",
+    "certificate",
+)
+DISC_DIRECTORY_NAMES = (
+    "bdmv",
+    "video_ts",
+)
+DISC_MARKER_FILES = (
+    "index.bdmv",
+    "movieobject.bdmv",
+    "video_ts.ifo",
+)
+MEDIA_EXTENSIONS = (
+    ".iso",
+    ".strm",
+    ".mkv",
+    ".mp4",
+    ".avi",
+    ".m2ts",
+    ".mts",
+    ".ts",
+    ".mov",
+    ".wmv",
+    ".mpg",
+    ".mpeg",
+)
 
 
 class SilentProgress:
@@ -182,6 +213,28 @@ def parent_path(path):
     return stripped[: index + 1]
 
 
+def library_art_root(path):
+    if not path:
+        return ""
+
+    stripped = path.rstrip("/\\")
+    item_name = basename(stripped).lower()
+
+    if item_name in DISC_MARKER_FILES:
+        disc_dir = parent_path(stripped)
+        if basename(disc_dir).lower() in DISC_DIRECTORY_NAMES:
+            return parent_path(disc_dir)
+        return disc_dir
+
+    if item_name in DISC_DIRECTORY_NAMES:
+        return parent_path(stripped)
+
+    if path.endswith(("/", "\\")):
+        return ensure_dir_path(path)
+
+    return parent_path(path)
+
+
 def join_path(parent, child):
     if not parent:
         return child
@@ -196,8 +249,37 @@ def basename(path):
     return path.rstrip("/\\").replace("\\", "/").split("/")[-1]
 
 
+def lowercase_names(items):
+    return set(basename(item).lower() for item in items)
+
+
 def compare_path(path):
     return ensure_dir_path(path).replace("\\", "/").lower()
+
+
+def should_skip_directory(directory):
+    return basename(directory).lower() in SKIP_DIRECTORY_NAMES
+
+
+def has_media_file(files):
+    for item in files:
+        name = basename(item).lower()
+        if name.endswith(MEDIA_EXTENSIONS):
+            return True
+    return False
+
+
+def is_disc_boundary(folder, dirs, files):
+    folder_name = basename(folder).lower()
+    dir_names = lowercase_names(dirs)
+    file_names = lowercase_names(files)
+
+    return (
+        folder_name in DISC_DIRECTORY_NAMES
+        or bool(dir_names.intersection(DISC_DIRECTORY_NAMES))
+        or bool(file_names.intersection(DISC_MARKER_FILES))
+        or has_media_file(files)
+    )
 
 
 def compact_roots(paths):
@@ -225,7 +307,7 @@ def collect_video_library_roots(progress):
     movies = fetch_library_items("VideoLibrary.GetMovies", "movies", ["file"])
     for movie in movies:
         movie_file = movie.get("file", "")
-        movie_dir = parent_path(movie_file)
+        movie_dir = library_art_root(movie_file)
         if movie_dir:
             roots.append(movie_dir)
 
@@ -311,11 +393,6 @@ def scan_root(root, root_index, root_count, progress, renew, visited, stats):
         if stats["folders"] == 1 or stats["folders"] % 25 == 0:
             update_progress(progress, percent, stats, folder)
 
-        if not renew and xbmcvfs.exists(join_path(folder, TARGET_FILENAME)):
-            stats["skipped"] += 1
-            log("Skipped folder with existing target: {}".format(folder))
-            continue
-
         try:
             dirs, files = xbmcvfs.listdir(folder)
         except Exception:
@@ -323,9 +400,19 @@ def scan_root(root, root_index, root_count, progress, renew, visited, stats):
             log("Could not list folder: {}\n{}".format(folder, traceback.format_exc()), xbmc.LOGERROR)
             continue
 
-        handle_files(folder, files, renew, stats)
+        target_exists = xbmcvfs.exists(join_path(folder, TARGET_FILENAME))
+        if target_exists and not renew:
+            stats["skipped"] += 1
+            log("Skipped folder with existing target: {}".format(folder))
+        else:
+            handle_files(folder, files, renew, stats)
+
+        if is_disc_boundary(folder, dirs, files):
+            continue
 
         for directory in dirs:
+            if should_skip_directory(directory):
+                continue
             stack.append(ensure_dir_path(join_path(folder, directory)))
 
     return True
