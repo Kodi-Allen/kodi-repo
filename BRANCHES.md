@@ -1,4 +1,4 @@
-# Kodi version branches
+﻿# Kodi version branches
 
 This repository can publish separate add-on feeds per Kodi version.
 
@@ -29,6 +29,6 @@ on the active Kodi branch.
 Use the repository ZIP from the matching branch:
 
 ```text
-https://raw.githubusercontent.com/kodiallen/kodi-repo/kodi-21/repository.kodiallen/repository.kodiallen-1.0.0.zip
-https://raw.githubusercontent.com/kodiallen/kodi-repo/kodi-22/repository.kodiallen/repository.kodiallen-1.0.0.zip
+https://raw.githubusercontent.com/Kodi-Allen/kodi-repo/kodi-21/repository.kodiallen/repository.kodiallen-1.0.0.zip
+https://raw.githubusercontent.com/Kodi-Allen/kodi-repo/kodi-22/repository.kodiallen/repository.kodiallen-1.0.0.zip
 ```

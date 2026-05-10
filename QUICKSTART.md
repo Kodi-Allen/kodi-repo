@@ -1,4 +1,4 @@
-# 🚀 Quick Start: GitHub Repository Setup
+﻿# ðŸš€ Quick Start: GitHub Repository Setup
 
 ## Step 1: Create GitHub Repository
 
@@ -8,7 +8,7 @@
    - **Name:** `kodi-repo` (or another name)
    - **Description:** "Kodi Omega compatible add-ons repository"
    - **Public** or **Private** (your choice)
-   - ❌ **DO NOT** check "Initialize with README"
+   - âŒ **DO NOT** check "Initialize with README"
 4. Click **"Create repository"**
 
 ## Step 2: Upload Repository
@@ -32,7 +32,7 @@ git commit -m "Initial commit: Kodi Allen Repository"
 git branch -M main
 
 # 6. Add remote
-git remote add origin https://github.com/kodiallen/kodi-repo.git
+git remote add origin https://github.com/Kodi-Allen/kodi-repo.git
 
 # 7. Upload
 git push -u origin main
@@ -41,7 +41,7 @@ git push -u origin main
 ### Option B: With GitHub Desktop
 
 1. Open [GitHub Desktop](https://desktop.github.com/)
-2. **File** → **Add local repository**
+2. **File** â†’ **Add local repository**
 3. Select your `kodi-repo` folder
 4. Click **"Publish repository"**
 
@@ -68,7 +68,7 @@ cd ..
 ## Step 4: Create GitHub Release (optional)
 
 1. Go to your repository on GitHub
-2. Click **"Releases"** → **"Create a new release"**
+2. Click **"Releases"** â†’ **"Create a new release"**
 3. Tag: `v1.0.0`
 4. Title: `Repository v1.0.0 - Initial Release`
 5. **Add these files:**
@@ -82,10 +82,10 @@ cd ..
 
 1. Download `repository.kodiallen-1.0.0.zip`:
    - From GitHub Releases OR
-   - Direct: `https://raw.githubusercontent.com/kodiallen/kodi-repo/main/repository.kodiallen/repository.kodiallen-1.0.0.zip`
+   - Direct: `https://raw.githubusercontent.com/Kodi-Allen/kodi-repo/main/repository.kodiallen/repository.kodiallen-1.0.0.zip`
 
 2. In Kodi:
-   - **Settings** → **Add-ons** → **Install from zip file**
+   - **Settings** â†’ **Add-ons** â†’ **Install from zip file**
    - Select `repository.kodiallen-1.0.0.zip`
 
 3. Done! Your repository is now installed.
@@ -94,7 +94,7 @@ cd ..
 
 You can also install the repository directly with this URL:
 ```
-https://raw.githubusercontent.com/kodiallen/kodi-repo/main/repository.kodiallen/repository.kodiallen-1.0.0.zip
+https://raw.githubusercontent.com/Kodi-Allen/kodi-repo/main/repository.kodiallen/repository.kodiallen-1.0.0.zip
 ```
 
 ## Common Problems
@@ -112,7 +112,7 @@ https://raw.githubusercontent.com/kodiallen/kodi-repo/main/repository.kodiallen/
 ### Problem: "No addons found"
 - Run `python3 tools/generate_repo.py`
 - Commit and push the generated files
-- Clear cache in Kodi: **Settings** → **System** → **Add-ons** → Clear cache
+- Clear cache in Kodi: **Settings** â†’ **System** â†’ **Add-ons** â†’ Clear cache
 
 ## Next Steps
 
@@ -137,13 +137,13 @@ https://raw.githubusercontent.com/kodiallen/kodi-repo/main/repository.kodiallen/
    - Push to GitHub
 
 3. **Share your repository:**
-   - GitHub URL: `https://github.com/kodiallen/kodi-repo`
-   - Installation link: `https://raw.githubusercontent.com/kodiallen/kodi-repo/main/repository.kodiallen/repository.kodiallen-1.0.0.zip`
+   - GitHub URL: `https://github.com/Kodi-Allen/kodi-repo`
+   - Installation link: `https://raw.githubusercontent.com/Kodi-Allen/kodi-repo/main/repository.kodiallen/repository.kodiallen-1.0.0.zip`
 
 ## Support
 
 For questions:
-- GitHub Issues: `https://github.com/kodiallen/kodi-repo/issues`
+- GitHub Issues: `https://github.com/Kodi-Allen/kodi-repo/issues`
 - Kodi Forum: https://forum.kodi.tv
 
-**Good luck! 🎉**
+**Good luck! ðŸŽ‰**

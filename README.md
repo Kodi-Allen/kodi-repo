@@ -1,23 +1,23 @@
-# Kodi Allen Repository
+﻿# Kodi Allen Repository
 
 Kodi Omega (v21) compatible add-on repository.
 
-## 📦 Installation
+## ðŸ“¦ Installation
 
 ### Method 1: Via ZIP File (Recommended)
 
 1. **Download the repository ZIP:**
-   - Go to [Releases](https://github.com/kodiallen/kodi-repo/releases)
+   - Go to [Releases](https://github.com/Kodi-Allen/kodi-repo/releases)
    - Download `repository.kodiallen-1.0.0.zip`
 
 2. **Install in Kodi:**
    - Open Kodi
-   - Go to: **Settings** → **Add-ons** → **Install from zip file**
+   - Go to: **Settings** â†’ **Add-ons** â†’ **Install from zip file**
    - Select the downloaded `repository.kodiallen-1.0.0.zip`
    - Wait for confirmation
 
 3. **Install add-ons:**
-   - Go to: **Settings** → **Add-ons** → **Install from repository**
+   - Go to: **Settings** â†’ **Add-ons** â†’ **Install from repository**
    - Select **Kodi Allen Repository**
    - Choose your desired add-on and install
 
@@ -27,19 +27,19 @@ You can also download individual add-ons directly:
 
 1. Go to the add-on folder (e.g. `script.artwork.beef/`)
 2. Download the ZIP file
-3. Install via: **Settings** → **Add-ons** → **Install from zip file**
+3. Install via: **Settings** â†’ **Add-ons** â†’ **Install from zip file**
 
 ---
 
-## 📋 Available Add-ons
+## ðŸ“‹ Available Add-ons
 
 ### Script: Artwork Beef (v0.28.6)
 **Automatic artwork management for your Kodi library**
 
-- ✅ Kodi Omega (v21) compatible
-- ✅ Fully migrated to Python 3
-- ✅ All GUI dialogs working
-- ✅ Supports: fanart.tv, TheTVDB.com, The Movie Database, TheAudioDB
+- âœ… Kodi Omega (v21) compatible
+- âœ… Fully migrated to Python 3
+- âœ… All GUI dialogs working
+- âœ… Supports: fanart.tv, TheTVDB.com, The Movie Database, TheAudioDB
 
 **Features:**
 - Automatic artwork download for movies, TV shows and music
@@ -52,7 +52,7 @@ You can also download individual add-ons directly:
 
 ---
 
-## 🛠️ For Developers
+## ðŸ› ï¸ For Developers
 
 ### Updating the Repository
 
@@ -81,21 +81,21 @@ To add or update an add-on:
 
 ```
 kodi-repo/
-├── repository.kodiallen/        # Repository add-on
-│   ├── addon.xml
-│   ├── icon.png
-│   └── fanart.jpg
-├── script.artwork.beef/         # Example add-on
-│   ├── addon.xml
-│   ├── icon.png
-│   ├── changelog.txt
-│   ├── ... (all addon files)
-│   └── script.artwork.beef-0.28.6.zip  # Auto-generated
-├── addons.xml                   # Index of all add-ons (auto-generated)
-├── addons.xml.md5               # Checksum (auto-generated)
-├── tools/
-│   └── generate_repo.py         # Generator script
-└── README.md
+â”œâ”€â”€ repository.kodiallen/        # Repository add-on
+â”‚   â”œâ”€â”€ addon.xml
+â”‚   â”œâ”€â”€ icon.png
+â”‚   â””â”€â”€ fanart.jpg
+â”œâ”€â”€ script.artwork.beef/         # Example add-on
+â”‚   â”œâ”€â”€ addon.xml
+â”‚   â”œâ”€â”€ icon.png
+â”‚   â”œâ”€â”€ changelog.txt
+â”‚   â”œâ”€â”€ ... (all addon files)
+â”‚   â””â”€â”€ script.artwork.beef-0.28.6.zip  # Auto-generated
+â”œâ”€â”€ addons.xml                   # Index of all add-ons (auto-generated)
+â”œâ”€â”€ addons.xml.md5               # Checksum (auto-generated)
+â”œâ”€â”€ tools/
+â”‚   â””â”€â”€ generate_repo.py         # Generator script
+â””â”€â”€ README.md
 ```
 
 ### Creating ZIP Files
@@ -109,7 +109,7 @@ The `generate_repo.py` script automatically creates:
 
 ---
 
-## 📝 Adding an Add-on
+## ðŸ“ Adding an Add-on
 
 ### Requirements
 - Add-on must have a valid `addon.xml`
@@ -121,12 +121,12 @@ The `generate_repo.py` script automatically creates:
 1. **Create add-on folder:**
    ```
    script.myaddon/
-   ├── addon.xml
-   ├── icon.png (512x512 recommended)
-   ├── fanart.jpg (1920x1080 recommended)
-   ├── changelog.txt
-   ├── LICENSE.txt
-   └── ... (other files)
+   â”œâ”€â”€ addon.xml
+   â”œâ”€â”€ icon.png (512x512 recommended)
+   â”œâ”€â”€ fanart.jpg (1920x1080 recommended)
+   â”œâ”€â”€ changelog.txt
+   â”œâ”€â”€ LICENSE.txt
+   â””â”€â”€ ... (other files)
    ```
 
 2. **addon.xml example:**
@@ -144,7 +144,7 @@ The `generate_repo.py` script automatically creates:
            <description lang="en">Detailed description</description>
            <platform>all</platform>
            <license>GPL-3.0</license>
-           <source>https://github.com/kodiallen/kodi-repo</source>
+           <source>https://github.com/Kodi-Allen/kodi-repo</source>
            <assets>
                <icon>icon.png</icon>
                <fanart>fanart.jpg</fanart>
@@ -168,7 +168,7 @@ The `generate_repo.py` script automatically creates:
 
 ---
 
-## 🔄 Updating an Add-on
+## ðŸ”„ Updating an Add-on
 
 1. Update files in your add-on folder
 2. Increase version number in `addon.xml`
@@ -180,15 +180,15 @@ Kodi will detect updates automatically!
 
 ---
 
-## 🆘 Support
+## ðŸ†˜ Support
 
 For issues or questions:
-- Open an [Issue](https://github.com/kodiallen/kodi-repo/issues)
+- Open an [Issue](https://github.com/Kodi-Allen/kodi-repo/issues)
 - Visit the Kodi Forum
 
 ---
 
-## 📜 License
+## ðŸ“œ License
 
 Each add-on has its own license. See the respective LICENSE.txt files.
 
@@ -196,7 +196,7 @@ The repository framework is available under MIT License.
 
 ---
 
-## 🙏 Credits
+## ðŸ™ Credits
 
 - **Artwork Beef:** Based on [script.artwork.beef](https://github.com/rmrector/script.artwork.beef) by rmrector
 - **Repository Framework:** Inspired by the Kodi community
@@ -204,11 +204,11 @@ The repository framework is available under MIT License.
 
 ---
 
-## ⚠️ Disclaimer
+## âš ï¸ Disclaimer
 
 These add-ons are community ports for Kodi Omega. Use at your own risk.
 For issues, please create an issue in this repository.
 
 ---
 
-**Enjoy your add-ons! 🎉**
+**Enjoy your add-ons! ðŸŽ‰**
