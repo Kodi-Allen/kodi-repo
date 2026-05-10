@@ -1,0 +1,40 @@
+# Kodi Media Center language file
+msgctxt "#32000"
+msgid "General"
+msgstr ""
+
+msgctxt "#32001"
+msgid "Renew existing back.jpg"
+msgstr ""
+
+msgctxt "#32002"
+msgid "If enabled, existing back.jpg files are replaced by mymovies-back.jpg. If disabled, folders with back.jpg are skipped early."
+msgstr ""
+
+msgctxt "#32003"
+msgid "Run now"
+msgstr ""
+
+msgctxt "#32004"
+msgid "Scan video library after copying"
+msgstr ""
+
+msgctxt "#32010"
+msgid "Schedule"
+msgstr ""
+
+msgctxt "#32011"
+msgid "Enable scheduled runs"
+msgstr ""
+
+msgctxt "#32012"
+msgid "Run once after Kodi startup"
+msgstr ""
+
+msgctxt "#32013"
+msgid "Startup delay in minutes"
+msgstr ""
+
+msgctxt "#32014"
+msgid "Repeat every hours"
+msgstr ""

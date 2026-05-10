@@ -1,0 +1,40 @@
+# Kodi Media Center language file
+msgctxt "#32000"
+msgid "General"
+msgstr "Allgemein"
+
+msgctxt "#32001"
+msgid "Renew existing back.jpg"
+msgstr "Vorhandene back.jpg erneuern"
+
+msgctxt "#32002"
+msgid "If enabled, existing back.jpg files are replaced by mymovies-back.jpg. If disabled, folders with back.jpg are skipped early."
+msgstr "Wenn aktiviert, werden vorhandene back.jpg Dateien durch mymovies-back.jpg ersetzt. Wenn deaktiviert, werden Ordner mit back.jpg frueh uebersprungen."
+
+msgctxt "#32003"
+msgid "Run now"
+msgstr "Jetzt ausfuehren"
+
+msgctxt "#32004"
+msgid "Scan video library after copying"
+msgstr "Videobibliothek nach dem Kopieren scannen"
+
+msgctxt "#32010"
+msgid "Schedule"
+msgstr "Zeitplan"
+
+msgctxt "#32011"
+msgid "Enable scheduled runs"
+msgstr "Geplante Laeufe aktivieren"
+
+msgctxt "#32012"
+msgid "Run once after Kodi startup"
+msgstr "Einmal nach Kodi-Start ausfuehren"
+
+msgctxt "#32013"
+msgid "Startup delay in minutes"
+msgstr "Startverzoegerung in Minuten"
+
+msgctxt "#32014"
+msgid "Repeat every hours"
+msgstr "Wiederholen alle Stunden"

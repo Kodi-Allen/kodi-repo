@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<settings>
+  <category label="32000">
+    <setting label="32003" type="action" action="RunScript(script.mymovies.backcopy)" />
+    <setting id="renew_existing" type="bool" label="32001" default="false" />
+    <setting id="run_library_scan" type="bool" label="32004" default="true" />
+  </category>
+  <category label="32010">
+    <setting id="schedule_enabled" type="bool" label="32011" default="false" />
+    <setting id="run_on_startup" type="bool" label="32012" default="false" visible="eq(-1,true)" />
+    <setting id="startup_delay_minutes" type="slider" option="int" label="32013" default="2" range="0,1,60" visible="eq(-2,true)" />
+    <setting id="schedule_interval_hours" type="slider" option="int" label="32014" default="24" range="1,1,168" visible="eq(-3,true)" />
+  </category>
+</settings>

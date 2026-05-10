@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="script.mymovies.backcopy" name="MyMovies Back Artwork Copy" version="1.2.0" provider-name="Kodi Allen">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+  </requires>
+  <extension point="xbmc.python.script" library="default.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.service" library="service.py" start="login"/>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Copies mymovies-back.jpg to back.jpg in video library folders.</summary>
+    <summary lang="de_DE">Kopiert mymovies-back.jpg als back.jpg in Videobibliothek-Ordnern.</summary>
+    <description lang="en_GB">Scans movie and TV show folders from the Kodi video library. Every found mymovies-back.jpg is copied in the same folder as back.jpg.</description>
+    <description lang="de_DE">Durchsucht Film- und Serienordner aus der Kodi-Videobibliothek. Jede gefundene mymovies-back.jpg wird im gleichen Ordner als back.jpg kopiert.</description>
+    <platform>all</platform>
+    <license>MIT</license>
+    <source>https://github.com/Kodi-Allen/kodi-repo</source>
+  </extension>
+</addon>
