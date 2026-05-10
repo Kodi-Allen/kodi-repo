@@ -24,6 +24,8 @@ For testing, install or copy this complete `script.mymovies.backcopy` folder int
 - Copies `mymovies-back.jpg` to `back.jpg` in the same directory.
 - Folders with an existing `back.jpg` are skipped early by default.
 - Enable `Renew existing back.jpg` in the add-on settings to replace existing `back.jpg` files.
+- Collection and box set folders are still traversed so movies in child folders are handled.
+- Disc folders are pruned at the movie root or disc index level; `@eaDir`, `BDMV/STREAM`, and other deep disc internals are not scanned.
 - Manual run: start the add-on from Kodi's program add-ons or press "Run now" in the add-on settings.
 - Scheduled run: enable scheduled runs in the add-on settings and choose startup/interval behavior.
 - The video library scan is started with `UpdateLibrary(video)` immediately after the copy pass.
