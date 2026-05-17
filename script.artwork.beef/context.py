@@ -45,7 +45,7 @@ def get_dbid(listitem):
         pass
     if listitem.getLabel() != xbmc.getInfoLabel('ListItem.Label'):
         # InfoLabels can report the wrong item
-        return int(listitem.getfilename().split('?')[0].rstrip('/').split('/')[-1])
+        return int(listitem.getPath().split('?')[0].rstrip('/').split('/')[-1])
     else:
         return int(xbmc.getInfoLabel('ListItem.DBID'))
 

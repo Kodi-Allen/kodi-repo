@@ -145,7 +145,7 @@ def _size_sort(image):
 
 def _imagelanguage_sort(image, basearttype):
     if not providers.base.languages:
-        return 1, image['language']
+        return 1, image['language'] or ''
 
     primarysort = 1 if image['language'] not in providers.base.languages else \
         1.0 * providers.base.languages.index(image['language']) / len(providers.base.languages)
@@ -155,4 +155,4 @@ def _imagelanguage_sort(image, basearttype):
                 basearttype.endswith('poster') and settings.titlefree_poster:
             primarysort += 1
 
-    return primarysort, image['language']
+    return primarysort, image['language'] or ''

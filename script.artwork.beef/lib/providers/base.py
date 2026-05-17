@@ -1,7 +1,9 @@
-import StorageServer
+import hashlib
 import xbmc
 from abc import ABCMeta, abstractmethod
+from datetime import timedelta
 from requests.packages import urllib3
+from simplecache import SimpleCache
 
 from lib.libs.addonsettings import settings
 from lib.libs.pykodi import log, localize as L
@@ -15,7 +17,27 @@ urllib3.disable_warnings()
 
 languages = ()
 
-cache = StorageServer.StorageServer('script.artwork.beef', 72)
+class _CacheShim:
+    """Drop-in replacement for legacy StorageServer.cacheFunction API,
+    backed by script.module.simplecache."""
+    def __init__(self, name, hours):
+        self._cache = SimpleCache()
+        self._prefix = name + ':'
+        self._ttl = timedelta(hours=hours)
+
+    def cacheFunction(self, func, *args):
+        key = self._prefix + hashlib.md5(
+            (func.__name__ + repr(args)).encode('utf-8')
+        ).hexdigest()
+        cached = self._cache.get(key)
+        if cached is not None:
+            return cached
+        result = func(*args)
+        if result is not None:
+            self._cache.set(key, result, expiration=self._ttl)
+        return result
+
+cache = _CacheShim('script.artwork.beef', 72)
 monitor = xbmc.Monitor()
 
 # Result of `get_images` is dict of lists, keyed on art type
