@@ -1,3 +1,27 @@
+v0.28.10 (2026-05-17)
+- Fix: AttributeError 'xbmcgui.ListItem' object has no attribute 'getfilename'
+  when manually selecting artwork in the Artwork Beef dialog on Kodi 19+.
+  The removed API getfilename() is replaced by getPath() (symmetric to the
+  existing setPath() calls) in lib/artworkselection.py and context.py.
+
+v0.28.9 (2026-05-16)
+- Fix: TypeError when sorting images by language on Python 3 (Kodi 19+).
+  image['language'] can be None for some providers, which broke tuple
+  sorting against str values. Now None is normalised to empty string.
+
+v0.28.8 (2026-05-16)
+- Fix: replace deprecated StorageServer (script.common.plugin.cache) cache
+  backend with script.module.simplecache. The legacy addon is no longer
+  distributed in Kodi repos and prevented Artwork Beef from starting on
+  fresh installs.
+
+v0.28.7 (2026-05-16)
+- Fix: remove unused script.module.simplejson and script.common.plugin.cache requirements that prevented installation on Kodi 22 (Piers)
+
+v0.28.6 (2025-12-12)
+- Kodi Omega (v21) compatibility
+- Python 3 migration (all Python 2 syntax updated)
+
 v0.28.5 (2020-11-26)
 - fix: really really treat 403 as 404 and replace it
 

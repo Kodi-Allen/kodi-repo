@@ -90,7 +90,7 @@ class ArtworkTypeSelector(xbmcgui.WindowXMLDialog):
             self.close()
         elif controlid == 6:
             item = self.guilist.getSelectedItem()
-            self.selected = item.getfilename()
+            self.selected = item.getPath()
             self.close()
         elif controlid == 7:
             self.close()
@@ -174,10 +174,10 @@ class ArtworkSelector(xbmcgui.WindowXMLDialog):
             if self.multi:
                 if self.selected is None:
                     self.selected = ([], [])
-                self.toggleitemlists(item.getfilename(), item.isSelected())
+                self.toggleitemlists(item.getPath(), item.isSelected())
                 item.select(not item.isSelected())
             else:
-                self.selected = item.getfilename()
+                self.selected = item.getPath()
                 self.close()
         elif controlid == 5:
             if self.multi and self.selected is None:
