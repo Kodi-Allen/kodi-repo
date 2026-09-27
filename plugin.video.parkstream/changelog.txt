@@ -1,3 +1,6 @@
+1.0.1 (ParkStream)
+- inputstream.adaptive is no longer installed automatically; the current streams play through Kodi's own player
+- README: supported Kodi version corrected
 1.0.0 (ParkStream)
 - First release as ParkStream, a fork of plugin.video.southpark_unofficial
 - Playback through the current official South Park video service

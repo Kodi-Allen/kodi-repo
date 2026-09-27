@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="plugin.video.parkstream" name="ParkStream" version="1.0.0+matrix.1" provider-name="Kodi-Allen">
+<addon id="plugin.video.parkstream" name="ParkStream" version="1.0.1+matrix.1" provider-name="Kodi-Allen">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
-        <import addon="inputstream.adaptive" version="2.4.0" />
+        <import addon="inputstream.adaptive" version="2.4.0" optional="true" />
     </requires>
     <extension point="xbmc.python.pluginsource" library="default.py">
         <provides>video</provides>
@@ -14,11 +14,9 @@
 
 ParkStream is an independently maintained fork of plugin.video.southpark_unofficial by Giovanni Dante Grazioli (wargio).</description>
         <disclaimer lang="en_GB">ParkStream is unofficial and not affiliated with or endorsed by South Park Studios, Comedy Central or Paramount. South Park and all related titles, characters and artwork are trademarks and copyrights of their respective owners. Episode availability depends on your location. Check your local laws before use.</disclaimer>
-        <news>1.0.0
-- Playback through the current official South Park video service
-- English audio through the official English site
-- Covers for all 26 seasons, show artwork and episode stills
-- Season descriptions, premiere dates and episode runtimes</news>
+        <news>1.0.1
+- inputstream.adaptive is no longer installed automatically; the current streams play through Kodi's own player
+- README: supported Kodi version corrected</news>
         <language>en de</language>
         <license>GPL-2.0-only</license>
         <source>https://github.com/Kodi-Allen/plugin.video.parkstream</source>

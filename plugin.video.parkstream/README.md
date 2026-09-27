@@ -19,8 +19,7 @@ websites in Kodi. It is an independently maintained fork of
 
 ## Requirements
 
-- Kodi 19 (Matrix) or newer
-- `inputstream.adaptive` (installed automatically as a dependency)
+- Kodi 21 (Omega). Tested on a Vero 4K+ with Kodi 21.1; Kodi 19 and 20 are untested.
 
 ## Installation
 
