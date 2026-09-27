@@ -15,6 +15,38 @@
       <source>https://github.com/Kodi-Allen/kodi-repo</source>
     </extension>
   </addon>
+  <addon id="plugin.video.parkstream" name="ParkStream" version="1.0.0+matrix.1" provider-name="Kodi-Allen">
+    <requires>
+      <import addon="xbmc.python" version="3.0.0"/>
+      <import addon="inputstream.adaptive" version="2.4.0"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+      <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+      <platform>all</platform>
+      <summary lang="en_GB">Unofficial Kodi video add-on for South Park.</summary>
+      <description lang="en_GB">Browse and watch South Park episodes from the official South Park websites, with season covers, episode stills, season descriptions and premiere dates. The location setting selects the audio and metadata language, for example Germany (German) or North America (English). Episodes that come with more than one audio track show all of them in the player's audio menu.
+ParkStream is an independently maintained fork of plugin.video.southpark_unofficial by Giovanni Dante Grazioli (wargio).</description>
+      <disclaimer lang="en_GB">ParkStream is unofficial and not affiliated with or endorsed by South Park Studios, Comedy Central or Paramount. South Park and all related titles, characters and artwork are trademarks and copyrights of their respective owners. Episode availability depends on your location. Check your local laws before use.</disclaimer>
+      <news>1.0.0
+- Playback through the current official South Park video service
+- English audio through the official English site
+- Covers for all 26 seasons, show artwork and episode stills
+- Season descriptions, premiere dates and episode runtimes</news>
+      <language>en de</language>
+      <license>GPL-2.0-only</license>
+      <source>https://github.com/Kodi-Allen/plugin.video.parkstream</source>
+      <website>https://github.com/Kodi-Allen/plugin.video.parkstream</website>
+      <reuselanguageinvoker>true</reuselanguageinvoker>
+      <assets>
+        <icon>icon.png</icon>
+        <fanart>fanart.jpg</fanart>
+        <banner>resources/media/banner.jpg</banner>
+        <clearlogo>resources/media/clearlogo.png</clearlogo>
+      </assets>
+    </extension>
+  </addon>
   <addon id="repository.kodiallen" name="Kodi Allen Repository" version="1.0.1" provider-name="Kodi Allen">
     <extension point="xbmc.addon.repository" name="Kodi Allen Repository">
       <dir>
