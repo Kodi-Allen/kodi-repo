@@ -500,13 +500,14 @@ class SouthParkAddon(object):
 			self.notify("{0} {1}".format(self.i18n.WARNING_LOADING, _encode(data["title"])), WARNING_TIMEOUT_SHORT)
 		streams   = []
 		subtitles = []
-		manifest_types = []
 		try:
 			stream = resolve_episode_stream(
 				self.options.audio(True), data.get("url"), lambda url: _http_get(url, False))
-			streams.append(stream["source"])
-			subtitles.append(None)
-			manifest_types.append(stream["manifest_type"])
+			if stream["manifest_type"] == "hls":
+				streams.append(stream["source"])
+				subtitles.append(None)
+			else:
+				log_error("Unsupported manifest type: {}".format(stream["manifest_type"]))
 		except StreamResolutionError as e:
 			log_error("Dynamic stream resolution failed: {}".format(e))
 
@@ -533,10 +534,8 @@ class SouthParkAddon(object):
 					if m3u8 == None:
 						raise Exception("invalid m3u8")
 					streams.append(m3u8)
-					manifest_types.append("hls")
 			except Exception as e:
 				streams = []
-				manifest_types = []
 				log_error(e)
 
 		if len(streams) < 1:
@@ -564,13 +563,7 @@ class SouthParkAddon(object):
 				'clearart': self.paths.CLEARART, 'tvshow.clearart': self.paths.CLEARART,
 				'banner': self.paths.BANNER, 'tvshow.banner': self.paths.BANNER})
 			playitem.setInfo('video', {'Title': title, 'Plot': data["details"], 'Season': season, 'Episode': episode, 'Aired': _date(data.get("date", "")), 'TVShowTitle': SHOW_TITLE, 'mediatype': 'episode'})
-			if manifest_types[i] == "dash":
-				playitem.setMimeType("application/dash+xml")
-				playitem.setContentLookup(False)
-				playitem.setProperty("inputstream", "inputstream.adaptive")
-				playitem.setProperty("inputstream.adaptive.manifest_type", "mpd")
-			else:
-				playitem.setMimeType("application/vnd.apple.mpegurl")
+			playitem.setMimeType("application/vnd.apple.mpegurl")
 
 			if subtitles[i] != None and show_subs:
 				playitem.setSubtitles([subtitles[i]])

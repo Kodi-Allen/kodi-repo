@@ -1,3 +1,5 @@
+1.0.2 (ParkStream)
+- Removed inputstream.adaptive completely; ParkStream plays HLS streams through Kodi's own player
 1.0.1 (ParkStream)
 - inputstream.adaptive is no longer installed automatically; the current streams play through Kodi's own player
 - README: supported Kodi version corrected
