@@ -1,0 +1,32 @@
+name: tubi-us-proxy-privado
+
+services:
+  gluetun:
+    image: qmcgaw/gluetun:v3.41.0
+    container_name: tubi-gluetun-privado
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    ports:
+      # Use 127.0.0.1 when Kodi runs on proxy-host. For a separate Kodi box,
+      # set this to proxy-host's LAN address. Never expose 8888 on the router.
+      - "${GLUETUN_BIND_ADDRESS:-127.0.0.1}:8888:8888/tcp"
+    environment:
+      VPN_SERVICE_PROVIDER: "custom"
+      VPN_TYPE: "openvpn"
+      OPENVPN_CUSTOM_CONFIG: "/vpn/privado-us.ovpn"
+      OPENVPN_USER: "${OPENVPN_USER}"
+      OPENVPN_PASSWORD: "${OPENVPN_PASSWORD}"
+      HTTPPROXY: "on"
+      HTTPPROXY_LOG: "${HTTPPROXY_LOG:-off}"
+      HTTPPROXY_USER: "${HTTPPROXY_USER:-}"
+      HTTPPROXY_PASSWORD: "${HTTPPROXY_PASSWORD:-}"
+      TZ: "${TZ:-Europe/Vienna}"
+    volumes:
+      - ./config:/vpn:ro
+      - gluetun-data:/gluetun
+    restart: unless-stopped
+
+volumes:
+  gluetun-data:

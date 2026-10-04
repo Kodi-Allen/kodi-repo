@@ -1,0 +1,86 @@
+# Kodi Media Center language file
+# Addon Name: TubiTV
+# Addon id: plugin.video.tubitv
+msgid ""
+msgstr ""
+"Project-Id-Version: plugin.video.tubitv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de_DE\n"
+
+msgctxt "#30056"
+msgid "Network route"
+msgstr "Netzwerkroute"
+
+msgctxt "#30057"
+msgid "Route"
+msgstr "Route"
+
+msgctxt "#30058"
+msgid "Direct"
+msgstr "Direkt"
+
+msgctxt "#30059"
+msgid "Custom"
+msgstr "Benutzerdefiniert"
+
+msgctxt "#30060"
+msgid "Proxy host"
+msgstr "Proxy-Host"
+
+msgctxt "#30061"
+msgid "Proxy port"
+msgstr "Proxy-Port"
+
+msgctxt "#30062"
+msgid "Proxy username (optional)"
+msgstr "Proxy-Benutzername (optional)"
+
+msgctxt "#30063"
+msgid "Proxy password (optional)"
+msgstr "Proxy-Passwort (optional)"
+
+msgctxt "#30064"
+msgid "Media relay host"
+msgstr "Medien-Relay-Host"
+
+msgctxt "#30065"
+msgid "Media relay port"
+msgstr "Medien-Relay-Port"
+
+msgctxt "#30066"
+msgid "Media relay signing key"
+msgstr "Signaturschlüssel des Medien-Relays"
+
+msgctxt "#30067"
+msgid "Widevine needs a newer system loader. Update OSMC before playing encrypted titles."
+msgstr "Widevine benötigt einen neueren System-Loader. Aktualisiere OSMC, bevor du verschlüsselte Titel abspielst."
+
+msgctxt "#30068"
+msgid "Detailed DRM diagnostics (tokens are masked)"
+msgstr "Ausführliche DRM-Diagnose (Tokens werden maskiert)"
+
+msgctxt "#30069"
+msgid "Widevine or InputStream Adaptive is not ready. Check InputStream Helper."
+msgstr "Widevine oder InputStream Adaptive ist nicht bereit. Prüfe InputStream Helper."
+
+msgctxt "#30070"
+msgid "Tubi rejects this old Widevine version. Encrypted titles need a current CDM; clear titles and Live TV still work."
+msgstr "Tubi lehnt diese alte Widevine-Version ab. Verschlüsselte Titel benötigen eine aktuelle CDM; unverschlüsselte Titel und Live-TV funktionieren weiterhin."
+
+msgctxt "#30071"
+msgid "UI prototype"
+msgstr "UI-Prototyp"
+
+msgctxt "#30072"
+msgid "Loading…"
+msgstr "Wird geladen…"
+
+msgctxt "#30073"
+msgid "No titles available. Press Back to return."
+msgstr "Keine Titel verfügbar. Mit Zurück zum Menü."
+
+msgctxt "#30074"
+msgid "Could not load titles. Press Back and try again."
+msgstr "Titel konnten nicht geladen werden. Zurück und erneut versuchen."

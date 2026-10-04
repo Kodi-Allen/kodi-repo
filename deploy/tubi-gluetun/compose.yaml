@@ -1,0 +1,35 @@
+name: tubi-us-proxy
+
+services:
+  gluetun:
+    image: qmcgaw/gluetun:v3.41.0
+    container_name: tubi-gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    ports:
+      # Keep this on 127.0.0.1 when Kodi runs on the Docker host. If Kodi is
+      # another LAN device, set GLUETUN_BIND_ADDRESS to the Docker host's LAN
+      # address; do not forward this port from the router to the Internet.
+      - "${GLUETUN_BIND_ADDRESS:-127.0.0.1}:8888:8888/tcp"
+    environment:
+      VPN_SERVICE_PROVIDER: "mullvad"
+      VPN_TYPE: "wireguard"
+      WIREGUARD_PRIVATE_KEY: "${WIREGUARD_PRIVATE_KEY}"
+      WIREGUARD_ADDRESSES: "${WIREGUARD_ADDRESSES}"
+      SERVER_COUNTRIES: "United States"
+      SERVER_CITIES: "${SERVER_CITIES:-}"
+      SERVER_HOSTNAMES: "${SERVER_HOSTNAMES:-}"
+      HTTPPROXY: "on"
+      HTTPPROXY_LOG: "${HTTPPROXY_LOG:-off}"
+      HTTPPROXY_USER: "${HTTPPROXY_USER:-}"
+      HTTPPROXY_PASSWORD: "${HTTPPROXY_PASSWORD:-}"
+      UPDATER_PERIOD: "480h"
+      TZ: "${TZ:-Europe/Vienna}"
+    volumes:
+      - gluetun-data:/gluetun
+    restart: unless-stopped
+
+volumes:
+  gluetun-data:

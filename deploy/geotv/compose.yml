@@ -1,0 +1,73 @@
+name: geotv
+
+services:
+  gluetun-us:
+    image: qmcgaw/gluetun:v3.41.3
+    container_name: geotv-gluetun-us
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    ports:
+      # CONNECT proxy for the Tubi add-on's Python API calls.
+      - "${GEOTV_BIND_ADDRESS:-192.0.2.10}:8883:8888/tcp"
+      # Local, signed Tubi media relay. Never forward either port at the router.
+      - "${GEOTV_BIND_ADDRESS:-192.0.2.10}:8893:8893/tcp"
+    environment:
+      # Gluetun's built-in Privado list: a random server from these cities, and
+      # another one whenever the healthcheck restarts the tunnel. The single
+      # server .ovpn files under ./config/gluetun/us are the old fallback.
+      VPN_SERVICE_PROVIDER: privado
+      VPN_TYPE: openvpn
+      SERVER_CITIES: "New York,Washington DC,Atlanta,Chicago,Miami,Detroit,St. Louis,Dallas"
+      UPDATER_PERIOD: "24h"
+      OPENVPN_USER: "${OPENVPN_USER:?set OPENVPN_USER in .env}"
+      OPENVPN_PASSWORD: "${OPENVPN_PASSWORD:?set OPENVPN_PASSWORD in .env}"
+      HTTPPROXY: "on"
+      HTTPPROXY_LOG: "off"
+      HTTPPROXY_USER: "${HTTPPROXY_USER:?set HTTPPROXY_USER in .env}"
+      HTTPPROXY_PASSWORD: "${HTTPPROXY_PASSWORD:?set HTTPPROXY_PASSWORD in .env}"
+      FIREWALL_INPUT_PORTS: "8893"
+      TZ: "${TZ:-Europe/Vienna}"
+    volumes:
+      - ./config/gluetun/us:/vpn:ro
+      - gluetun-us-data:/gluetun
+    restart: unless-stopped
+
+  tubi-relay:
+    build:
+      context: ./tubi/relay
+    image: geotv/tubi-relay:1.1.2
+    container_name: geotv-tubi-relay
+    network_mode: service:gluetun-us
+    depends_on:
+      gluetun-us:
+        condition: service_healthy
+    environment:
+      RELAY_LISTEN_HOST: 0.0.0.0
+      RELAY_LISTEN_PORT: "8893"
+      RELAY_PUBLIC_BASE: "${RELAY_PUBLIC_BASE:-http://192.0.2.10:8893}"
+      RELAY_SIGNING_KEY: "${RELAY_SIGNING_KEY:?set RELAY_SIGNING_KEY in .env}"
+      RELAY_URL_TTL: "${RELAY_URL_TTL:-86400}"
+      TZ: "${TZ:-Europe/Vienna}"
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8893/healthz', timeout=3).read()"
+      interval: 15s
+      timeout: 5s
+      retries: 4
+      start_period: 10s
+
+volumes:
+  gluetun-us-data:

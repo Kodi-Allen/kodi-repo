@@ -5,3 +5,8 @@
 Thumbs.db
 *.pyc
 __pycache__/
+/deploy/tubi-gluetun/.env
+/deploy/tubi-gluetun-privado/.env
+/deploy/tubi-gluetun-privado/config/*.ovpn
+/deploy/geotv/.env
+/deploy/geotv/config/gluetun/us/*.ovpn
