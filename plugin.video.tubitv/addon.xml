@@ -37,6 +37,18 @@
 	  titles and Live TV remain available.
 	- CHANGED: Replace t1mlib's Chrome 41 User-Agent with a current, consistent
 	  web-client identity for Tubi API, manifest and licence requests.
+	- NEW: Live TV channels in the Kodi TV guide keep a fixed channel number.
+	  Tubi's order numbers the first line-up, new channels go on the end and
+	  a dropped channel's number stays reserved.
+	- NEW: Channels appear in every Tubi group they belong to, not only the
+	  first; NFL is under Sports On Now as well as Featured.
+	- CHANGED: The guide covers 48 to 72 hours instead of 24 to 48.
+	- CHANGED: Channel logos and guide images use Tubi's own public image URLs,
+	  which never expire, instead of relay URLs that lapse inside the cached
+	  playlist and guide.
+	- FIXED: A lost connection no longer empties the TV guide. Live calls retry
+	  a failed connection, and if Tubi still cannot be reached the last
+	  line-up is served instead of none.
 
 	2026.10.4+kodiallen.7 - Tubi licence client context
 	- FIXED: Send the Widevine POST with the same web User-Agent as the Tubi API

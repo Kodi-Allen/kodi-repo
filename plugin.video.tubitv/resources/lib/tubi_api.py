@@ -57,6 +57,16 @@ EPG_BATCH = 20
 # few at a time keeps a guide refresh to seconds instead of a minute, which
 # matters because the tools that ask for it are waiting on a socket.
 EPG_WORKERS = 5
+# Tubi's guide always ends on a UTC midnight: a lookahead of 1 runs to the end
+# of tomorrow, 2 to the end of the day after - 48 to 72 hours, depending on
+# the hour it is asked. Nothing further is served; every other value is
+# treated as 1.
+EPG_LOOKAHEAD = 2
+# A routed connection now and then loses its TLS handshake on the way to Tubi
+# (seen as SSL UNEXPECTED_EOF through a CONNECT proxy). A guide refresh or a
+# channel switch is not worth losing to that, so the live calls try again
+# when the connection fails. Anything Tubi itself answers is final.
+LIVE_ATTEMPTS = 3
 
 APP_ID = 'tubitv'
 PLATFORM = 'web'
@@ -126,14 +136,18 @@ class TubiApi(object):
     def kidsMode(self):
         return 'true' if self.kids else 'false'
 
-    def get(self, url, params):
-        try:
-            response = requests.get(url, params=params, headers=self.headers,
-                                    timeout=TIMEOUT, **self.requestKwargs)
-            response.raise_for_status()
-            return response.json()
-        except Exception as err:
-            raise TubiApiError(str(err))
+    def get(self, url, params, attempts=1):
+        for attempt in range(1, attempts + 1):
+            try:
+                response = requests.get(url, params=params, headers=self.headers,
+                                        timeout=TIMEOUT, **self.requestKwargs)
+                response.raise_for_status()
+                return response.json()
+            except requests.exceptions.ConnectionError as err:
+                if attempt == attempts:
+                    raise TubiApiError(str(err))
+            except Exception as err:
+                raise TubiApiError(str(err))
 
     def post(self, url, payload):
         try:
@@ -381,19 +395,24 @@ class TubiApi(object):
 
     # ------------------------------------------------------------- live tv
 
-    def liveChannels(self):
+    def liveChannels(self, allGroups=False):
         """Tubi's linear channels.
 
         Returns (channels in line-up order, {channel id: group name}). Every
         channel carries its own live HLS manifest, none of them are encrypted
         and none of them need an account.
+
+        Tubi files a channel under several groups - its editorial rows such as
+        Featured come first - and the map keeps only the first. With allGroups
+        it holds the list of every group instead, in Tubi's order.
         """
         params = [('mode', EPG_MODE),
                   ('platform', PLATFORM),
                   ('device_id', self.deviceId)]
         if self.userId is not None:
             params.append(('user_id', self.userId))
-        data = self.get(''.join([BROWSE_API, '/api/v2/epg']), params)
+        data = self.get(''.join([BROWSE_API, '/api/v2/epg']), params,
+                        attempts=LIVE_ATTEMPTS)
 
         contents = data.get('contents') or {}
         groups = {}
@@ -402,7 +421,11 @@ class TubiApi(object):
             for channelId in container.get('contents') or []:
                 if channelId not in contents:
                     continue
-                groups.setdefault(channelId, container.get('name'))
+                name = container.get('name')
+                if not allGroups:
+                    groups.setdefault(channelId, name)
+                elif name and name not in groups.setdefault(channelId, []):
+                    groups[channelId].append(name)
                 if contents[channelId] not in ordered:
                     ordered.append(contents[channelId])
         # Anything Tubi did not file under a group still belongs in the guide
@@ -414,11 +437,12 @@ class TubiApi(object):
     def _programmingBatch(self, batch):
         params = [('platform', PLATFORM),
                   ('device_id', self.deviceId),
-                  ('lookahead', 1),
+                  ('lookahead', EPG_LOOKAHEAD),
                   ('content_id', ','.join(str(i) for i in batch))] + LIMIT_RESOLUTIONS
         if self.userId is not None:
             params.append(('user_id', self.userId))
-        data = self.get(''.join([EPG_API, '/content/epg/programming']), params)
+        data = self.get(''.join([EPG_API, '/content/epg/programming']), params,
+                        attempts=LIVE_ATTEMPTS)
         return data.get('rows') or []
 
     def liveProgramming(self, channelIds, tolerant=False):

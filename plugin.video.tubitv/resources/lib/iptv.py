@@ -11,11 +11,14 @@
 #
 import html
 import json
+import os
 import re
 import socket
 import time
 
 import xbmc
+
+from resources.lib.tubi_api import TubiApiError
 
 VERSION = 1
 TIMEOUT = 30
@@ -91,24 +94,96 @@ def episodeOf(program):
     return 'S%02dE%02d' % (int(season), int(episode))
 
 
-def channels(api, playPath, mediaUrl=None):
-    """The JSON-STREAMS document for Tubi's linear channels."""
-    lineUp, groups = api.liveChannels()
+def warn(message):
+    xbmc.log(msg=''.join(['plugin.video.tubitv : ', message]), level=xbmc.LOGWARNING)
+
+
+def loadStore(path):
+    """What the last line-up left behind: channel numbers and the streams."""
+    if not path or not os.path.exists(path):
+        return {}
+    try:
+        with open(path, 'r') as handle:
+            data = json.load(handle)
+        return data if isinstance(data, dict) else {}
+    except (IOError, OSError, ValueError) as err:
+        warn('iptv store unreadable, starting afresh : %s' % err)
+        return {}
+
+
+def saveStore(path, data):
+    """Write the store whole or not at all - a failure costs nothing now."""
+    if not path:
+        return
+    try:
+        folder = os.path.dirname(path)
+        if folder and not os.path.isdir(folder):
+            os.makedirs(folder)
+        temporary = path + '.tmp'
+        with open(temporary, 'w') as handle:
+            json.dump(data, handle)
+        os.replace(temporary, path)
+    except (IOError, OSError) as err:
+        warn('iptv store not saved : %s' % err)
+
+
+def assignNumbers(channelIds, numbers):
+    """Give every channel a number that stays with it.
+
+    Tubi has no channel numbers, and numbering by position would move every
+    channel along whenever Tubi adds or reorders one. So a channel keeps the
+    number it was first given: the first line-up is numbered in Tubi's order,
+    a new channel goes on the end, and the number of one Tubi drops stays
+    reserved in case it comes back.
+    """
+    numbers = dict((key, value) for key, value in (numbers or {}).items()
+                   if isinstance(value, int))
+    following = max(list(numbers.values()) or [0]) + 1
+    for channelId in channelIds:
+        if channelId not in numbers:
+            numbers[channelId] = following
+            following += 1
+    return numbers
+
+
+def channels(api, playPath, store=None):
+    """The JSON-STREAMS document for Tubi's linear channels.
+
+    Logos go across as Tubi's own URLs. They are public, never expire and
+    load from anywhere, whereas a signed relay URL would expire inside the
+    playlists IPTV Manager and IPTV Simple keep.
+
+    If Tubi cannot be reached the last line-up is served again. IPTV Manager
+    turns a failed call into an empty playlist, and IPTV Simple then removes
+    every channel - a much worse outcome than a line-up a few hours old. The
+    streams are plugin paths resolved at play time, so they cannot go stale.
+    """
+    saved = loadStore(store)
+    try:
+        lineUp, groups = api.liveChannels(allGroups=True)
+    except TubiApiError as err:
+        if not saved.get('streams'):
+            raise
+        warn('Tubi line-up unavailable, serving the saved one : %s' % err)
+        return {'version': VERSION, 'streams': saved['streams']}
+
+    numbers = assignNumbers([str(channel.get('id')) for channel in lineUp],
+                            saved.get('numbers'))
     streams = []
     for channel in lineUp:
         channelId = str(channel.get('id'))
-        logo = firstImage(channel.get('images'), 'thumbnail', 'poster', 'landscape')
-        if mediaUrl is not None:
-            logo = mediaUrl(logo)
         streams.append({'id': channelId,
                         'name': plainText(channel.get('title')),
-                        'logo': logo,
+                        'logo': firstImage(channel.get('images'),
+                                           'thumbnail', 'poster', 'landscape'),
+                        'preset': numbers[channelId],
                         'stream': playPath % channelId,
-                        'group': groups.get(channelId)})
+                        'group': groups.get(channelId) or []})
+    saveStore(store, {'numbers': numbers, 'streams': streams})
     return {'version': VERSION, 'streams': streams}
 
 
-def epg(api, channelIds, mediaUrl=None):
+def epg(api, channelIds):
     """The JSON-EPG document for the given channels.
 
     Tubi timestamps its programmes in ISO-8601 UTC already, which is what
@@ -131,7 +206,7 @@ def epg(api, channelIds, mediaUrl=None):
                 entry['episode'] = episode
             image = firstImage(program.get('images'), 'thumbnail', 'landscape', 'poster')
             if image is not None:
-                entry['image'] = mediaUrl(image) if mediaUrl is not None else image
+                entry['image'] = image
             tags = program.get('tags') or []
             if tags:
                 entry['genre'] = plainText(tags[0])
@@ -140,9 +215,16 @@ def epg(api, channelIds, mediaUrl=None):
     return {'version': VERSION, 'epg': guide}
 
 
-def guideFor(api, mediaUrl=None):
-    lineUp, _ = api.liveChannels()
-    return epg(api, [str(channel.get('id')) for channel in lineUp], mediaUrl=mediaUrl)
+def guideFor(api, store=None):
+    try:
+        lineUp, _ = api.liveChannels()
+        channelIds = [str(channel.get('id')) for channel in lineUp]
+    except TubiApiError as err:
+        channelIds = [stream['id'] for stream in loadStore(store).get('streams') or []]
+        if not channelIds:
+            raise
+        warn('Tubi line-up unavailable, guiding the saved one : %s' % err)
+    return epg(api, channelIds)
 
 
 def summarise(route, data, seconds):
@@ -155,16 +237,17 @@ def summarise(route, data, seconds):
     return 'iptv served %s : %s in %.1fs' % (route, what, seconds)
 
 
-def handle(route, port, api, playPath, log=None, mediaUrl=None):
+def handle(route, port, api, playPath, log=None, store=None):
     """Answer one IPTV Manager call. Returns True when it was ours.
 
     The work is deferred into a callable so the socket can be opened first -
-    see send().
+    see send(). The store is a file that keeps the channel numbers and the
+    last line-up between calls.
     """
     if route.endswith(CHANNELS_ROUTE):
-        build = lambda: channels(api, playPath, mediaUrl=mediaUrl)
+        build = lambda: channels(api, playPath, store=store)
     elif route.endswith(EPG_ROUTE):
-        build = lambda: guideFor(api, mediaUrl=mediaUrl)
+        build = lambda: guideFor(api, store=store)
     else:
         return False
 

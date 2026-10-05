@@ -234,6 +234,29 @@ be switched off if you would rather keep the channels inside the addon.
 The channel line-up is served as JSON-STREAMS and the guide as JSON-EPG, both
 written back over the callback socket IPTV Manager supplies.
 
+- **Channel numbers** stay put. Tubi has none of its own, so the addon keeps
+  them in `iptv.json` in its profile: the first line-up is numbered in Tubi's
+  order, a new channel goes on the end, and a channel Tubi drops keeps its
+  number reserved. Turn on *Settings → PVR & Live TV → General → Use channel
+  numbers from backend* so Kodi shows them. Deleting `iptv.json` numbers the
+  channels afresh.
+- **Groups**: a channel is listed in every Tubi group it belongs to.
+- **Guide depth**: Tubi's guide always ends on a UTC midnight, the end of the
+  day after tomorrow, so it reaches 48 to 72 hours ahead.
+- **Logos and guide images** are Tubi's own public image URLs, never relay
+  URLs, because IPTV Manager and IPTV Simple keep them for hours or days and
+  a signed relay URL would expire in between.
+- **A failed refresh** does not empty the guide. Live calls retry a lost
+  connection, and if Tubi still cannot be reached the last line-up is served
+  again. IPTV Manager would otherwise write an empty playlist, and IPTV Simple
+  would remove every channel.
+
+On Kodi 20 and later, IPTV Manager's *Configure IPTV Simple automatically*
+writes IPTV Simple's legacy add-on settings, not its per-instance settings.
+Configure an IPTV Simple instance yourself instead: a local M3U at
+`userdata/addon_data/service.iptv.manager/playlist.m3u8` and a local XMLTV at
+`.../epg.xml`.
+
 The callback socket is opened before the document is built. IPTV Manager gives
 an addon ten seconds to call back and then waits as long as the connection
 stays open, and building the guide takes one request per batch of channels —

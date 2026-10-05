@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # KodiAddon
 #
+import os
 import re
 import sys
 import urllib.parse
@@ -62,5 +63,5 @@ if len(sys.argv) > 2 and sys.argv[2].startswith('?'):
 query = urllib.parse.parse_qs(sys.argv[2][1:]) if len(sys.argv) > 2 else {}
 port = (query.get('port') or [None])[0]
 if not iptv.handle(sys.argv[0], port, ma.api, LIVE_PATH, log=ma.log,
-                   mediaUrl=ma.mediaUrl):
+                   store=os.path.join(ma.auth.profile, 'iptv.json')):
     ma.processAddonEvent()
