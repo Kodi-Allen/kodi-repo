@@ -243,8 +243,8 @@ msgid "Tubi rejects this old Widevine version. Encrypted titles need a current C
 msgstr ""
 
 msgctxt "#30071"
-msgid "UI prototype"
-msgstr "UI prototype"
+msgid "Tubi Home"
+msgstr "Tubi Home"
 
 msgctxt "#30072"
 msgid "Loading…"

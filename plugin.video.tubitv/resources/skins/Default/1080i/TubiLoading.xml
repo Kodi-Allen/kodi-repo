@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Covers every Tubi start until the custom Home opens. -->
+<window>
+    <zorder>2</zorder>
+    <!-- While this fades out, Kodi lets Home activate underneath it. -->
+    <animation effect="fade" start="100" end="0" time="400">WindowClose</animation>
+    <controls>
+        <control type="image">
+            <left>0</left><top>0</top><width>1920</width><height>1080</height>
+            <texture colordiffuse="FF0B0019">tubi-white.png</texture>
+        </control>
+        <control type="image">
+            <left>0</left><top>0</top><width>1920</width><height>660</height>
+            <texture colordiffuse="A66E2DAA">tubi-ambient.png</texture>
+        </control>
+        <control type="image">
+            <left>751</left><top>440</top><width>417</width><height>120</height>
+            <aspectratio>keep</aspectratio>
+            <texture>tubi-logo.png</texture>
+        </control>
+        <control type="group">
+            <left>929</left><top>612</top>
+            <control type="image">
+                <left>0</left><top>0</top><width>12</width><height>12</height>
+                <texture colordiffuse="FFF0F0F0">tubi-white.png</texture>
+                <animation effect="fade" start="25" end="100" time="400" tween="sine" pulse="true" condition="true">Conditional</animation>
+            </control>
+            <control type="image">
+                <left>26</left><top>0</top><width>12</width><height>12</height>
+                <texture colordiffuse="FFF0F0F0">tubi-white.png</texture>
+                <animation effect="fade" start="25" end="100" time="400" delay="200" tween="sine" pulse="true" condition="true">Conditional</animation>
+            </control>
+            <control type="image">
+                <left>52</left><top>0</top><width>12</width><height>12</height>
+                <texture colordiffuse="FFF0F0F0">tubi-white.png</texture>
+                <animation effect="fade" start="25" end="100" time="400" delay="400" tween="sine" pulse="true" condition="true">Conditional</animation>
+            </control>
+        </control>
+    </controls>
+</window>

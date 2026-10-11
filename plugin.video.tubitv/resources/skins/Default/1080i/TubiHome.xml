@@ -1,88 +1,558 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
-    <defaultcontrol always="true">100</defaultcontrol>
-    <backgroundcolor>FF101218</backgroundcolor>
+    <defaultcontrol>100</defaultcontrol>
+    <backgroundcolor>FF0B0019</backgroundcolor>
     <controls>
         <control type="image">
             <left>0</left><top>0</top><width>1920</width><height>1080</height>
-            <texture colordiffuse="FF101218">tubi-white.png</texture>
+            <texture colordiffuse="FF0B0019">tubi-white.png</texture>
         </control>
         <control type="image">
             <left>0</left><top>0</top><width>1920</width><height>1080</height>
             <aspectratio>scale</aspectratio>
             <texture background="true">$INFO[Container(100).ListItem.Art(fanart)]</texture>
             <fadetime>250</fadetime>
+            <visible>!Control.HasFocus(201) + !Control.HasFocus(202) + !Control.HasFocus(110) + !Control.HasFocus(120) + !Control.HasFocus(130)</visible>
         </control>
         <control type="image">
             <left>0</left><top>0</top><width>1920</width><height>1080</height>
-            <texture colordiffuse="B3101218">tubi-white.png</texture>
+            <aspectratio>scale</aspectratio>
+            <texture background="true">$INFO[Container(110).ListItem.Art(fanart)]</texture>
+            <fadetime>250</fadetime>
+            <visible>Control.HasFocus(110)</visible>
         </control>
-        <control type="label">
-            <left>100</left><top>96</top><width>1720</width><height>64</height>
-            <font>font13</font><textcolor>FFF0F0F0</textcolor>
-            <label>[B]TUBI[/B]</label>
+        <control type="image">
+            <left>0</left><top>0</top><width>1920</width><height>1080</height>
+            <aspectratio>scale</aspectratio>
+            <texture background="true">$INFO[Container(120).ListItem.Art(fanart)]</texture>
+            <fadetime>250</fadetime>
+            <visible>Control.HasFocus(120)</visible>
         </control>
-        <control type="label">
-            <left>100</left><top>228</top><width>1720</width><height>48</height>
-            <font>font13</font><textcolor>FFF0F0F0</textcolor>
-            <label>$INFO[Window.Property(tubi.row)]</label>
+        <control type="image">
+            <left>0</left><top>0</top><width>1920</width><height>1080</height>
+            <aspectratio>scale</aspectratio>
+            <texture background="true">$INFO[Container(130).ListItem.Art(fanart)]</texture>
+            <fadetime>250</fadetime>
+            <visible>Control.HasFocus(130)</visible>
         </control>
-        <control type="label">
-            <left>100</left><top>300</top><width>1720</width><height>64</height>
-            <font>font13</font><textcolor>FFC0C0C0</textcolor>
-            <label>$INFO[Window.Property(tubi.status)]</label>
+        <control type="image">
+            <left>0</left><top>0</top><width>1920</width><height>1080</height>
+            <aspectratio>scale</aspectratio>
+            <texture background="true">$INFO[Window.Property(tubi.featured0.art)]</texture>
+            <fadetime>250</fadetime>
+            <visible>Control.HasFocus(201)</visible>
         </control>
-        <!-- Six unchanged 288px cells; normal poster 256x384, gap 32.
-             Only the focused artwork grows to 268x402 (104.6875%).
-             Extra clipping room + offsets preserve the row origin (96,300). -->
-        <control type="list" id="100">
-            <left>88</left><top>284</top><width>1728</width><height>476</height>
-            <offsetx>8</offsetx><offsety>16</offsety>
-            <orientation>horizontal</orientation>
-            <onleft>100</onleft><onright>100</onright>
-            <onup>100</onup><ondown>100</ondown>
-            <scrolltime>0</scrolltime>
-            <itemlayout width="288" height="460">
+        <control type="image">
+            <left>0</left><top>0</top><width>1920</width><height>1080</height>
+            <aspectratio>scale</aspectratio>
+            <texture background="true">$INFO[Window.Property(tubi.featured1.art)]</texture>
+            <fadetime>250</fadetime>
+            <visible>Control.HasFocus(202)</visible>
+        </control>
+        <control type="image">
+            <left>0</left><top>0</top><width>1920</width><height>1080</height>
+            <texture colordiffuse="B30B0019">tubi-white.png</texture>
+        </control>
+        <!-- Tubi web ambient: violet .65 down to 80px, fading out by 660px. -->
+        <control type="image">
+            <left>0</left><top>0</top><width>1920</width><height>660</height>
+            <texture colordiffuse="A66E2DAA">tubi-ambient.png</texture>
+        </control>
+        <!-- 80px header; Tubi wordmark in #FFFF13, aligned with the row. -->
+        <control type="image">
+            <left>100</left><top>24</top><width>111</width><height>32</height>
+            <aspectratio>keep</aspectratio>
+            <texture>tubi-logo.png</texture>
+        </control>
+        <!-- Navbar right of the wordmark, text only, 44px between items.
+             Focus: white text plus a 3px underline below the text. -->
+        <control type="button" id="301">
+            <left>264</left><top>20</top><width>81</width><height>40</height>
+            <texturefocus /><texturenofocus />
+            <label>Home</label><font>font13</font><textoffsetx>0</textoffsetx><aligny>center</aligny>
+            <textcolor>FFC0C0C0</textcolor><focusedcolor>FFF0F0F0</focusedcolor>
+            <onright>302</onright><ondown>201</ondown>
+        </control>
+        <control type="image">
+            <left>267</left><top>58</top><width>75</width><height>3</height>
+            <texture colordiffuse="FFF0F0F0">tubi-white.png</texture>
+            <visible>Control.HasFocus(301)</visible>
+        </control>
+        <control type="button" id="302">
+            <left>382</left><top>20</top><width>92</width><height>40</height>
+            <texturefocus /><texturenofocus />
+            <label>Movies</label><font>font13</font><textoffsetx>0</textoffsetx><aligny>center</aligny>
+            <textcolor>FFC0C0C0</textcolor><focusedcolor>FFF0F0F0</focusedcolor>
+            <onleft>301</onleft><onright>303</onright><ondown>201</ondown>
+        </control>
+        <control type="image">
+            <left>385</left><top>58</top><width>86</width><height>3</height>
+            <texture colordiffuse="FFF0F0F0">tubi-white.png</texture>
+            <visible>Control.HasFocus(302)</visible>
+        </control>
+        <control type="button" id="303">
+            <left>513</left><top>20</top><width>131</width><height>40</height>
+            <texturefocus /><texturenofocus />
+            <label>TV Shows</label><font>font13</font><textoffsetx>0</textoffsetx><aligny>center</aligny>
+            <textcolor>FFC0C0C0</textcolor><focusedcolor>FFF0F0F0</focusedcolor>
+            <onleft>302</onleft><onright>304</onright><ondown>201</ondown>
+        </control>
+        <control type="image">
+            <left>514</left><top>58</top><width>127</width><height>3</height>
+            <texture colordiffuse="FFF0F0F0">tubi-white.png</texture>
+            <visible>Control.HasFocus(303)</visible>
+        </control>
+        <control type="button" id="304">
+            <left>681</left><top>20</top><width>100</width><height>40</height>
+            <texturefocus /><texturenofocus />
+            <label>Live TV</label><font>font13</font><textoffsetx>0</textoffsetx><aligny>center</aligny>
+            <textcolor>FFC0C0C0</textcolor><focusedcolor>FFF0F0F0</focusedcolor>
+            <onleft>303</onleft><onright>305</onright><ondown>201</ondown>
+        </control>
+        <control type="image">
+            <left>684</left><top>58</top><width>94</width><height>3</height>
+            <texture colordiffuse="FFF0F0F0">tubi-white.png</texture>
+            <visible>Control.HasFocus(304)</visible>
+        </control>
+        <control type="button" id="305">
+            <left>820</left><top>20</top><width>91</width><height>40</height>
+            <texturefocus /><texturenofocus />
+            <label>Search</label><font>font13</font><textoffsetx>0</textoffsetx><aligny>center</aligny>
+            <textcolor>FFC0C0C0</textcolor><focusedcolor>FFF0F0F0</focusedcolor>
+            <onleft>304</onleft><ondown>201</ondown>
+        </control>
+        <control type="image">
+            <left>821</left><top>58</top><width>87</width><height>3</height>
+            <texture colordiffuse="FFF0F0F0">tubi-white.png</texture>
+            <visible>Control.HasFocus(305)</visible>
+        </control>
+        <!-- Featured and the poster rows scroll in one vertical grouplist
+             below the fixed 80px header; Kodi scrolls it to the focused row.
+             Positions inside each group are relative to that group. -->
+        <control type="grouplist" id="900">
+            <left>0</left><top>80</top><width>1920</width><height>1000</height>
+            <orientation>vertical</orientation><itemgap>0</itemgap>
+            <control type="group">
+                <height>438</height>
+                <!-- Two featured cards showing the current pair of the "featured"
+                     container (home.py sets the properties), 843x406, gap 10,
+                     spanning the row (100-1796). 16px corners via mask.
+                     Buttons 201/202 make them focusable; SELECT uses the pair item. -->
                 <control type="image">
-                    <left>4</left><top>4</top><width>256</width><height>384</height>
-                    <texture colordiffuse="FF252830">tubi-white.png</texture>
+                    <left>97</left><top>5</top><width>849</width><height>412</height>
+                    <texture colordiffuse="FFF0F0F0" diffuse="tubi-card-mask.png">tubi-white.png</texture>
+                    <visible>Control.HasFocus(201)</visible>
                 </control>
                 <control type="image">
-                    <left>4</left><top>4</top><width>256</width><height>384</height>
-                    <aspectratio>keep</aspectratio>
-                    <texture>$INFO[Window.Property(tubi.fallback)]</texture>
+                    <left>100</left><top>8</top><width>843</width><height>406</height>
+                    <texture colordiffuse="FF252830" diffuse="tubi-card-mask.png">tubi-white.png</texture>
                 </control>
                 <control type="image">
-                    <left>4</left><top>4</top><width>256</width><height>384</height>
-                    <aspectratio>keep</aspectratio>
-                    <texture background="true">$INFO[ListItem.Art(poster)]</texture>
-                </control>
-            </itemlayout>
-            <focusedlayout width="288" height="460">
-                <control type="image">
-                    <left>-6</left><top>-9</top><width>276</width><height>410</height>
-                    <texture colordiffuse="FFF0F0F0">tubi-white.png</texture>
+                    <left>100</left><top>8</top><width>843</width><height>406</height>
+                    <aspectratio scalediffuse="false">scale</aspectratio>
+                    <texture background="true" diffuse="tubi-card-mask.png">$INFO[Window.Property(tubi.featured0.art)]</texture>
+                    <fadetime>250</fadetime>
                 </control>
                 <control type="image">
-                    <left>-2</left><top>-5</top><width>268</width><height>402</height>
-                    <texture colordiffuse="FF252830">tubi-white.png</texture>
-                </control>
-                <control type="image">
-                    <left>-2</left><top>-5</top><width>268</width><height>402</height>
-                    <aspectratio>keep</aspectratio>
-                    <texture>$INFO[Window.Property(tubi.fallback)]</texture>
-                </control>
-                <control type="image">
-                    <left>-2</left><top>-5</top><width>268</width><height>402</height>
-                    <aspectratio>keep</aspectratio>
-                    <texture background="true">$INFO[ListItem.Art(poster)]</texture>
+                    <left>100</left><top>8</top><width>843</width><height>406</height>
+                    <texture colordiffuse="CC000000" diffuse="tubi-card-mask.png" flipy="true">tubi-ambient.png</texture>
                 </control>
                 <control type="label">
-                    <left>4</left><top>410</top><width>256</width><height>48</height>
+                    <left>124</left><top>358</top><width>795</width><height>40</height>
                     <font>font13</font><textcolor>FFF0F0F0</textcolor>
-                    <label>$INFO[ListItem.Label]</label><scroll>false</scroll>
+                    <label>[B]$INFO[Window.Property(tubi.featured0.title)][/B]$INFO[Window.Property(tubi.featured0.year),[COLOR FFC0C0C0]   ,[/COLOR]]</label>
+                    <visible>String.IsEmpty(Window.Property(tubi.featured0.titleart))</visible>
                 </control>
-            </focusedlayout>
+                <!-- Tubi title art instead of the text title: about 40% of the card
+                     width, bottom-left above the year, never stretched. -->
+                <control type="image">
+                    <left>124</left><top>212</top><width>340</width><height>140</height>
+                    <aspectratio align="left" aligny="bottom">keep</aspectratio>
+                    <texture background="true">$INFO[Window.Property(tubi.featured0.titleart)]</texture>
+                    <visible>!String.IsEmpty(Window.Property(tubi.featured0.titleart))</visible>
+                </control>
+                <control type="label">
+                    <left>124</left><top>358</top><width>795</width><height>40</height>
+                    <font>font13</font><textcolor>FFC0C0C0</textcolor>
+                    <label>$INFO[Window.Property(tubi.featured0.year)]</label>
+                    <visible>!String.IsEmpty(Window.Property(tubi.featured0.titleart))</visible>
+                </control>
+                <control type="button" id="201">
+                    <left>100</left><top>8</top><width>843</width><height>406</height>
+                    <texturefocus /><texturenofocus /><label />
+                    <onright>202</onright><onup>301</onup><ondown>100</ondown>
+                </control>
+                <control type="image">
+                    <left>950</left><top>5</top><width>849</width><height>412</height>
+                    <texture colordiffuse="FFF0F0F0" diffuse="tubi-card-mask.png">tubi-white.png</texture>
+                    <visible>Control.HasFocus(202)</visible>
+                </control>
+                <control type="image">
+                    <left>953</left><top>8</top><width>843</width><height>406</height>
+                    <texture colordiffuse="FF252830" diffuse="tubi-card-mask.png">tubi-white.png</texture>
+                </control>
+                <control type="image">
+                    <left>953</left><top>8</top><width>843</width><height>406</height>
+                    <aspectratio scalediffuse="false">scale</aspectratio>
+                    <texture background="true" diffuse="tubi-card-mask.png">$INFO[Window.Property(tubi.featured1.art)]</texture>
+                    <fadetime>250</fadetime>
+                </control>
+                <control type="image">
+                    <left>953</left><top>8</top><width>843</width><height>406</height>
+                    <texture colordiffuse="CC000000" diffuse="tubi-card-mask.png" flipy="true">tubi-ambient.png</texture>
+                </control>
+                <control type="label">
+                    <left>977</left><top>358</top><width>795</width><height>40</height>
+                    <font>font13</font><textcolor>FFF0F0F0</textcolor>
+                    <label>[B]$INFO[Window.Property(tubi.featured1.title)][/B]$INFO[Window.Property(tubi.featured1.year),[COLOR FFC0C0C0]   ,[/COLOR]]</label>
+                    <visible>String.IsEmpty(Window.Property(tubi.featured1.titleart))</visible>
+                </control>
+                <!-- Tubi title art instead of the text title: about 40% of the card
+                     width, bottom-left above the year, never stretched. -->
+                <control type="image">
+                    <left>977</left><top>212</top><width>340</width><height>140</height>
+                    <aspectratio align="left" aligny="bottom">keep</aspectratio>
+                    <texture background="true">$INFO[Window.Property(tubi.featured1.titleart)]</texture>
+                    <visible>!String.IsEmpty(Window.Property(tubi.featured1.titleart))</visible>
+                </control>
+                <control type="label">
+                    <left>977</left><top>358</top><width>795</width><height>40</height>
+                    <font>font13</font><textcolor>FFC0C0C0</textcolor>
+                    <label>$INFO[Window.Property(tubi.featured1.year)]</label>
+                    <visible>!String.IsEmpty(Window.Property(tubi.featured1.titleart))</visible>
+                </control>
+                <control type="button" id="202">
+                    <left>953</left><top>8</top><width>843</width><height>406</height>
+                    <texturefocus /><texturenofocus /><label />
+                    <onleft>201</onleft><onup>301</onup><ondown>100</ondown>
+                </control>
+            </control>
+            <control type="group">
+                <height>532</height>
+                <control type="label">
+                    <left>100</left><top>0</top><width>1720</width><height>48</height>
+                    <font>font13</font><textcolor>FFF0F0F0</textcolor>
+                    <label>$INFO[Window.Property(tubi.row)]</label>
+                </control>
+                <control type="label">
+                    <left>100</left><top>48</top><width>1720</width><height>64</height>
+                    <font>font13</font><textcolor>FFC0C0C0</textcolor>
+                    <label>$INFO[Window.Property(tubi.status)]</label>
+                </control>
+                <!-- Six unchanged 288px cells; normal poster 256x384, gap 32.
+                     Only the focused artwork grows to 274x411 (107.03125%).
+                     Extra clipping room + offsets keep the row origin at (96,590),
+                     24px below the heading so the focus frame clears it. -->
+                <control type="list" id="100">
+                    <left>88</left><top>56</top><width>1728</width><height>476</height>
+                    <offsetx>8</offsetx><offsety>16</offsety>
+                    <orientation>horizontal</orientation>
+                    <onleft>100</onleft><onright>100</onright>
+                    <!-- UP goes to the featured card above: posters 1-3 / 4-6. -->
+                    <onup condition="Integer.IsLess(Container(100).Position,3)">201</onup><onup>202</onup>
+                    <ondown condition="!String.IsEmpty(Window.Property(tubi.row110))">110</ondown><ondown>100</ondown>
+                    <scrolltime>0</scrolltime>
+                    <itemlayout width="288" height="460">
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <texture colordiffuse="FF252830">tubi-white.png</texture>
+                        </control>
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture>$INFO[Window.Property(tubi.fallback)]</texture>
+                        </control>
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture background="true">$INFO[ListItem.Art(poster)]</texture>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout width="288" height="460">
+                        <control type="image">
+                            <left>-8</left><top>-12.5</top><width>280</width><height>417</height>
+                            <texture colordiffuse="FFF0F0F0">tubi-white.png</texture>
+                            <visible>Control.HasFocus(100)</visible>
+                        </control>
+                        <control type="image">
+                            <left>-5</left><top>-9.5</top><width>274</width><height>411</height>
+                            <texture colordiffuse="FF252830">tubi-white.png</texture>
+                            <visible>Control.HasFocus(100)</visible>
+                        </control>
+                        <control type="image">
+                            <left>-5</left><top>-9.5</top><width>274</width><height>411</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture>$INFO[Window.Property(tubi.fallback)]</texture>
+                            <visible>Control.HasFocus(100)</visible>
+                        </control>
+                        <control type="image">
+                            <left>-5</left><top>-9.5</top><width>274</width><height>411</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture background="true">$INFO[ListItem.Art(poster)]</texture>
+                            <visible>Control.HasFocus(100)</visible>
+                        </control>
+                        <!-- Not focused: the remembered item looks like any other cell. -->
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <texture colordiffuse="FF252830">tubi-white.png</texture>
+                            <visible>!Control.HasFocus(100)</visible>
+                        </control>
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture>$INFO[Window.Property(tubi.fallback)]</texture>
+                            <visible>!Control.HasFocus(100)</visible>
+                        </control>
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture background="true">$INFO[ListItem.Art(poster)]</texture>
+                            <visible>!Control.HasFocus(100)</visible>
+                        </control>
+                    </focusedlayout>
+                </control>
+            </control>
+            <control type="group">
+                <height>532</height>
+                <visible>!String.IsEmpty(Window.Property(tubi.row110))</visible>
+                <control type="label">
+                    <left>100</left><top>0</top><width>1720</width><height>48</height>
+                    <font>font13</font><textcolor>FFF0F0F0</textcolor>
+                    <label>$INFO[Window.Property(tubi.row110)]</label>
+                </control>
+                <control type="list" id="110">
+                    <left>88</left><top>56</top><width>1728</width><height>476</height>
+                    <offsetx>8</offsetx><offsety>16</offsety>
+                    <orientation>horizontal</orientation>
+                    <onleft>110</onleft><onright>110</onright>
+                    <onup>100</onup><ondown condition="!String.IsEmpty(Window.Property(tubi.row120))">120</ondown><ondown>110</ondown>
+                    <scrolltime>0</scrolltime>
+                    <itemlayout width="288" height="460">
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <texture colordiffuse="FF252830">tubi-white.png</texture>
+                        </control>
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture>$INFO[Window.Property(tubi.fallback)]</texture>
+                        </control>
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture background="true">$INFO[ListItem.Art(poster)]</texture>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout width="288" height="460">
+                        <control type="image">
+                            <left>-8</left><top>-12.5</top><width>280</width><height>417</height>
+                            <texture colordiffuse="FFF0F0F0">tubi-white.png</texture>
+                            <visible>Control.HasFocus(110)</visible>
+                        </control>
+                        <control type="image">
+                            <left>-5</left><top>-9.5</top><width>274</width><height>411</height>
+                            <texture colordiffuse="FF252830">tubi-white.png</texture>
+                            <visible>Control.HasFocus(110)</visible>
+                        </control>
+                        <control type="image">
+                            <left>-5</left><top>-9.5</top><width>274</width><height>411</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture>$INFO[Window.Property(tubi.fallback)]</texture>
+                            <visible>Control.HasFocus(110)</visible>
+                        </control>
+                        <control type="image">
+                            <left>-5</left><top>-9.5</top><width>274</width><height>411</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture background="true">$INFO[ListItem.Art(poster)]</texture>
+                            <visible>Control.HasFocus(110)</visible>
+                        </control>
+                        <!-- Not focused: the remembered item looks like any other cell. -->
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <texture colordiffuse="FF252830">tubi-white.png</texture>
+                            <visible>!Control.HasFocus(110)</visible>
+                        </control>
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture>$INFO[Window.Property(tubi.fallback)]</texture>
+                            <visible>!Control.HasFocus(110)</visible>
+                        </control>
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture background="true">$INFO[ListItem.Art(poster)]</texture>
+                            <visible>!Control.HasFocus(110)</visible>
+                        </control>
+                    </focusedlayout>
+                </control>
+            </control>
+            <control type="group">
+                <height>532</height>
+                <visible>!String.IsEmpty(Window.Property(tubi.row120))</visible>
+                <control type="label">
+                    <left>100</left><top>0</top><width>1720</width><height>48</height>
+                    <font>font13</font><textcolor>FFF0F0F0</textcolor>
+                    <label>$INFO[Window.Property(tubi.row120)]</label>
+                </control>
+                <control type="list" id="120">
+                    <left>88</left><top>56</top><width>1728</width><height>476</height>
+                    <offsetx>8</offsetx><offsety>16</offsety>
+                    <orientation>horizontal</orientation>
+                    <onleft>120</onleft><onright>120</onright>
+                    <onup>110</onup><ondown condition="!String.IsEmpty(Window.Property(tubi.row130))">130</ondown><ondown>120</ondown>
+                    <scrolltime>0</scrolltime>
+                    <itemlayout width="288" height="460">
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <texture colordiffuse="FF252830">tubi-white.png</texture>
+                        </control>
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture>$INFO[Window.Property(tubi.fallback)]</texture>
+                        </control>
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture background="true">$INFO[ListItem.Art(poster)]</texture>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout width="288" height="460">
+                        <control type="image">
+                            <left>-8</left><top>-12.5</top><width>280</width><height>417</height>
+                            <texture colordiffuse="FFF0F0F0">tubi-white.png</texture>
+                            <visible>Control.HasFocus(120)</visible>
+                        </control>
+                        <control type="image">
+                            <left>-5</left><top>-9.5</top><width>274</width><height>411</height>
+                            <texture colordiffuse="FF252830">tubi-white.png</texture>
+                            <visible>Control.HasFocus(120)</visible>
+                        </control>
+                        <control type="image">
+                            <left>-5</left><top>-9.5</top><width>274</width><height>411</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture>$INFO[Window.Property(tubi.fallback)]</texture>
+                            <visible>Control.HasFocus(120)</visible>
+                        </control>
+                        <control type="image">
+                            <left>-5</left><top>-9.5</top><width>274</width><height>411</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture background="true">$INFO[ListItem.Art(poster)]</texture>
+                            <visible>Control.HasFocus(120)</visible>
+                        </control>
+                        <!-- Not focused: the remembered item looks like any other cell. -->
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <texture colordiffuse="FF252830">tubi-white.png</texture>
+                            <visible>!Control.HasFocus(120)</visible>
+                        </control>
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture>$INFO[Window.Property(tubi.fallback)]</texture>
+                            <visible>!Control.HasFocus(120)</visible>
+                        </control>
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture background="true">$INFO[ListItem.Art(poster)]</texture>
+                            <visible>!Control.HasFocus(120)</visible>
+                        </control>
+                    </focusedlayout>
+                </control>
+            </control>
+            <control type="group">
+                <height>532</height>
+                <visible>!String.IsEmpty(Window.Property(tubi.row130))</visible>
+                <control type="label">
+                    <left>100</left><top>0</top><width>1720</width><height>48</height>
+                    <font>font13</font><textcolor>FFF0F0F0</textcolor>
+                    <label>$INFO[Window.Property(tubi.row130)]</label>
+                </control>
+                <control type="list" id="130">
+                    <left>88</left><top>56</top><width>1728</width><height>476</height>
+                    <offsetx>8</offsetx><offsety>16</offsety>
+                    <orientation>horizontal</orientation>
+                    <onleft>130</onleft><onright>130</onright>
+                    <onup>120</onup><ondown>130</ondown>
+                    <scrolltime>0</scrolltime>
+                    <itemlayout width="288" height="460">
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <texture colordiffuse="FF252830">tubi-white.png</texture>
+                        </control>
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture>$INFO[Window.Property(tubi.fallback)]</texture>
+                        </control>
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture background="true">$INFO[ListItem.Art(poster)]</texture>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout width="288" height="460">
+                        <control type="image">
+                            <left>-8</left><top>-12.5</top><width>280</width><height>417</height>
+                            <texture colordiffuse="FFF0F0F0">tubi-white.png</texture>
+                            <visible>Control.HasFocus(130)</visible>
+                        </control>
+                        <control type="image">
+                            <left>-5</left><top>-9.5</top><width>274</width><height>411</height>
+                            <texture colordiffuse="FF252830">tubi-white.png</texture>
+                            <visible>Control.HasFocus(130)</visible>
+                        </control>
+                        <control type="image">
+                            <left>-5</left><top>-9.5</top><width>274</width><height>411</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture>$INFO[Window.Property(tubi.fallback)]</texture>
+                            <visible>Control.HasFocus(130)</visible>
+                        </control>
+                        <control type="image">
+                            <left>-5</left><top>-9.5</top><width>274</width><height>411</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture background="true">$INFO[ListItem.Art(poster)]</texture>
+                            <visible>Control.HasFocus(130)</visible>
+                        </control>
+                        <!-- Not focused: the remembered item looks like any other cell. -->
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <texture colordiffuse="FF252830">tubi-white.png</texture>
+                            <visible>!Control.HasFocus(130)</visible>
+                        </control>
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture>$INFO[Window.Property(tubi.fallback)]</texture>
+                            <visible>!Control.HasFocus(130)</visible>
+                        </control>
+                        <control type="image">
+                            <left>4</left><top>4</top><width>256</width><height>384</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture background="true">$INFO[ListItem.Art(poster)]</texture>
+                            <visible>!Control.HasFocus(130)</visible>
+                        </control>
+                    </focusedlayout>
+                </control>
+            </control>
+        </control>
+        <!-- Rows 2-4 scroll the content under the header: fade it out below
+             the navbar instead of a hard cut (only while one of them has focus,
+             so the unscrolled home looks as before). -->
+        <control type="image">
+            <left>0</left><top>80</top><width>1920</width><height>64</height>
+            <texture colordiffuse="FF4C1E75">tubi-ambient.png</texture>
+            <visible>Control.HasFocus(110) | Control.HasFocus(120) | Control.HasFocus(130)</visible>
+            <animation effect="fade" time="200">VisibleChange</animation>
+        </control>
+        <!-- Preload only: just outside the screen, so Kodi loads and caches
+             the hero the next featured step brings in. A hidden control
+             (visible=false) does not load its texture. -->
+        <control type="image">
+            <left>1920</left><top>1080</top><width>1</width><height>1</height>
+            <texture background="true">$INFO[Window.Property(tubi.featured.preload)]</texture>
         </control>
     </controls>
 </window>

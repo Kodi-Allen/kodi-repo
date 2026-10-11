@@ -550,7 +550,7 @@ class myAddon(t1mAddon):
                              if row.get('id') == 'most_popular' or
                              row.get('slug') == 'most_popular'), None)
         if prototypeRow is not None:
-            ilist = self.addMenuItem(self.localLang(30071) or 'UI-Prototyp', 'DF', ilist,
+            ilist = self.addMenuItem(self.localLang(30071) or 'Tubi Home', 'DF', ilist,
                                      'ui|' + json.dumps({
                                          'id': prototypeRow.get('id') or prototypeRow['slug'],
                                          'title': prototypeRow.get('title')}),
@@ -621,18 +621,25 @@ class myAddon(t1mAddon):
         xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, liz)
 
     def getAddonShows(self, url, ilist):
-        containerId, cursor = (url.split('|', 1) + ['0'])[:2]
+        containerId, cursor, contentMode = (url.split('|') + [None, None])[:3]
         try:
-            contents, nextCursor = self.api.container(containerId, cursor=int(cursor))
+            contents, nextCursor = self.api.container(containerId, cursor=int(cursor or 0),
+                                                      contentMode=contentMode)
         except TubiApiError as err:
             self.report(err)
             return ilist
+        kinds = {content.get('type') for content in contents}
+        if kinds:
+            directoryContent = ('tvshows' if kinds == {SERIES} else
+                                'movies' if SERIES not in kinds else 'videos')
+            xbmcplugin.setContent(int(sys.argv[1]), directoryContent)
         for content in contents:
             ilist = self.addContent(content, ilist)
         if nextCursor is not None:
             infoList = {'Title': self.localLang(30026)}
             ilist = self.addMenuItem(self.localLang(30026), 'GS', ilist,
-                                     '|'.join([containerId, str(nextCursor)]),
+                                     '|'.join([containerId, str(nextCursor)] +
+                                              ([contentMode] if contentMode else [])),
                                      self.addonIcon, self.addonFanart, infoList, isFolder=True)
         return(ilist)
 
@@ -642,7 +649,8 @@ class myAddon(t1mAddon):
         inList = False
         try:
             if parts[0] == 'home':
-                return self.homeRows(ilist)
+                # home|movie and home|tv are Tubi's Movies and TV Shows pages
+                return self.homeRows(ilist, parts[1] if len(parts) > 1 else None)
             if parts[0] == 'mylist':
                 contents = self.api.contents([str(e['content_id']) for e in self.api.queue()])
                 inList = True
@@ -657,21 +665,28 @@ class myAddon(t1mAddon):
             ilist = self.addContent(content, ilist, inList=inList)
         return(ilist)
 
-    def homeRows(self, ilist):
-        """Tubi's own home screen, its rows as folders."""
-        for row in self.api.homescreenAll():
+    def homeRows(self, ilist, contentMode=None):
+        """Tubi's own home screen, its rows as folders.
+
+        With a contentMode each row keeps it, so the row lists only films or
+        only series as on Tubi's own Movies and TV Shows pages.
+        """
+        for row in self.api.homescreenAll(contentMode):
             infoList = {'Title': row.get('title'),
                         'Plot': row.get('description')}
             thumb = row.get('thumbnail') or self.addonIcon
+            rowId = row.get('id') or row.get('slug')
             ilist = self.addMenuItem(row.get('title'), 'GS', ilist,
-                                     row.get('id') or row.get('slug'),
+                                     '|'.join([rowId, '0', contentMode]) if contentMode else rowId,
                                      thumb, self.addonFanart, infoList, isFolder=True)
         return(ilist)
 
     def getAddonMovies(self, url, ilist):
         query = xbmcgui.Dialog().input(self.localLang(30010))
         if len(query) == 0:
-            return ilist
+            # Cancelled: fail the listing so Kodi keeps the folder it came from.
+            xbmcplugin.endOfDirectory(int(sys.argv[1]), succeeded=False)
+            sys.exit()
         try:
             contents = self.api.search(query)
         except TubiApiError as err:

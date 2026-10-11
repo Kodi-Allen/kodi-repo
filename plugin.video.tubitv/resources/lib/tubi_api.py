@@ -201,17 +201,21 @@ class TubiApi(object):
                         [('is_kids_mode', self.kidsMode)])
         return data.get('containers') or []
 
-    def container(self, containerId, cursor=0):
+    def container(self, containerId, cursor=0, extraImages=(), contentMode=None):
         """One page of a category.
 
         Returns the contents in the order the container lists them, plus the
         cursor for the next page (None when the category is exhausted).
+        extraImages asks for further image kinds on top of IMAGES;
+        contentMode ('movie' or 'tv') keeps only films or series.
         """
         params = [('contents_limit', PAGE_SIZE),
                   ('cursor', cursor),
                   ('include_channels', 'true'),
                   ('include_sponsorships', 'true'),
-                  ('is_kids_mode', self.kidsMode)] + IMAGES
+                  ('is_kids_mode', self.kidsMode)] + IMAGES + list(extraImages)
+        if contentMode:
+            params.append(('content_mode', contentMode))
         data = self.get(''.join([BROWSE_API, '/api/v7/containers/', containerId]), params)
         container = data.get('container') or {}
         contents = data.get('contents') or {}
@@ -224,12 +228,13 @@ class TubiApi(object):
             nextCursor = None
         return items, nextCursor
 
-    def homescreen(self, cursor=0, size=HOME_GROUP_SIZE):
+    def homescreen(self, cursor=0, size=HOME_GROUP_SIZE, contentMode=None):
         """The personalised rows Tubi puts on its own home screen.
 
         Returns (rows, next group cursor). Each row is a container in the
         same shape the category endpoint answers with, so opening one goes
-        back through container().
+        back through container(). contentMode 'movie' or 'tv' gives Tubi's
+        Movies or TV Shows page instead.
         """
         params = [('include_channels', 'true'),
                   ('contents_limit', 10),
@@ -240,11 +245,13 @@ class TubiApi(object):
                   ('group_start', cursor),
                   ('group_size', size),
                   ('is_kids_mode', self.kidsMode)] + IMAGES
+        if contentMode:
+            params.append(('content_mode', contentMode))
         data = self.get(''.join([BROWSE_API, '/api/v8/homescreen']), params)
         rows = [c for c in data.get('containers') or [] if c.get('children')]
         return rows, data.get('group_cursor')
 
-    def homescreenAll(self):
+    def homescreenAll(self, contentMode=None):
         """Every home row, the two calls the Tubi site makes for its own home.
 
         The site asks for the first seven rows, then asks again from the
@@ -252,9 +259,9 @@ class TubiApi(object):
         the rest. Asking only for the first group - which is what this did -
         gives a home screen a seventh the length of Tubi's own.
         """
-        rows, cursor = self.homescreen()
+        rows, cursor = self.homescreen(contentMode=contentMode)
         if cursor:
-            more, _ = self.homescreen(cursor, HOME_GROUP_ALL)
+            more, _ = self.homescreen(cursor, HOME_GROUP_ALL, contentMode)
             seen = set(filter(None, (r.get('id') for r in rows)))
             rows.extend(r for r in more if r.get('id') not in seen)
         return rows

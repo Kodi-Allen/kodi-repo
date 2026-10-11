@@ -70,8 +70,8 @@ msgid "Tubi rejects this old Widevine version. Encrypted titles need a current C
 msgstr "Tubi lehnt diese alte Widevine-Version ab. Verschlüsselte Titel benötigen eine aktuelle CDM; unverschlüsselte Titel und Live-TV funktionieren weiterhin."
 
 msgctxt "#30071"
-msgid "UI prototype"
-msgstr "UI-Prototyp"
+msgid "Tubi Home"
+msgstr "Tubi Home"
 
 msgctxt "#30072"
 msgid "Loading…"

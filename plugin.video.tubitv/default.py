@@ -10,6 +10,18 @@ import xbmc
 import xbmcaddon
 import xbmcgui
 
+# A root plugin run can begin before the service sees the Videos window.
+# Request the cover before the slower add-on imports; the service remains the
+# sole owner of opening Home, including cached entries where this file is not run.
+if (len(sys.argv) > 2 and not sys.argv[2][1:] and
+        not xbmcgui.Window(10000).getProperty('tubitv.return.home') and
+        xbmc.getCondVisibility(
+            'Window.IsActive(videos) + '
+            '[String.IsEqual(Container.FolderPath,addons://sources/video) | '
+            'String.StartsWith(Container.FolderPath,plugin://plugin.video.tubitv/)]')):
+    xbmcgui.Window(10000).setProperty('tubitv.return.home', 'loading')
+    xbmc.log(msg='plugin.video.tubitv : loading requested', level=xbmc.LOGINFO)
+
 from resources.lib import iptv
 from resources.lib.scraper import myAddon
 from resources.lib.tubi_api import TubiApi
@@ -61,6 +73,16 @@ if len(sys.argv) > 2 and sys.argv[2].startswith('?'):
 # IPTV Manager calls /iptv/channels and /iptv/epg and wants the answer on the
 # socket it names, not a Kodi directory listing.
 query = urllib.parse.parse_qs(sys.argv[2][1:]) if len(sys.argv) > 2 else {}
+
+# The root Kodi may show before the navbar target loads is not a return.
+RETURN_HOME = 'tubitv.return.home'
+NAVBAR_TARGETS = {('SE', 'home|movie'), ('SE', 'home|tv'), ('GC', 'live'), ('GM', 'search')}
+# A series arms at its outer folder; its seasons ('id|season') lie inside it.
+mode, url = (query.get('mode') or [''])[0], (query.get('url') or [''])[0]
+if (xbmcgui.Window(10000).getProperty(RETURN_HOME) == 'requested' and
+        ((mode, url) in NAVBAR_TARGETS or (mode == 'GE' and '|' not in url))):
+    xbmcgui.Window(10000).setProperty(RETURN_HOME, 'armed')
+    xbmc.log(msg='%s : RETURN armed %s' % (ADDON_ID, (query.get('mode') or [''])[0]), level=xbmc.LOGINFO)
 port = (query.get('port') or [None])[0]
 if not iptv.handle(sys.argv[0], port, ma.api, LIVE_PATH, log=ma.log,
                    store=os.path.join(ma.auth.profile, 'iptv.json')):
