@@ -7,15 +7,16 @@ import time
 import xbmc
 import xbmcgui
 
+from resources.lib import movies
 from resources.lib import search
 
 CAROUSEL_INTERVAL = 15.0
 FEATURED_INTERVAL = 10.0
-# Navbar 302-304 open the add-on's own routes through the folder path in
-# onClick; 301 (Home) stays in this window and 305 opens the search window.
-NAVBAR = {302: 'plugin://plugin.video.tubitv/?mode=SE&url=home%7Cmovie',
-          303: 'plugin://plugin.video.tubitv/?mode=SE&url=home%7Ctv',
+# Navbar 303-304 open the add-on's own routes through the folder path in
+# onClick; 301 stays here, while 302 and 305 open custom windows.
+NAVBAR = {303: 'plugin://plugin.video.tubitv/?mode=SE&url=home%7Ctv',
           304: 'plugin://plugin.video.tubitv/?mode=GC&url=live'}
+MOVIES = 302
 SEARCH = 305
 ROOT = 'plugin://plugin.video.tubitv/'
 # Rows 2-4 below Most Popular: the next poster rows of Tubi's own home, in
@@ -33,6 +34,7 @@ class TubiHome(xbmcgui.WindowXML):
         self.rowItems = {}
         self.folder = None
         self.leave = False
+        self.moviesRequested = False
         self.searchRequested = False
         self.started = False
         self.closed = False
@@ -199,6 +201,9 @@ class TubiHome(xbmcgui.WindowXML):
         elif controlId == 301:  # Home: stay here, back to the poster row
             self.setFocusId(100)
             return
+        elif controlId == MOVIES:
+            self.moviesRequested = True
+            return
         elif controlId == SEARCH:
             # The home loop opens it, so this callback returns at once.
             self.searchRequested = True
@@ -346,6 +351,17 @@ def showHome(addon, row, idle=None, cover=None):
                 addon.note('TUBI-UI home abandoned for window %d' % current)
                 window.closed = True
                 break
+            if window.moviesRequested and window.windowId:
+                window.moviesRequested = False
+                navbar, abandoned = movies.showMovies(addon, idle)
+                if abandoned:
+                    window.closed = True
+                    break
+                if navbar:
+                    window.onClick(navbar)
+                else:
+                    window.setFocusId(100)
+                continue
             # Only after onInit, which records this window's id.
             if window.searchRequested and window.windowId:
                 window.searchRequested = False
