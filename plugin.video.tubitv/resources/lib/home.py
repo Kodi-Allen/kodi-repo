@@ -7,14 +7,16 @@ import time
 import xbmc
 import xbmcgui
 
+from resources.lib import search
+
 CAROUSEL_INTERVAL = 15.0
 FEATURED_INTERVAL = 10.0
-# Navbar 302-305 open the add-on's own routes through the folder path in
-# onClick; 301 (Home) stays in this window.
+# Navbar 302-304 open the add-on's own routes through the folder path in
+# onClick; 301 (Home) stays in this window and 305 opens the search window.
 NAVBAR = {302: 'plugin://plugin.video.tubitv/?mode=SE&url=home%7Cmovie',
           303: 'plugin://plugin.video.tubitv/?mode=SE&url=home%7Ctv',
-          304: 'plugin://plugin.video.tubitv/?mode=GC&url=live',
-          305: 'plugin://plugin.video.tubitv/?mode=GM&url=search'}
+          304: 'plugin://plugin.video.tubitv/?mode=GC&url=live'}
+SEARCH = 305
 ROOT = 'plugin://plugin.video.tubitv/'
 # Rows 2-4 below Most Popular: the next poster rows of Tubi's own home, in
 # its order. Only these container types hold plain films and series.
@@ -31,6 +33,7 @@ class TubiHome(xbmcgui.WindowXML):
         self.rowItems = {}
         self.folder = None
         self.leave = False
+        self.searchRequested = False
         self.started = False
         self.closed = False
         self.lock = threading.RLock()
@@ -196,6 +199,10 @@ class TubiHome(xbmcgui.WindowXML):
         elif controlId == 301:  # Home: stay here, back to the poster row
             self.setFocusId(100)
             return
+        elif controlId == SEARCH:
+            # The home loop opens it, so this callback returns at once.
+            self.searchRequested = True
+            return
         elif controlId in NAVBAR:
             # Arm only when default.py reaches the actual navbar target.
             xbmcgui.Window(10000).setProperty('tubitv.return.home', 'requested')
@@ -325,6 +332,8 @@ def showHome(addon, row, idle=None, cover=None):
         # This replaces doModal's wait, rather than starting timer threads.
         # Kodi dispatches input callbacks while waitForAbort releases Python.
         window.show()
+        # Back out of a series opened from the results: straight to search.
+        window.searchRequested = bool(search.pending)
         monitor = xbmc.Monitor()
         while not window.closed:
             if idle is not None:
@@ -337,6 +346,24 @@ def showHome(addon, row, idle=None, cover=None):
                 addon.note('TUBI-UI home abandoned for window %d' % current)
                 window.closed = True
                 break
+            # Only after onInit, which records this window's id.
+            if window.searchRequested and window.windowId:
+                window.searchRequested = False
+                folder, navbar, abandoned = search.showSearch(addon, idle)
+                if abandoned:
+                    window.closed = True
+                    break
+                if folder:
+                    # A series from the results takes Home's own folder way.
+                    xbmcgui.Window(10000).setProperty('tubitv.return.home', 'requested')
+                    with window.lock:
+                        window.folder = folder
+                        window.closed = True
+                        window.close()
+                    break
+                if navbar:
+                    window.onClick(navbar)
+                continue
             window.advanceIfIdle()
             delay = max(0.1, min(1.0, min(window.nextAdvance, window.nextFeatured) - time.monotonic()))
             if monitor.waitForAbort(delay):
