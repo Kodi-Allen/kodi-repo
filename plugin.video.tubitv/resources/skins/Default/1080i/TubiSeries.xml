@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Tubi series: the seasons beside the active season's episodes. -->
+<window>
+    <defaultcontrol>500</defaultcontrol>
+    <backgroundcolor>FF0B0019</backgroundcolor>
+    <controls>
+        <control type="image">
+            <left>0</left><top>0</top><width>1920</width><height>1080</height>
+            <texture colordiffuse="FF0B0019">tubi-white.png</texture>
+        </control>
+        <control type="image">
+            <left>0</left><top>0</top><width>1920</width><height>1080</height>
+            <aspectratio>scale</aspectratio>
+            <texture background="true">$INFO[Window.Property(tubi.series.fanart)]</texture>
+            <fadetime>250</fadetime>
+        </control>
+        <control type="image">
+            <left>0</left><top>0</top><width>1920</width><height>1080</height>
+            <texture colordiffuse="C70B0019">tubi-white.png</texture>
+        </control>
+        <control type="image">
+            <left>0</left><top>0</top><width>1920</width><height>660</height>
+            <texture colordiffuse="A66E2DAA">tubi-ambient.png</texture>
+        </control>
+        <control type="image">
+            <left>100</left><top>24</top><width>111</width><height>32</height>
+            <aspectratio>keep</aspectratio><texture>tubi-logo.png</texture>
+        </control>
+        <control type="label">
+            <left>100</left><top>74</top><width>1460</width><height>72</height>
+            <font>font53</font><textcolor>FFFFFFFF</textcolor>
+            <label>$INFO[Window.Property(tubi.series.title)]</label>
+        </control>
+        <control type="label">
+            <left>1560</left><top>88</top><width>260</width><height>48</height>
+            <font>font13</font><align>right</align><textcolor>FFC0C0C0</textcolor>
+            <label>$INFO[Window.Property(tubi.series.year)]</label>
+        </control>
+        <control type="label">
+            <left>100</left><top>150</top><width>1720</width><height>64</height>
+            <font>font12</font><textcolor>FFB8B4C4</textcolor><wrapmultiline>true</wrapmultiline>
+            <label>$INFO[Window.Property(tubi.series.plot)]</label>
+        </control>
+        <control type="label">
+            <left>100</left><top>240</top><width>440</width><height>36</height>
+            <font>font12</font><textcolor>FF9A94A8</textcolor>
+            <label>[UPPERCASE]$LOCALIZE[33054][/UPPERCASE]</label>
+        </control>
+        <control type="label">
+            <left>620</left><top>240</top><width>1200</width><height>36</height>
+            <font>font12</font><textcolor>FF9A94A8</textcolor>
+            <label>[UPPERCASE]$LOCALIZE[20360][/UPPERCASE]</label>
+        </control>
+        <control type="list" id="500">
+            <left>100</left><top>288</top><width>440</width><height>760</height>
+            <orientation>vertical</orientation>
+            <onright>600</onright>
+            <scrolltime>150</scrolltime>
+            <itemlayout width="440" height="76">
+                        <control type="image">
+                            <left>0</left><top>14</top><width>6</width><height>48</height>
+                            <texture colordiffuse="FFB983FF">tubi-white.png</texture>
+                            <visible>String.IsEqual(ListItem.Property(active),true)</visible>
+                        </control>
+                        <control type="label">
+                            <left>28</left><top>0</top><width>280</width><height>76</height>
+                            <font>font13</font><aligny>center</aligny><textcolor>FFF0F0F0</textcolor>
+                            <label>[B]$INFO[ListItem.Label][/B]</label>
+                            <visible>String.IsEqual(ListItem.Property(active),true)</visible>
+                        </control>
+                        <control type="label">
+                            <left>28</left><top>0</top><width>280</width><height>76</height>
+                            <font>font13</font><aligny>center</aligny><textcolor>FFB0B0B8</textcolor>
+                            <label>$INFO[ListItem.Label]</label>
+                            <visible>!String.IsEqual(ListItem.Property(active),true)</visible>
+                        </control>
+                        <control type="label">
+                            <left>250</left><top>0</top><width>186</width><height>76</height>
+                            <font>font12</font><aligny>center</aligny><align>right</align><textcolor>FF9A94A8</textcolor>
+                            <label>$INFO[ListItem.Label2]</label>
+                        </control>
+            </itemlayout>
+            <focusedlayout width="440" height="76">
+                        <control type="image">
+                            <left>0</left><top>0</top><width>440</width><height>76</height>
+                            <texture colordiffuse="FF6E2DAA">tubi-white.png</texture>
+                            <visible>Control.HasFocus(500)</visible>
+                        </control>
+                        <control type="label">
+                            <left>28</left><top>0</top><width>280</width><height>76</height>
+                            <font>font13</font><aligny>center</aligny><textcolor>FFFFFFFF</textcolor>
+                            <label>[B]$INFO[ListItem.Label][/B]</label>
+                            <visible>Control.HasFocus(500)</visible>
+                        </control>
+                        <control type="label">
+                            <left>250</left><top>0</top><width>170</width><height>76</height>
+                            <font>font12</font><aligny>center</aligny><align>right</align><textcolor>FFE6DCF5</textcolor>
+                            <label>$INFO[ListItem.Label2]</label>
+                            <visible>Control.HasFocus(500)</visible>
+                        </control>
+                        <control type="image">
+                            <left>0</left><top>14</top><width>6</width><height>48</height>
+                            <texture colordiffuse="FFB983FF">tubi-white.png</texture>
+                            <visible>!Control.HasFocus(500) + [String.IsEqual(ListItem.Property(active),true)]</visible>
+                        </control>
+                        <control type="label">
+                            <left>28</left><top>0</top><width>280</width><height>76</height>
+                            <font>font13</font><aligny>center</aligny><textcolor>FFF0F0F0</textcolor>
+                            <label>[B]$INFO[ListItem.Label][/B]</label>
+                            <visible>!Control.HasFocus(500) + [String.IsEqual(ListItem.Property(active),true)]</visible>
+                        </control>
+                        <control type="label">
+                            <left>28</left><top>0</top><width>280</width><height>76</height>
+                            <font>font13</font><aligny>center</aligny><textcolor>FFB0B0B8</textcolor>
+                            <label>$INFO[ListItem.Label]</label>
+                            <visible>!Control.HasFocus(500) + [!String.IsEqual(ListItem.Property(active),true)]</visible>
+                        </control>
+                        <control type="label">
+                            <left>250</left><top>0</top><width>186</width><height>76</height>
+                            <font>font12</font><aligny>center</aligny><align>right</align><textcolor>FF9A94A8</textcolor>
+                            <label>$INFO[ListItem.Label2]</label>
+                            <visible>!Control.HasFocus(500)</visible>
+                        </control>
+            </focusedlayout>
+        </control>
+        <control type="label">
+            <left>620</left><top>300</top><width>1200</width><height>40</height>
+            <font>font13</font><textcolor>FFC0C0C0</textcolor>
+            <label>$INFO[Window.Property(tubi.series.status)]</label>
+        </control>
+        <control type="list" id="600">
+            <left>620</left><top>282</top><width>1200</width><height>780</height>
+            <orientation>vertical</orientation>
+            <onleft>500</onleft>
+            <scrolltime>200</scrolltime>
+            <itemlayout width="1200" height="216">
+                        <control type="image">
+                            <left>16</left><top>14</top><width>320</width><height>180</height>
+                            <texture colordiffuse="FF252830">tubi-white.png</texture>
+                        </control>
+                        <control type="image">
+                            <left>16</left><top>14</top><width>320</width><height>180</height>
+                            <aspectratio>scale</aspectratio>
+                            <texture background="true">$INFO[ListItem.Art(thumb)]</texture>
+                        </control>
+                        <control type="label">
+                            <left>368</left><top>10</top><width>816</width><height>40</height>
+                            <font>font13</font><textcolor>FFF0F0F0</textcolor>
+                            <label>[B]$INFO[ListItem.Property(code)][/B]  ·  $INFO[ListItem.Label]</label>
+                        </control>
+                        <control type="label">
+                            <left>368</left><top>52</top><width>816</width><height>32</height>
+                            <font>font12</font><textcolor>FF9A94A8</textcolor>
+                            <label>$INFO[ListItem.Property(details)]</label>
+                        </control>
+                        <control type="textbox">
+                            <left>368</left><top>90</top><width>816</width><height>104</height>
+                            <font>font12</font><textcolor>FFC8C4D0</textcolor>
+                            <label>$INFO[ListItem.Plot]</label>
+                        </control>
+            </itemlayout>
+            <focusedlayout width="1200" height="216">
+                        <control type="image">
+                            <left>0</left><top>0</top><width>1200</width><height>208</height>
+                            <texture colordiffuse="CC4C1E75">tubi-white.png</texture>
+                            <visible>Control.HasFocus(600)</visible>
+                        </control>
+                        <control type="image">
+                            <left>13</left><top>11</top><width>326</width><height>186</height>
+                            <texture colordiffuse="FFF0F0F0">tubi-white.png</texture>
+                            <visible>Control.HasFocus(600)</visible>
+                        </control>
+                        <control type="image">
+                            <left>16</left><top>14</top><width>320</width><height>180</height>
+                            <texture colordiffuse="FF252830">tubi-white.png</texture>
+                        </control>
+                        <control type="image">
+                            <left>16</left><top>14</top><width>320</width><height>180</height>
+                            <aspectratio>scale</aspectratio>
+                            <texture background="true">$INFO[ListItem.Art(thumb)]</texture>
+                        </control>
+                        <control type="label">
+                            <left>368</left><top>10</top><width>816</width><height>40</height>
+                            <font>font13</font><textcolor>FFF0F0F0</textcolor>
+                            <label>[B]$INFO[ListItem.Property(code)][/B]  ·  $INFO[ListItem.Label]</label>
+                        </control>
+                        <control type="label">
+                            <left>368</left><top>52</top><width>816</width><height>32</height>
+                            <font>font12</font><textcolor>FF9A94A8</textcolor>
+                            <label>$INFO[ListItem.Property(details)]</label>
+                        </control>
+                        <control type="textbox">
+                            <left>368</left><top>90</top><width>816</width><height>104</height>
+                            <font>font12</font><textcolor>FFC8C4D0</textcolor>
+                            <label>$INFO[ListItem.Plot]</label>
+                        </control>
+            </focusedlayout>
+        </control>
+    </controls>
+</window>

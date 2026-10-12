@@ -9,14 +9,16 @@ import xbmcgui
 
 from resources.lib import movies
 from resources.lib import search
+from resources.lib import series
+from resources.lib import tvshows
 
 CAROUSEL_INTERVAL = 15.0
 FEATURED_INTERVAL = 10.0
-# Navbar 303-304 open the add-on's own routes through the folder path in
-# onClick; 301 stays here, while 302 and 305 open custom windows.
-NAVBAR = {303: 'plugin://plugin.video.tubitv/?mode=SE&url=home%7Ctv',
-          304: 'plugin://plugin.video.tubitv/?mode=GC&url=live'}
+# Navbar 304 opens the add-on's own route through the folder path in
+# onClick; 301 stays here, while 302, 303 and 305 open custom windows.
+NAVBAR = {304: 'plugin://plugin.video.tubitv/?mode=GC&url=live'}
 MOVIES = 302
+TVSHOWS = 303
 SEARCH = 305
 ROOT = 'plugin://plugin.video.tubitv/'
 # Rows 2-4 below Most Popular: the next poster rows of Tubi's own home, in
@@ -35,7 +37,9 @@ class TubiHome(xbmcgui.WindowXML):
         self.folder = None
         self.leave = False
         self.moviesRequested = False
+        self.tvRequested = False
         self.searchRequested = False
+        self.seriesRequested = None
         self.started = False
         self.closed = False
         self.lock = threading.RLock()
@@ -204,6 +208,9 @@ class TubiHome(xbmcgui.WindowXML):
         elif controlId == MOVIES:
             self.moviesRequested = True
             return
+        elif controlId == TVSHOWS:
+            self.tvRequested = True
+            return
         elif controlId == SEARCH:
             # The home loop opens it, so this callback returns at once.
             self.searchRequested = True
@@ -218,10 +225,13 @@ class TubiHome(xbmcgui.WindowXML):
             return
         if not 0 <= position < len(items):
             return
-        url, _, isFolder = items[position][:3]
+        url, item, isFolder = items[position][:3]
         self.addon.note('TUBI-UI select %d (%s)' % (
             position, 'folder' if isFolder else 'playback'))
-        if isFolder:
+        if isFolder and item is not None:
+            # A series opens above Home from the home loop; Home stays as it is.
+            self.seriesRequested = (url, item)
+        elif isFolder:
             # Hand folders back to Kodi's existing video navigation after
             # closing this window; never leave an inactive modal UI behind.
             # BACK out of a series' outermost folder returns here, as from the navbar.
@@ -337,8 +347,6 @@ def showHome(addon, row, idle=None, cover=None):
         # This replaces doModal's wait, rather than starting timer threads.
         # Kodi dispatches input callbacks while waitForAbort releases Python.
         window.show()
-        # Back out of a series opened from the results: straight to search.
-        window.searchRequested = bool(search.pending)
         monitor = xbmc.Monitor()
         while not window.closed:
             if idle is not None:
@@ -362,20 +370,30 @@ def showHome(addon, row, idle=None, cover=None):
                 else:
                     window.setFocusId(100)
                 continue
-            # Only after onInit, which records this window's id.
-            if window.searchRequested and window.windowId:
-                window.searchRequested = False
-                folder, navbar, abandoned = search.showSearch(addon, idle)
+            if window.seriesRequested and window.windowId:
+                url, item = window.seriesRequested
+                window.seriesRequested = None
+                if series.showSeries(addon, url, item, idle):
+                    window.closed = True
+                    break
+                continue
+            if window.tvRequested and window.windowId:
+                window.tvRequested = False
+                navbar, abandoned = tvshows.showTVShows(addon, idle)
                 if abandoned:
                     window.closed = True
                     break
-                if folder:
-                    # A series from the results takes Home's own folder way.
-                    xbmcgui.Window(10000).setProperty('tubitv.return.home', 'requested')
-                    with window.lock:
-                        window.folder = folder
-                        window.closed = True
-                        window.close()
+                if navbar:
+                    window.onClick(navbar)
+                else:
+                    window.setFocusId(100)
+                continue
+            # Only after onInit, which records this window's id.
+            if window.searchRequested and window.windowId:
+                window.searchRequested = False
+                navbar, abandoned = search.showSearch(addon, idle)
+                if abandoned:
+                    window.closed = True
                     break
                 if navbar:
                     window.onClick(navbar)

@@ -6,14 +6,13 @@ import time
 import xbmc
 import xbmcgui
 
+from resources.lib import series
+
 FIELD = 400
 GRID = 500
 # Films and series with a poster, as in Home's rows; Live TV has its own place.
 RESULT_TYPES = ('v', 's')
 MAX_RESULTS = 120
-# A series opened from the results leaves this window; the next Home of this
-# process reopens it with the same query, results and focus.
-pending = None
 
 
 class TubiSearch(xbmcgui.WindowXML):
@@ -22,9 +21,8 @@ class TubiSearch(xbmcgui.WindowXML):
         self.addon = None
         self.items = []
         self.query = ''
-        self.position = 0
-        self.folder = None
         self.navbar = None
+        self.seriesRequested = None
         self.closed = False
         self.started = False
         self.windowId = None
@@ -39,13 +37,7 @@ class TubiSearch(xbmcgui.WindowXML):
         self.setProperty('tubi.fallback', self.addon.addonIcon)
         self.setProperty('tubi.search.status', '')
         self.setProperty('tubi.search.field', self.query or self.addon.localLang(30010) or 'Search')
-        if self.items:
-            grid = self.getControl(GRID)
-            grid.addItems([item for _, item, _ in self.items])
-            grid.selectItem(self.position)
-            self.setFocusId(GRID)
-        else:
-            self.setFocusId(FIELD)
+        self.setFocusId(FIELD)
 
     def onClick(self, controlId):
         if controlId == FIELD:
@@ -62,12 +54,10 @@ class TubiSearch(xbmcgui.WindowXML):
             position = self.getControl(GRID).getSelectedPosition()
             if not 0 <= position < len(self.items):
                 return
-            url, _, isFolder = self.items[position][:3]
+            url, item, isFolder = self.items[position][:3]
             if isFolder:
-                global pending
-                pending = (self.query, self.items, position)
-                self.folder = url
-                self.leave()
+                # The series opens above the results, which stay as they are.
+                self.seriesRequested = (url, item)
             else:
                 xbmc.executebuiltin('PlayMedia("%s")' % url)
         elif controlId == 301:
@@ -118,13 +108,9 @@ class TubiSearch(xbmcgui.WindowXML):
 
 
 def showSearch(addon, idle=None):
-    """Run the search window over Home; returns (folder, navbar, abandoned)."""
-    global pending
+    """Run the search window over Home; returns (navbar, abandoned)."""
     window = TubiSearch('TubiSearch.xml', addon.homeDir, 'Default', '1080i')
     window.addon = addon
-    if pending:
-        window.query, window.items, window.position = pending
-        pending = None
     abandoned = False
     try:
         window.show()
@@ -138,10 +124,17 @@ def showSearch(addon, idle=None):
                 addon.note('TUBI-UI search abandoned for window %d' % current)
                 window.closed = abandoned = True
                 break
+            if window.seriesRequested:
+                url, item = window.seriesRequested
+                window.seriesRequested = None
+                if series.showSeries(addon, url, item, idle):
+                    window.closed = abandoned = True
+                    break
+                continue
             if monitor.waitForAbort(0.25):
                 break
     finally:
         window.leave()
-        folder, navbar = window.folder, window.navbar
+        navbar = window.navbar
         del window
-    return folder, navbar, abandoned
+    return navbar, abandoned

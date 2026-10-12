@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # KodiAddon (tubitv)
 #
+import concurrent.futures
 import json
 import os
 import platform
@@ -423,6 +424,7 @@ class myAddon(t1mAddon):
         if content.get('type') == SERIES:
             name = ''.join([content.get('title') or '', self.localLang(30019)])
             infoList['Title'] = name
+            infoList['TVShowTitle'] = content.get('title')
             infoList['mediatype'] = 'tvshow'
             contextMenu = [(self.localLang(30024),
                             'RunPlugin(%s?mode=AS&url=%s)' % (sys.argv[0], qp(contentId)))]
@@ -703,15 +705,25 @@ class myAddon(t1mAddon):
         seasons = self.api.seasons(seriesId)
         return [s for s in seasons if s.get('episodes')]
 
-    def episodeItems(self, seriesId, season, ilist, showTitle=None):
+    @staticmethod
+    def showOf(pending):
+        """The series payload fetched alongside its seasons, {} without one."""
+        try:
+            return pending.result() if pending is not None else {}
+        except TubiApiError:
+            return {}
+
+    def episodeItems(self, seriesId, season, ilist, showTitle=None, show=None):
         try:
             episodes = self.api.episodes(seriesId, season.get('season'),
                                          expected=len(season.get('episodes') or []))
         except TubiApiError as err:
             self.report(err)
             return ilist
+        series = self.showOf(show)
         if showTitle is None:
-            showTitle = xbmc.getInfoLabel('ListItem.TVShowTitle') or ''
+            showTitle = series.get('title') or xbmc.getInfoLabel('ListItem.TVShowTitle') or ''
+        poster = self.firstOf(series, 'posterarts')
         for episode in episodes:
             infoList = self.infoOf(episode)
             title = episode.get('title') or ''
@@ -732,12 +744,21 @@ class myAddon(t1mAddon):
             playUrl = '|'.join([str(episode.get('id')), str(seriesId), str(season.get('season'))])
             ilist = self.addMenuItem(title, 'GV', ilist, playUrl, img, fanart,
                                      infoList, isFolder=False)
+            if poster:
+                # The episode image is a landscape still; the poster is the show's.
+                ilist[-1][1].setArt({'poster': self.mediaUrl(poster)})
             ilist = self.applyResume(ilist, episode.get('id'))
         return ilist
 
     def getAddonEpisodes(self, url, ilist):
         """A series' seasons, or one season's episodes for `seriesId|season`."""
         seriesId, season = (url.split('|', 1) + [None])[:2]
+        # The show's title and artwork come from the series itself: the folder
+        # is often opened without its list item in focus. Fetch it beside the
+        # season index rather than after it.
+        pool = concurrent.futures.ThreadPoolExecutor(max_workers=1)
+        show = pool.submit(self.api.content, seriesId)
+        pool.shutdown(wait=False)
         try:
             seasons = self.seasonList(seriesId)
         except TubiApiError as err:
@@ -748,12 +769,18 @@ class myAddon(t1mAddon):
             wanted = [s for s in seasons if str(s.get('season')) == str(season)]
             if len(wanted) == 0:
                 return ilist
-            return self.episodeItems(seriesId, wanted[0], ilist)
+            return self.episodeItems(seriesId, wanted[0], ilist, show=show)
 
         if len(seasons) == 1:
-            return self.episodeItems(seriesId, seasons[0], ilist)
+            return self.episodeItems(seriesId, seasons[0], ilist, show=show)
 
-        showTitle = xbmc.getInfoLabel('ListItem.Title').replace(self.localLang(30019), '')
+        xbmcplugin.setContent(int(sys.argv[1]), 'seasons')
+        series = self.showOf(show)
+        showTitle = (series.get('title') or
+                     xbmc.getInfoLabel('ListItem.Title').replace(self.localLang(30019), ''))
+        # Tubi has no season artwork; the show's own stands in for it.
+        poster = self.firstOf(series, 'posterarts') or self.addonIcon
+        fanart = self.firstOf(series, 'backgrounds', 'hero_images') or self.addonFanart
         for entry in seasons:
             name = entry.get('name') or ' '.join([self.localLang(30027), str(entry.get('season'))])
             infoList = {'Title': name,
@@ -762,7 +789,8 @@ class myAddon(t1mAddon):
                         'mediatype': 'season'}
             ilist = self.addMenuItem(name, 'GE', ilist,
                                      '|'.join([seriesId, str(entry.get('season'))]),
-                                     self.addonIcon, self.addonFanart, infoList, isFolder=True)
+                                     poster, fanart, infoList, isFolder=True)
+            ilist[-1][1].setProperty('TotalEpisodes', str(len(entry.get('episodes') or [])))
         return(ilist)
 
     def addShowToLibrary(self, url):
