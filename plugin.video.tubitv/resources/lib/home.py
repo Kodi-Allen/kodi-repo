@@ -7,6 +7,7 @@ import time
 import xbmc
 import xbmcgui
 
+from resources.lib import live
 from resources.lib import movies
 from resources.lib import search
 from resources.lib import series
@@ -14,11 +15,10 @@ from resources.lib import tvshows
 
 CAROUSEL_INTERVAL = 15.0
 FEATURED_INTERVAL = 10.0
-# Navbar 304 opens the add-on's own route through the folder path in
-# onClick; 301 stays here, while 302, 303 and 305 open custom windows.
-NAVBAR = {304: 'plugin://plugin.video.tubitv/?mode=GC&url=live'}
+# Navbar 301 stays here, while 302-305 open custom windows.
 MOVIES = 302
 TVSHOWS = 303
+LIVE = 304
 SEARCH = 305
 ROOT = 'plugin://plugin.video.tubitv/'
 # Rows 2-4 below Most Popular: the next poster rows of Tubi's own home, in
@@ -38,6 +38,7 @@ class TubiHome(xbmcgui.WindowXML):
         self.leave = False
         self.moviesRequested = False
         self.tvRequested = False
+        self.liveRequested = False
         self.searchRequested = False
         self.seriesRequested = None
         self.started = False
@@ -211,16 +212,13 @@ class TubiHome(xbmcgui.WindowXML):
         elif controlId == TVSHOWS:
             self.tvRequested = True
             return
+        elif controlId == LIVE:
+            self.liveRequested = True
+            return
         elif controlId == SEARCH:
             # The home loop opens it, so this callback returns at once.
             self.searchRequested = True
             return
-        elif controlId in NAVBAR:
-            # Arm only when default.py reaches the actual navbar target.
-            xbmcgui.Window(10000).setProperty('tubitv.return.home', 'requested')
-            items, position = [(NAVBAR[controlId], None, True)], 0
-            self.addon.note('TUBI-UI navbar select: %d' % controlId)
-            self.addon.note('RETURN requested')
         else:
             return
         if not 0 <= position < len(items):
@@ -376,6 +374,17 @@ def showHome(addon, row, idle=None, cover=None):
                 if series.showSeries(addon, url, item, idle):
                     window.closed = True
                     break
+                continue
+            if window.liveRequested and window.windowId:
+                window.liveRequested = False
+                navbar, abandoned = live.showLive(addon, idle)
+                if abandoned:
+                    window.closed = True
+                    break
+                if navbar:
+                    window.onClick(navbar)
+                else:
+                    window.setFocusId(100)
                 continue
             if window.tvRequested and window.windowId:
                 window.tvRequested = False
