@@ -43,6 +43,63 @@ ParkStream is an independently maintained fork of plugin.video.southpark_unoffic
       </assets>
     </extension>
   </addon>
+  <addon id="plugin.video.tubitv" name="TubiTV" version="2026.10.13" provider-name="Lunatixz, Breezyslasher, Kodi Allen">
+    <requires>
+      <import addon="xbmc.python" version="3.0.0"/>
+      <import addon="script.module.t1mlib" version="4.0.9"/>
+      <import addon="script.module.requests" version="2.22.0"/>
+      <import addon="inputstream.adaptive" version="2.6.0"/>
+      <import addon="script.module.inputstreamhelper" version="0.5.10" optional="true"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+      <provides>video</provides>
+    </extension>
+    <extension point="xbmc.service" library="service.py"/>
+    <extension point="xbmc.addon.metadata">
+      <summary lang="en_GB">Free films, TV shows and live channels from Tubi</summary>
+      <description lang="en_GB">Tubi has a large library of free, ad-supported films, TV shows and live channels. Unofficial add-on, not affiliated with Tubi.
+* Home, Movies, TV Shows, Search and a Live TV guide in the add-on's own interface
+* Series with their seasons and episodes
+* Live TV guide from Tubi's own programme data, plus IPTV Manager integration for the Kodi TV guide
+* Context menu: add to the library, related titles, trailers, and with an account My List, like and dislike
+* Resume from Tubi's watch history
+* Optional Tubi account sign-in
+* Add films and shows to the Kodi library as .strm files
+* Add-on-local direct/custom network routing with a GeoTV media relay
+* PseudoTV Live support</description>
+      <disclaimer lang="en_GB">Unofficial add-on, not affiliated with or endorsed by Tubi. Tubi streams only in the countries it serves. Encrypted titles need a working Widevine CDM for InputStream Adaptive.</disclaimer>
+      <platform>all</platform>
+      <language>en</language>
+      <license>GPL-3.0-or-later</license>
+      <website>https://tubitv.com/</website>
+      <source>https://github.com/Kodi-Allen/kodi-repo/tree/main/plugin.video.tubitv</source>
+      <news>
+2026.10.13 - The add-on's own interface
+- NEW: Home, Movies, TV Shows, Series, Search and a Live TV guide in the
+  add-on's own interface, with a loading screen and a navigation bar.
+- NEW: Live TV guide from Tubi's programme data: categories, channel logos,
+  a half-hour timeline, the current time and programme progress.
+- NEW: Context menu on films and series: library export, related titles,
+  trailer, My List, like and dislike.
+- NEW: Resume from Tubi's watch history in the new interface.
+- CHANGED: Encrypted titles go to InputStream Adaptive without a check for a
+  Linux Widevine file or a minimum CDM version, so Android, Windows and macOS
+  can play them. Only a CDM that would crash Kodi is refused.
+- FIXED: Clearing or changing the account credentials ends the previous
+  sign-in, also when signing in with the new ones fails.
+- FIXED: Series and Live TV stop waiting after 20 seconds when Tubi cannot be
+  reached; Back cancels the loading screen.
+Earlier changes are in the add-on's source history.
+		</news>
+      <assets>
+        <icon>resources/images/icon.png</icon>
+        <fanart>resources/images/fanart.jpg</fanart>
+        <screenshot>resources/screenshots/home.jpg</screenshot>
+        <screenshot>resources/screenshots/context-menu.jpg</screenshot>
+        <screenshot>resources/screenshots/live-tv.jpg</screenshot>
+      </assets>
+    </extension>
+  </addon>
   <addon id="repository.kodiallen" name="Kodi Allen Repository" version="1.0.1" provider-name="Kodi Allen">
     <extension point="xbmc.addon.repository" name="Kodi Allen Repository">
       <dir>
