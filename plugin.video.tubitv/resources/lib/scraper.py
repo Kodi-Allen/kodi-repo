@@ -610,6 +610,8 @@ class myAddon(t1mAddon):
             xbmcplugin.setResolvedUrl(int(sys.argv[1]), False, xbmcgui.ListItem(offscreen=True))
             return
         liz = xbmcgui.ListItem(path=self.mediaUrl(manifest), offscreen=True)
+        # A live channel is never a film or an episode a scrobbler should log.
+        liz.setProperty('script.trakt.exclude', 'true')
         liz.setMimeType('application/x-mpegURL')
         liz.setContentLookup(False)
         liz.setProperty('inputstream', 'inputstream.adaptive')
@@ -977,6 +979,7 @@ class myAddon(t1mAddon):
             'drm': licenseUrl is not None,
         }))
         liz = xbmcgui.ListItem(path=self.mediaUrl(manifest), offscreen=True)
+        self.describePlayback(liz, url, content)
         liz.setSubtitles([self.mediaUrl(sub['url']) for sub in content.get('subtitles') or []
                           if sub.get('url')])
         # Use the adaptive reader for every HLS rendition, not only Widevine.
@@ -1002,6 +1005,41 @@ class myAddon(t1mAddon):
                           [key for key, _ in drmProps], WIDEVINE_KEYSYSTEM,
                           safeUrl(licenseUrl)))
         xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, liz)
+
+    def describePlayback(self, liz, url, content):
+        """Tell Kodi what the resolved item is, for whatever watches the player.
+
+        Trakt's scrobbler, for one, knows a film by its title and year and an
+        episode by its show, season and number. A trailer is neither and is
+        marked to be left alone. An episode's year is its own, not the year
+        the show began, so it is not passed on; nor is an implausible one.
+        """
+        parts = uqp(url).split('|')
+        if parts[0] == 'trailer':
+            liz.setProperty('script.trakt.exclude', 'true')
+            return
+        title = content.get('title') or ''
+        if len(parts) >= 3:
+            if ' - ' in title and title.startswith('S'):
+                title = title.split(' - ', 1)[1]
+            info = {'mediatype': 'episode', 'title': title,
+                    'tvshowtitle': content.get('series_title'),
+                    'season': asInt(parts[2]),
+                    'episode': asInt(content.get('episode_number'))}
+        else:
+            year = asInt(content.get('year'))
+            info = {'mediatype': 'movie', 'title': title,
+                    'year': year if year is not None and 1880 <= year <= 2100 else None}
+        info = dict((key, value) for key, value in info.items() if value not in (None, ''))
+        if not INFOTAG_SETTERS:
+            liz.setInfo('video', info)
+            return
+        tag = liz.getVideoInfoTag()
+        setters = {'mediatype': tag.setMediaType, 'title': tag.setTitle,
+                   'tvshowtitle': tag.setTvShowTitle, 'season': tag.setSeason,
+                   'episode': tag.setEpisode, 'year': tag.setYear}
+        for key, value in info.items():
+            setters[key](value)
 
     def drmProperties(self, licenseUrl):
         """Describe the Widevine licence request to inputstream.adaptive.

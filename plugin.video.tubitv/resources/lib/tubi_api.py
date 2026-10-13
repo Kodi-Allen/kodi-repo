@@ -495,6 +495,9 @@ class TubiApi(object):
             found = []
             for child in data.get('children') or []:
                 found.extend(child.get('children') or [])
+            # The page is the series itself; its title is what an episode lacks.
+            for episode in found:
+                episode.setdefault('series_title', data.get('title'))
             episodes.extend(found)
             if len(found) < SEASON_PAGE_SIZE:
                 break
