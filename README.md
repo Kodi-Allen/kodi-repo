@@ -1,6 +1,12 @@
 # Kodi Allen Repository
 
-Kodi Omega (v21) compatible add-on repository.
+Kodi add-on repository for Kodi 21 (Omega). It distributes
+[ParkStream](docs/parkstream/README.md), an unofficial South Park Kodi add-on, together with the
+MPLS STRM Player, Artwork Beef, MyMovies Back Artwork Copy and the Aeon Tajo skin.
+
+**Contents:** [Installation](#-installation) · [Available add-ons](#-available-add-ons) ·
+[ParkStream – South Park for Kodi](#parkstream--south-park-for-kodi) ·
+[For developers](#%EF%B8%8F-for-developers) · [License](#-license)
 
 ## 📦 Installation
 
@@ -35,12 +41,30 @@ You can also download individual add-ons directly:
 
 | Add-on | Version | Category | Description |
 |---|---|---|---|
-| ParkStream | 1.0.0+matrix.1 | Video add-ons | Unofficial Kodi video add-on for South Park ([source](https://github.com/Kodi-Allen/plugin.video.parkstream)) |
+| ParkStream | 1.0.2+matrix.1 | Video add-ons | Unofficial South Park Kodi add-on ([documentation](docs/parkstream/README.md), [source](https://github.com/Kodi-Allen/plugin.video.parkstream)) |
 | MPLS STRM Player | 4.1.0 | Video add-ons | Play Blu-ray MPLS playlists from .strm files and create them via thediscdb.com |
 | Artwork Beef | 0.28.10 | Program add-ons | Automatically adds extra artwork for your media |
 | MyMovies Back Artwork Copy | 1.3.0 | Program add-ons | Copies mymovies-back.jpg to back.jpg in video library folders |
 | Aeon Tajo | 7.7.4 | Look and feel (skin) | Distributed through [GitHub Releases](https://github.com/Kodi-Allen/kodi-repo/releases/tag/skin.aeon.tajo) |
 | Kodi Allen Repository | 1.0.1 | Add-on repository | Updates itself automatically after installing 1.0.0 |
+
+## ParkStream – South Park for Kodi
+
+ParkStream is an unofficial Kodi video add-on for watching South Park episodes from the official
+South Park websites. It lists all seasons with season covers and descriptions, shows episode stills
+with plots, runtimes and air dates, offers a random episode and lets you choose the regional site
+that matches your audio language. Tested with Kodi 21.1 (Omega).
+
+![ParkStream season list in Kodi with the season 1 cover and season description](docs/parkstream/screenshots/parkstream-kodi-season-list.jpg)
+
+**Install:** add the Kodi Allen Repository (see [Installation](#-installation)), then choose
+**Install from repository → Kodi Allen Repository → Video add-ons → ParkStream**.
+
+Full documentation with screenshots, settings, known limitations and troubleshooting:
+**[ParkStream documentation](docs/parkstream/README.md)** ·
+Source code: [Kodi-Allen/plugin.video.parkstream](https://github.com/Kodi-Allen/plugin.video.parkstream)
+
+---
 
 ### Script: Artwork Beef (v0.28.10)
 **Automatic artwork management for your Kodi library**
