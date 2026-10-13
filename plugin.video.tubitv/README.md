@@ -17,6 +17,7 @@ the sign-in can be maintained as Tubi changes its API.
 - Title actions in the context menu: add to the Kodi library, related
   titles, trailers, and — signed in — My List, likes and dislikes
 - Resume from where Tubi's watch history says you stopped
+- Works with Kodi's Trakt add-on: films and episodes can be scrobbled
 - Optional Tubi account sign-in
 - Live channels in Kodi's TV guide through IPTV Manager
 - Add a film or a whole show to the Kodi library as `.strm` files
@@ -91,6 +92,14 @@ If Tubi's watch history holds a position for a film or episode, selecting it
 offers **Resume from …** or **Play from beginning**. Signed in, with **Tell
 Tubi where you stopped watching** on, the add-on reports the position when
 playback stops (see [Resume](#resume-1)).
+
+### Trakt
+
+If Kodi's Trakt add-on (`script.trakt`) is installed, it can scrobble what
+you watch in Tubi. Films carry their title and year, episodes their series,
+season and episode number, which is what it matches on. Live TV channels and
+trailers are marked so that it ignores them. Trakt is optional: Tubi needs
+no Trakt account and does not talk to Trakt itself.
 
 ## Known limitations
 
