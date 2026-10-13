@@ -6,6 +6,8 @@ import time
 import xbmc
 import xbmcgui
 
+from resources.lib import context
+from resources.lib import search
 from resources.lib.tubi_api import HOME_GROUP_ALL
 
 ROW_CONTROLS = tuple(range(100, 350, 10))
@@ -18,6 +20,7 @@ class TubiMovies(xbmcgui.WindowXML):
         self.addon = None
         self.rowItems = {}
         self.navbar = None
+        self.relatedRequested = None
         self.closed = False
         self.started = False
         self.windowId = None
@@ -78,7 +81,7 @@ class TubiMovies(xbmcgui.WindowXML):
                     if self.closed:
                         return used
                     if content.get('type') == MOVIE and content.get('posterarts'):
-                        self.addon.addContent(content, items)
+                        context.addContent(self.addon, content, items)
             except Exception as err:
                 self.addon.note('TUBI-MOVIES row %s failed: %s' % (
                     rowId, type(err).__name__), xbmc.LOGERROR)
@@ -114,11 +117,11 @@ class TubiMovies(xbmcgui.WindowXML):
             items = self.rowItems[controlId]
             if not 0 <= position < len(items):
                 return
-            url, _, isFolder = items[position][:3]
+            url, item, isFolder = items[position][:3]
             if not isFolder:
                 self.addon.note('TUBI-MOVIES play row=%d position=%d' % (
                     controlId, position))
-                xbmc.executebuiltin('PlayMedia("%s")' % url)
+                context.play(url, item)
         elif controlId == 302:
             if ROW_CONTROLS[0] in self.rowItems:
                 self.setFocusId(ROW_CONTROLS[0])
@@ -129,6 +132,15 @@ class TubiMovies(xbmcgui.WindowXML):
     def onAction(self, action):
         if action.getId() in (10, 92):  # Previous menu / back
             self.leave()
+        elif action.getId() == context.CONTEXT_MENU:
+            try:
+                focus = self.getFocusId()
+            except RuntimeError:
+                return
+            items = self.rowItems.get(focus) or []
+            position = self.getControl(focus).getSelectedPosition() if items else -1
+            if 0 <= position < len(items):
+                self.relatedRequested = context.show(self.addon, items[position][1])
 
     def leave(self):
         with self.lock:
@@ -153,6 +165,17 @@ def showMovies(addon, idle=None):
                 addon.note('TUBI-MOVIES abandoned for window %d' % current)
                 window.closed = abandoned = True
                 break
+            if window.relatedRequested:
+                related, window.relatedRequested = window.relatedRequested, None
+                navbar, abandoned = search.showSearch(addon, idle, related=related)
+                if abandoned:
+                    window.closed = True
+                    break
+                # Another navbar page closes this one; its own entry stays here.
+                if navbar and navbar != 302:
+                    window.navbar = navbar
+                    window.leave()
+                continue
             if monitor.waitForAbort(0.1):
                 break
     finally:

@@ -6,6 +6,7 @@ import time
 import xbmc
 import xbmcgui
 
+from resources.lib import context
 from resources.lib import series
 
 FIELD = 400
@@ -23,6 +24,8 @@ class TubiSearch(xbmcgui.WindowXML):
         self.query = ''
         self.navbar = None
         self.seriesRequested = None
+        self.relatedRequested = None
+        self.related = None
         self.closed = False
         self.started = False
         self.windowId = None
@@ -38,6 +41,14 @@ class TubiSearch(xbmcgui.WindowXML):
         self.setProperty('tubi.search.status', '')
         self.setProperty('tubi.search.field', self.query or self.addon.localLang(30010) or 'Search')
         self.setFocusId(FIELD)
+        if self.related:
+            # Related titles of one title, shown as this page's results.
+            self.setProperty('tubi.search.field', '%s: %s' % (
+                self.addon.localLang(30034) or 'Related titles', self.related.get('title') or ''))
+            self.setProperty('tubi.search.status', self.addon.localLang(30072) or 'Loading…')
+            self.searches += 1
+            threading.Thread(target=self.search, daemon=True,
+                             args=(self.related['id'], self.searches, self.addon.api.related)).start()
 
     def onClick(self, controlId):
         if controlId == FIELD:
@@ -59,8 +70,11 @@ class TubiSearch(xbmcgui.WindowXML):
                 # The series opens above the results, which stay as they are.
                 self.seriesRequested = (url, item)
             else:
-                xbmc.executebuiltin('PlayMedia("%s")' % url)
+                context.play(url, item)
         elif controlId == 301:
+            if self.related:
+                # A related page sits above another page; Home means Home.
+                self.navbar = controlId
             self.leave()
         elif controlId in (302, 303, 304):
             self.navbar = controlId
@@ -71,6 +85,15 @@ class TubiSearch(xbmcgui.WindowXML):
     def onAction(self, action):
         if action.getId() in (10, 92):  # Previous menu / back
             self.leave()
+        elif action.getId() == context.CONTEXT_MENU:
+            try:
+                if self.getFocusId() != GRID:
+                    return
+            except RuntimeError:
+                return
+            position = self.getControl(GRID).getSelectedPosition()
+            if 0 <= position < len(self.items):
+                self.relatedRequested = context.show(self.addon, self.items[position][1])
 
     def leave(self):
         with self.lock:
@@ -78,15 +101,15 @@ class TubiSearch(xbmcgui.WindowXML):
                 self.closed = True
                 self.close()
 
-    def search(self, query, number):
+    def search(self, query, number, fetch=None):
         started = time.monotonic()
         items, status = [], ''
         try:
-            for content in self.addon.api.search(query):
+            for content in (fetch or self.addon.api.search)(query):
                 if len(items) >= MAX_RESULTS:
                     break
                 if content.get('type') in RESULT_TYPES and content.get('posterarts'):
-                    self.addon.addContent(content, items)
+                    context.addContent(self.addon, content, items)
             if not items:
                 status = self.addon.localLang(30073) or 'No titles available.'
         except Exception as err:
@@ -107,10 +130,15 @@ class TubiSearch(xbmcgui.WindowXML):
             self.addon.note('TUBI-UI search: %d results in %.2f s' % (len(items), time.monotonic() - started))
 
 
-def showSearch(addon, idle=None):
-    """Run the search window over Home; returns (navbar, abandoned)."""
+def showSearch(addon, idle=None, related=None):
+    """Run the search window over Home; returns (navbar, abandoned).
+
+    With related, the {'id', 'title'} of a title, the page lists that
+    title's related titles instead of waiting for a query.
+    """
     window = TubiSearch('TubiSearch.xml', addon.homeDir, 'Default', '1080i')
     window.addon = addon
+    window.related = related
     abandoned = False
     try:
         window.show()
@@ -130,6 +158,16 @@ def showSearch(addon, idle=None):
                 if series.showSeries(addon, url, item, idle):
                     window.closed = abandoned = True
                     break
+                continue
+            if window.relatedRequested:
+                related, window.relatedRequested = window.relatedRequested, None
+                navbar, abandoned = showSearch(addon, idle, related=related)
+                if abandoned:
+                    window.closed = True
+                    break
+                if navbar:
+                    window.navbar = navbar
+                    window.leave()
                 continue
             if monitor.waitForAbort(0.25):
                 break

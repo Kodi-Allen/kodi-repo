@@ -65,10 +65,6 @@ msgctxt "#30069"
 msgid "Widevine or InputStream Adaptive is not ready. Check InputStream Helper."
 msgstr "Widevine oder InputStream Adaptive ist nicht bereit. Prüfe InputStream Helper."
 
-msgctxt "#30070"
-msgid "Tubi rejects this old Widevine version. Encrypted titles need a current CDM; clear titles and Live TV still work."
-msgstr "Tubi lehnt diese alte Widevine-Version ab. Verschlüsselte Titel benötigen eine aktuelle CDM; unverschlüsselte Titel und Live-TV funktionieren weiterhin."
-
 msgctxt "#30071"
 msgid "Tubi Home"
 msgstr "Tubi Home"

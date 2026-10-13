@@ -10,7 +10,7 @@ import xbmc
 import xbmcgui
 
 from resources.lib import tubi_api
-from resources.lib.series import Cover
+from resources.lib.series import coverLoad
 from resources.lib.tubi_api import TubiApiError
 
 CATEGORIES = 400
@@ -404,20 +404,26 @@ class TubiLive(xbmcgui.WindowXML):
 
 
 def showLive(addon, idle=None):
-    """Show the guide over Home; return (navbar target, abandoned)."""
+    """Show the guide over Home; return (navbar target, abandoned).
+
+    The navbar target is False when the guide could not open at all, so
+    the caller leaves its focus where it was.
+    """
     started = time.monotonic()
-    cover = Cover('TubiLoading.xml', addon.homeDir, 'Default', '1080i')
-    cover.show()
-    try:
+
+    def load():
         categories, channels = lineUp(addon.api)
         guide = programmes(addon.api, [str(i) for i in categories[0][1]]) if categories else {}
-    except TubiApiError as err:
-        addon.note('TUBI-LIVE load failed: ' + type(err).__name__, xbmc.LOGERROR)
-        categories = []
+        return categories, channels, guide
+
+    loaded = coverLoad(addon, load, 'TUBI-LIVE')
+    if loaded is None:
+        return False, False
+    cover, (categories, channels, guide) = loaded
     if not categories:
         cover.close()
         xbmcgui.Dialog().notification(addon.addonName, addon.localLang(30074) or 'Could not load titles.')
-        return None, False
+        return False, False
     window = TubiLive('TubiLive.xml', addon.homeDir, 'Default', '1080i')
     window.addon = addon
     window.categories = categories

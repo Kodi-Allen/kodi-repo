@@ -100,20 +100,15 @@ def loaderSupportsRelr(path=None):
                (b'DT_RELRENT', b'GLIBC_ABI_DT_RELR', b'ElfW(Relr)'))
 
 
-def _versionTuple(value):
-    """Turn a dotted Widevine version into an integer tuple."""
-    try:
-        return tuple(int(part) for part in str(value).split('.'))
-    except (TypeError, ValueError):
-        return ()
-
-
-def widevineCompatibility(cdmPath, loaderPath=None, minimumVersion=None):
+def widevineCompatibility(cdmPath, loaderPath=None):
     """Return ``(safe, reason, details)`` without loading Widevine.
 
     The one known process-killing mismatch is a CDM using packed RELR
     relocations with a loader that cannot apply them. Unknown combinations
     are left to InputStream Adaptive rather than being device-name blocked.
+    No file at cdmPath is not a reason to refuse either: Android brings its
+    own Widevine, Windows and macOS name the library differently, and a
+    Linux CDM may live wherever InputStream Adaptive was told to look.
     """
     details = elfInfo(cdmPath)
     details['loader'] = loaderPath or systemLoader()
@@ -121,12 +116,7 @@ def widevineCompatibility(cdmPath, loaderPath=None, minimumVersion=None):
     details['machine'] = platform.machine()
     details['pointer_bits'] = struct.calcsize('P') * 8
     if not details['exists']:
-        return False, 'widevine CDM is missing', details
+        return True, 'no CDM at the default path, left to inputstream.adaptive', details
     if details['has_relr'] and details['loader_relr'] is False:
         return False, 'CDM needs DT_RELR but the system loader lacks it', details
-    installed = _versionTuple(details['version'])
-    minimum = _versionTuple(minimumVersion)
-    if installed and minimum and installed < minimum:
-        return False, 'widevine CDM %s is older than required %s' % (
-            details['version'], minimumVersion), details
     return True, 'compatible', details

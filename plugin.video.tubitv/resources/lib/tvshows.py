@@ -6,6 +6,8 @@ import time
 import xbmc
 import xbmcgui
 
+from resources.lib import context
+from resources.lib import search
 from resources.lib import series
 from resources.lib.tubi_api import HOME_GROUP_ALL
 
@@ -21,6 +23,7 @@ class TubiTVShows(xbmcgui.WindowXML):
         self.rowIds = {}
         self.seriesRequested = None
         self.navbar = None
+        self.relatedRequested = None
         self.closed = False
         self.started = False
         self.windowId = None
@@ -84,7 +87,7 @@ class TubiTVShows(xbmcgui.WindowXML):
                     if self.closed:
                         return used
                     if content.get('type') == SERIES and content.get('posterarts'):
-                        self.addon.addContent(content, items)
+                        context.addContent(self.addon, content, items)
                         # Every title here is a series; show it without the suffix.
                         items[-1][1].setLabel(content.get('title') or '')
             except Exception as err:
@@ -129,7 +132,7 @@ class TubiTVShows(xbmcgui.WindowXML):
                 # The series opens above this window, which stays as it is.
                 self.seriesRequested = (url, item)
             else:
-                xbmc.executebuiltin('PlayMedia("%s")' % url)
+                context.play(url, item)
         elif controlId == 303:
             if ROW_CONTROLS[0] in self.rowItems:
                 self.setFocusId(ROW_CONTROLS[0])
@@ -140,6 +143,15 @@ class TubiTVShows(xbmcgui.WindowXML):
     def onAction(self, action):
         if action.getId() in (10, 92):  # Previous menu / back
             self.leave()
+        elif action.getId() == context.CONTEXT_MENU:
+            try:
+                focus = self.getFocusId()
+            except RuntimeError:
+                return
+            items = self.rowItems.get(focus) or []
+            position = self.getControl(focus).getSelectedPosition() if items else -1
+            if 0 <= position < len(items):
+                self.relatedRequested = context.show(self.addon, items[position][1])
 
     def leave(self):
         with self.lock:
@@ -170,6 +182,17 @@ def showTVShows(addon, idle=None):
                 if series.showSeries(addon, url, item, idle):
                     window.closed = abandoned = True
                     break
+                continue
+            if window.relatedRequested:
+                related, window.relatedRequested = window.relatedRequested, None
+                navbar, abandoned = search.showSearch(addon, idle, related=related)
+                if abandoned:
+                    window.closed = True
+                    break
+                # Another navbar page closes this one; its own entry stays here.
+                if navbar and navbar != 303:
+                    window.navbar = navbar
+                    window.leave()
                 continue
             if monitor.waitForAbort(0.1):
                 break

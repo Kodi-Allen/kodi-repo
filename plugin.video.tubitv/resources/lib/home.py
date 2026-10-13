@@ -7,6 +7,7 @@ import time
 import xbmc
 import xbmcgui
 
+from resources.lib import context
 from resources.lib import live
 from resources.lib import movies
 from resources.lib import search
@@ -41,6 +42,7 @@ class TubiHome(xbmcgui.WindowXML):
         self.liveRequested = False
         self.searchRequested = False
         self.seriesRequested = None
+        self.relatedRequested = None
         self.started = False
         self.closed = False
         self.lock = threading.RLock()
@@ -79,7 +81,7 @@ class TubiHome(xbmcgui.WindowXML):
             for content in contents:
                 if self.closed:
                     return
-                self.addon.addContent(content, items)
+                context.addContent(self.addon, content, items)
             status = '' if items else (self.addon.localLang(30073) or
                                        'No titles available. Press Back to return.')
         except Exception as err:
@@ -125,7 +127,7 @@ class TubiHome(xbmcgui.WindowXML):
                         return
                     # Films and series with a poster; anything else would not open.
                     if content.get('type') in ('v', 's') and content.get('posterarts'):
-                        self.addon.addContent(content, items)
+                        context.addContent(self.addon, content, items)
             except Exception as err:
                 self.addon.note('TUBI-UI row %s failed: %s' % (rowId, type(err).__name__), xbmc.LOGERROR)
             if not items:
@@ -149,7 +151,7 @@ class TubiHome(xbmcgui.WindowXML):
             for content in contents:
                 if self.closed:
                     return
-                self.addon.addContent(content, featured)
+                context.addContent(self.addon, content, featured)
                 art = (self.addon.firstOf(content.get('images') or {}, 'hero_16x9') or
                        self.addon.firstOf(content, 'hero_images', 'backgrounds') or '')
                 titleArt = self.addon.firstOf(content.get('images') or {}, 'title_art') or ''
@@ -239,9 +241,30 @@ class TubiHome(xbmcgui.WindowXML):
                 self.closed = True
                 self.close()
         else:
-            xbmc.executebuiltin('PlayMedia("%s")' % url)
+            context.play(url, item)
+
+    def focusedItem(self):
+        """The title under the focus: a featured card or a poster row."""
+        try:
+            focus = self.getFocusId()
+        except RuntimeError:
+            return None
+        if focus in (201, 202):
+            items, position = self.featured, self.featuredIndex + focus - 201
+        elif focus == 100:
+            items, position = self.items, self.getControl(100).getSelectedPosition()
+        elif focus in self.rowItems:
+            items, position = self.rowItems[focus], self.getControl(focus).getSelectedPosition()
+        else:
+            return None
+        return items[position][1] if 0 <= position < len(items) else None
 
     def onAction(self, action):
+        if action.getId() == context.CONTEXT_MENU:
+            item = self.focusedItem()
+            if item is not None:
+                self.relatedRequested = context.show(self.addon, item)
+            return
         with self.lock:
             self.nextAdvance = time.monotonic() + CAROUSEL_INTERVAL
             if action.getId() in (10, 92):  # Parent directory / previous menu
@@ -383,7 +406,7 @@ def showHome(addon, row, idle=None, cover=None):
                     break
                 if navbar:
                     window.onClick(navbar)
-                else:
+                elif navbar is None:
                     window.setFocusId(100)
                 continue
             if window.tvRequested and window.windowId:
@@ -396,6 +419,15 @@ def showHome(addon, row, idle=None, cover=None):
                     window.onClick(navbar)
                 else:
                     window.setFocusId(100)
+                continue
+            if window.relatedRequested and window.windowId:
+                related, window.relatedRequested = window.relatedRequested, None
+                navbar, abandoned = search.showSearch(addon, idle, related=related)
+                if abandoned:
+                    window.closed = True
+                    break
+                if navbar:
+                    window.onClick(navbar)
                 continue
             # Only after onInit, which records this window's id.
             if window.searchRequested and window.windowId:

@@ -66,23 +66,20 @@ class DeviceCompatibilityTests(unittest.TestCase):
             for path in (oldLoader, newLoader, cdm):
                 os.unlink(path)
 
-    def test_rejects_a_cdm_older_than_the_service_minimum(self):
+    def test_cdm_version_and_location_are_left_to_inputstream_adaptive(self):
         loader = self.temporaryFile(b'assert info[DT_RELRENT] ElfW(Relr)')
         oldCdm = self.temporaryFile(
             b'\x7fELF' + b'\x00' * 60 + b'.relr.dyn\x004.10.2662.3\x00')
-        currentCdm = self.temporaryFile(
-            b'\x7fELF' + b'\x00' * 60 + b'.relr.dyn\x004.10.2891.0\x00')
         try:
-            safe, reason, _ = widevineCompatibility(
-                oldCdm, loader, minimumVersion='4.10.2891.0')
-            self.assertFalse(safe)
-            self.assertIn('older than required', reason)
-            safe, reason, _ = widevineCompatibility(
-                currentCdm, loader, minimumVersion='4.10.2891.0')
+            safe, reason, details = widevineCompatibility(oldCdm, loader)
             self.assertTrue(safe)
             self.assertEqual('compatible', reason)
+            self.assertEqual('4.10.2662.3', details['version'])
+            safe, reason, details = widevineCompatibility(oldCdm + '.absent', loader)
+            self.assertTrue(safe)
+            self.assertFalse(details['exists'])
         finally:
-            for path in (loader, oldCdm, currentCdm):
+            for path in (loader, oldCdm):
                 os.unlink(path)
 
 

@@ -341,7 +341,7 @@ class TubiAuth(object):
         self.cache['user'] = session
         self.cache.pop('failure', None)
         self._writeCache()
-        self.log('signed in as %s' % session.get('name'), level=xbmc.LOGINFO)
+        self.log('signed in', level=xbmc.LOGINFO)
         return session
 
     @staticmethod
@@ -362,6 +362,8 @@ class TubiAuth(object):
         username = self.addon.getSetting('login_name')
         password = self.addon.getSetting('login_pass')
         if not username or not password:
+            # Cleared credentials end the account they belonged to.
+            self._forgetUser()
             return None
 
         fingerprint = self._fingerprint(username, password)
@@ -374,6 +376,9 @@ class TubiAuth(object):
             return None
         session = self.cache.get('user') or {}
         if session.get('credentials') != fingerprint:
+            # Changed credentials: the previous account goes before the new
+            # one is tried, so a failed switch cannot fall back to it.
+            self._forgetUser()
             session = {}
         if session.get('connect_sid') and session.get('expires_at', 0) > time.time() + EXPIRY_MARGIN:
             return session
@@ -393,26 +398,46 @@ class TubiAuth(object):
         except Exception as err:
             raise TubiAuthError(str(err))
 
+    def _forgetUser(self):
+        """Drop a cached sign-in; the device and anonymous tokens stay."""
+        if self.cache.pop('user', None) is not None:
+            self._writeCache()
+
+    def _liveUser(self):
+        """The cached sign-in, only while it is live and still belongs to
+        the credentials in the settings - the same rules session() applies.
+        """
+        username = self.addon.getSetting('login_name')
+        password = self.addon.getSetting('login_pass')
+        session = self.cache.get('user') or {}
+        if not username or not password or not session.get('access_token'):
+            return {}
+        fingerprint = self._fingerprint(username, password)
+        if (session.get('credentials') != fingerprint or
+                self.cache.get('signed_out') == fingerprint or
+                session.get('expires_at', 0) <= time.time() + EXPIRY_MARGIN):
+            return {}
+        return session
+
     def bearer(self):
         """The token the content API authenticates with.
 
         The signed in user token when there is a live one, otherwise the
         anonymous device token - Tubi serves its free catalogue to either.
         """
-        session = self.cache.get('user') or {}
-        if session.get('access_token') and session.get('expires_at', 0) > time.time() + EXPIRY_MARGIN:
+        session = self._liveUser()
+        if session:
             return session['access_token']
         return self.anonymousToken()
 
     @property
     def signedIn(self):
-        session = self.cache.get('user') or {}
-        return bool(session.get('access_token'))
+        return bool(self._liveUser())
 
     @property
     def userId(self):
         """The signed in account id, which Tubi uses to personalise the guide."""
-        return (self.cache.get('user') or {}).get('user_id')
+        return self._liveUser().get('user_id')
 
     def apply(self, headers):
         """Fill in the headers the content API expects.

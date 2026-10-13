@@ -53,10 +53,6 @@ DRM_PROPERTIES_SINCE = 21
 # being told; 22 has dropped the property altogether.
 MANIFEST_TYPE_UNTIL = 21
 CDM_PATH = 'special://home/cdm/libwidevinecdm.so'
-# Widevine revoked older CDM generations in 2025. Tubi now rejects the final
-# ARM32 CDM (4.10.2662.3) with 401 / error code 403. Refuse the known-dead
-# licence attempt before Kodi shows only the clear lead and then stalls.
-TUBI_MINIMUM_CDM = '4.10.2891.0'
 
 
 # InfoTagVideo's own setters, and the stream detail classes, arrived in Kodi
@@ -257,8 +253,7 @@ class myAddon(t1mAddon):
     def widevineEnvironment(self):
         """Log platform, ISA and CDM capabilities without loading the CDM."""
         cdmPath = xbmcvfs.translatePath(CDM_PATH)
-        safe, reason, details = widevineCompatibility(
-            cdmPath, minimumVersion=TUBI_MINIMUM_CDM)
+        safe, reason, details = widevineCompatibility(cdmPath)
         self.diag('platform machine=%s userspace=%s-bit os=%s model=%s Kodi=%s' % (
             details['machine'], details['pointer_bits'], osRelease(),
             deviceModel() or 'unknown', xbmc.getInfoLabel('System.BuildVersion') or 'unknown'))
@@ -966,12 +961,7 @@ class myAddon(t1mAddon):
             if not compatible:
                 self.note('blocked unsafe Widevine start: %s' % reason,
                           level=xbmc.LOGWARNING)
-                if 'DT_RELR' in reason:
-                    message = 30067
-                elif 'older than required' in reason:
-                    message = 30070
-                else:
-                    message = 30069
+                message = 30067 if 'DT_RELR' in reason else 30069
                 xbmcgui.Dialog().notification(self.addonName, self.localLang(message),
                                               xbmcgui.NOTIFICATION_ERROR, 10000)
                 xbmcplugin.setResolvedUrl(int(sys.argv[1]), False,

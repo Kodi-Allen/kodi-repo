@@ -8,19 +8,65 @@ import urllib.parse
 import xbmc
 import xbmcgui
 
-from resources.lib.tubi_api import TubiApiError
+from resources.lib import context
 
 SEASONS = 500
 EPISODES = 600
 PLAIN_SEASON = re.compile(r'^Season \d+$')
+# How long a custom page may sit behind the loading cover. Normal loads take
+# a few seconds; a dead route would otherwise hold the cover for minutes.
+LOAD_DEADLINE = 20.0
 
 
 class Cover(xbmcgui.WindowXMLDialog):
     """The add-on's loading screen, above the page the series came from."""
+    cancelled = False
 
     def onAction(self, action):
-        # Do not send BACK into a running load.
-        pass
+        # Back gives up on the load; nothing else reaches the page below.
+        if action.getId() in (10, 92):
+            self.cancelled = True
+
+
+def coverLoad(addon, load, tag, deadline=LOAD_DEADLINE):
+    """Run load() behind the loading cover for at most `deadline` seconds.
+
+    Returns (cover, result) with the cover still up, so the caller can open
+    its window under the cover's closing fade. A failure, the deadline or
+    Back closes the cover and returns None; the page below stays as it was.
+    """
+    cover = Cover('TubiLoading.xml', addon.homeDir, 'Default', '1080i')
+    cover.show()
+    outcome = {}
+
+    def work():
+        try:
+            outcome['result'] = load()
+        except Exception as err:
+            outcome['error'] = err
+
+    worker = threading.Thread(target=work, daemon=True)
+    worker.start()
+    monitor = xbmc.Monitor()
+    started = time.monotonic()
+    while worker.is_alive() and not cover.cancelled:
+        if time.monotonic() - started > deadline or monitor.waitForAbort(0.1):
+            break
+    if 'result' in outcome and not cover.cancelled:
+        return cover, outcome['result']
+    cover.close()
+    if cover.cancelled:
+        addon.note('%s load cancelled' % tag)
+        return None
+    if 'error' in outcome:
+        # API exception messages may contain URLs; log only the type.
+        addon.note('%s load failed: %s' % (tag, type(outcome['error']).__name__), xbmc.LOGERROR)
+        message = addon.localLang(30074) or 'Could not load titles.'
+    else:
+        addon.note('%s load timed out after %.0f s' % (tag, deadline), xbmc.LOGERROR)
+        message = addon.localLang(30022) or 'Could not reach Tubi'
+    xbmcgui.Dialog().notification(addon.addonName, message, xbmcgui.NOTIFICATION_ERROR)
+    return None
 
 
 class TubiSeries(xbmcgui.WindowXML):
@@ -111,7 +157,7 @@ class TubiSeries(xbmcgui.WindowXML):
             items = self.episodes.get(self.active) or []
             if 0 <= position < len(items):
                 self.addon.note('TUBI-SERIES play season=%d episode=%d' % (self.active, position))
-                xbmc.executebuiltin('PlayMedia("%s")' % items[position][0])
+                context.play(items[position][0], items[position][1])
 
     def onAction(self, action):
         if action.getId() in (10, 92):  # Previous menu / back
@@ -146,14 +192,16 @@ def showSeries(addon, url, origin, idle=None):
     tag = origin.getVideoInfoTag()
     title = tag.getTVShowTitle() or origin.getLabel().replace(addon.localLang(30019), '')
     started = time.monotonic()
-    cover = Cover('TubiLoading.xml', addon.homeDir, 'Default', '1080i')
-    cover.show()
     addon.note('TUBI-SERIES loading %s (%s)' % (seriesId, title))
-    try:
+
+    def load():
         seasons = addon.seasonList(seriesId)
-    except TubiApiError as err:
-        addon.note('TUBI-SERIES load failed: ' + type(err).__name__, xbmc.LOGERROR)
-        seasons = []
+        return seasons, (episodeItems(addon, seriesId, seasons[0], title) if seasons else [])
+
+    loaded = coverLoad(addon, load, 'TUBI-SERIES')
+    if loaded is None:
+        return False
+    cover, (seasons, firstEpisodes) = loaded
     if not seasons:
         cover.close()
         xbmcgui.Dialog().notification(addon.addonName,
@@ -167,7 +215,7 @@ def showSeries(addon, url, origin, idle=None):
     window.year = tag.getYear()
     window.plot = tag.getPlot()
     window.seasons = seasons
-    window.episodes[0] = episodeItems(addon, seriesId, seasons[0], title)
+    window.episodes[0] = firstEpisodes
     addon.note('TUBI-SERIES ready: %d seasons, %d episodes in %.2f s' % (
         len(seasons), len(window.episodes[0]), time.monotonic() - started))
     abandoned = False

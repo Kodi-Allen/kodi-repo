@@ -29,7 +29,7 @@
             <visible>Control.HasFocus(301)</visible>
         </control>
         <control type="button" id="302">
-            <left>382</left><top>20</top><width>92</width><height>40</height>
+            <left>382</left><top>20</top><width>100</width><height>40</height>
             <texturefocus /><texturenofocus />
             <label>Movies</label><font>font13</font><textoffsetx>0</textoffsetx><aligny>center</aligny>
             <textcolor>FFC0C0C0</textcolor><focusedcolor>FFF0F0F0</focusedcolor>
