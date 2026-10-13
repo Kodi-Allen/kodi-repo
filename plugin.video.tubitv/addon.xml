@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.tubitv" name="TubiTV" version="2026.10.13+kodiallen.1" provider-name="Lunatixz, Breezyslasher, Kodi Allen">
+<addon id="plugin.video.tubitv" name="TubiTV" version="2026.10.13" provider-name="Lunatixz, Breezyslasher, Kodi Allen">
 	<requires>
 		<import addon="xbmc.python" version="3.0.0"/>
 		<import addon="script.module.t1mlib" version="4.0.9"/>
@@ -27,11 +27,11 @@
 		<disclaimer lang="en_GB">Unofficial add-on, not affiliated with or endorsed by Tubi. Tubi streams only in the countries it serves. Encrypted titles need a working Widevine CDM for InputStream Adaptive.</disclaimer>
 		<platform>all</platform>
 		<language>en</language>
-		<license>GPL-2.0-or-later</license>
+		<license>GPL-3.0-or-later</license>
 		<website>https://tubitv.com/</website>
 	<source>https://github.com/Kodi-Allen/kodi-repo/tree/main/plugin.video.tubitv</source>
 		<news>
-2026.10.13+kodiallen.1 - The add-on's own interface
+2026.10.13 - The add-on's own interface
 - NEW: Home, Movies, TV Shows, Series, Search and a Live TV guide in the
   add-on's own interface, with a loading screen and a navigation bar.
 - NEW: Live TV guide from Tubi's programme data: categories, channel logos,

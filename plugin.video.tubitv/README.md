@@ -458,4 +458,8 @@ not hammer the login endpoint.
 
 ## License
 
-GPL-2.0-or-later — see [LICENSE.txt](LICENSE.txt)
+GPL-3.0-or-later — see [LICENSE.txt](LICENSE.txt).
+
+`resources/lib/pseudotv.py` (Copyright (C) 2021 Lunatixz) is licensed under
+GPL-3.0-or-later, as its header states. The rest of the add-on was published
+under GPL-2.0-or-later; together they are distributed under GPL-3.0-or-later.
