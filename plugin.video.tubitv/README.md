@@ -1,28 +1,120 @@
 # TubiTV for Kodi
 
-Browse and watch [Tubi](https://tubitv.com/) — free, ad-supported films and TV
-shows — from inside Kodi.
+Browse and watch [Tubi](https://tubitv.com/) — free, ad-supported films, TV
+shows and live channels — from inside Kodi, in an interface laid out like
+Tubi's own.
 
-This is a fork of [Lunatixz's](https://github.com/Lunatixz) `plugin.video.tubitv`,
-kept here so the sign-in can be maintained as Tubi changes its API.
+This is an unofficial add-on, not affiliated with Tubi. It is a fork of
+[Lunatixz's](https://github.com/Lunatixz) `plugin.video.tubitv`, kept here so
+the sign-in can be maintained as Tubi changes its API.
 
 ## Features
 
-- Browse the Tubi categories, with paging through long ones
-- Home, which is Tubi's own screen, Continue Watching and My List rows included
-  — see [Home and the category list](#home-and-the-category-list)
-- Related titles and trailers on every film and series
-- Add to and remove from My List, and like or dislike a title
-- Kids mode, and Tubi's own English, Spanish or French metadata
-- Tubi's linear channels as Live TV, optionally in the Kodi TV guide
-- Search the Tubi catalogue
-- Series listed by season, with episode numbers, cast, plot and artwork
-- Add a film or a whole show to the Kodi library as `.strm` files
+- Home, Movies, TV Shows, Search and a Live TV guide in the add-on's own
+  interface
+- Series with their seasons and episodes, cast, plot and artwork
+- A programme guide for Tubi's live channels, from Tubi's own guide data
+- Title actions in the context menu: add to the Kodi library, related
+  titles, trailers, and — signed in — My List, likes and dislikes
+- Resume from where Tubi's watch history says you stopped
 - Optional Tubi account sign-in
+- Live channels in Kodi's TV guide through IPTV Manager
+- Add a film or a whole show to the Kodi library as `.strm` files
+- Kids mode, and Tubi's own English, Spanish or French metadata
 - PseudoTV Live recommendation service
 - Direct or add-on-local custom routing without changing Kodi's global proxy
-- Signed GeoTV relay URLs for HLS and DASH manifests, child playlists, media
-  files, subtitles, artwork and Widevine licence transport
+
+## Availability
+
+Tubi streams only in the countries it serves, and its catalogue differs from
+one country to the next. Tubi decides from where a connection comes; titles
+and channels that it does not offer in your region are not available here
+either.
+
+## Requirements and installation
+
+- Kodi 21 (Omega) is the version the add-on is tested on. It declares Kodi 19
+  and later and keeps compatibility code for Kodi 19 and 20, but the add-on's
+  interface has only been tested on Kodi 21.
+- Encrypted titles need Widevine; see [Widevine](#widevine).
+
+Install the **Kodi Allen Repository** (see the repository's main README), then
+in Kodi: Settings → Add-ons → Install from repository → Kodi Allen Repository →
+Video add-ons → TubiTV. Kodi installs the dependencies — t1m Library Routines,
+Requests and InputStream Adaptive — from the official Kodi repository.
+InputStream Helper is optional.
+
+## The interface
+
+Opening the add-on shows a short loading screen, then the add-on's Home. A
+navigation bar — Home, Movies, TV Shows, Live TV, Search — sits on every page.
+Back returns to the page before; Back on Home leaves the add-on.
+
+- **Home**: two featured titles at a time that change every few seconds, Most
+  Popular, and three more rows from Tubi's home screen.
+- **Movies** and **TV Shows**: Tubi's own Movies and TV Shows pages as rows of
+  posters, in Tubi's order.
+- **Series**: the seasons on the left, the episodes of the chosen season on
+  the right.
+- **Search**: type a title; films and series appear as a grid of posters.
+- **Live TV**: a programme guide built from Tubi's own guide data — Tubi's
+  channel categories, channel logos, programmes on a timeline in half-hour
+  steps, a line marking the current time and how far the current programme
+  has got. Choose a programme that is on now to watch the channel; programmes
+  later in the day show their details.
+
+![Home](resources/screenshots/home.jpg)
+
+![Live TV guide](resources/screenshots/live-tv.jpg)
+
+### Context menu
+
+On a film or series, the context menu (the Menu or C key, or a right click)
+offers:
+
+| Action | Shown for |
+|---|---|
+| Add Movie To Library / Add Show To Library | films / series |
+| Related titles | films and series; opens a page of related titles |
+| Play trailer | titles Tubi has a trailer for |
+| Add to My List / Remove from My List | signed in |
+| Remove from Continue Watching | signed in, titles in your watch history |
+| Like / Dislike | signed in; choosing it again clears the rating |
+
+Episodes and live channels have no context menu.
+
+![Context menu on a film](resources/screenshots/context-menu.jpg)
+
+### Resume
+
+If Tubi's watch history holds a position for a film or episode, selecting it
+offers **Resume from …** or **Play from beginning**. Signed in, with **Tell
+Tubi where you stopped watching** on, the add-on reports the position when
+playback stops (see [Resume](#resume-1)).
+
+## Known limitations
+
+- Rows show the first page of each Tubi row (up to 50 titles), and Search
+  shows up to 120 results. There is no "show more" yet; Search finds titles
+  beyond those.
+- Home has no Continue Watching or My List row, and My List has no page of
+  its own. Titles are added to and removed from My List in the context menu.
+- The interface uses the active skin's fonts. Under skins other than the one
+  it was designed with, text sizes differ slightly; under Estuary the series
+  title appears in a smaller font.
+- Kodi favourites and skin shortcuts that point to one of the add-on's folders
+  (rather than to the add-on itself) still open that folder as a plain Kodi
+  list.
+- Encrypted 720p renditions need hardware DRM; see
+  [Playback and DRM](#playback-and-drm).
+
+## Folder listings
+
+Behind the interface the add-on still provides its plain Kodi folders —
+Tubi's category list, Home rows, series and seasons, channels, search. Kodi
+favourites, the library `.strm` files, PseudoTV Live and other add-ons use
+them, and the interface returns to them only if it cannot start. Category
+folders page through every title.
 
 ## Network route, proxy and media relay
 
@@ -70,30 +162,6 @@ device token otherwise:
 | Part-watched titles, and forgetting one | `lishi…/api/v2/view_history` |
 | Liking and disliking | `account…/user/preferences/rate` |
 
-## Home and the category list
-
-The addon's root is `browse_list`, Tubi's full category list, and Home is
-`homescreen`, the rows Tubi's own home screen shows. They overlap heavily but
-they are not the same list, and neither contains the other. Counting distinct
-row titles per capture, English, kids mode off:
-
-| Capture | Categories | Home rows | Home rows not in the category list |
-|---|---|---|---|
-| session A | 110 | 40 | 6 |
-| session B | 130 | 47 | 4 |
-| session C | 130 | 70 | 17 |
-
-What Home has that the category list does not is the personal and the
-time-sensitive: Continue Watching, My List, Watch Next, Recommended, and rows
-Tubi assembles for the moment. The category list is the whole catalogue, in
-Tubi's own order, and it is the longer of the two.
-
-Home is fetched the way the site fetches it — the first seven rows, then a
-second call from the cursor it hands back asking for every row after them.
-Only the first call was being made, which is why Home used to show six or
-seven rows against the root's hundred and more, and why it looked like a
-short duplicate of the root rather than a different list.
-
 ## Playback and DRM
 
 Tubi encrypts some titles and not others, so the addon handles both. It asks
@@ -109,42 +177,12 @@ never requests a licence. Of the 404 non-live titles seen across the captures,
 left to pick for them was a 720p rendition no software CDM can play.
 
 When only an encrypted stream is available, playback goes through
-`inputstream.adaptive` with `com.widevine.alpha` and the title's own license
-server — which needs a working Widevine CDM on the device. The add-on prefers
-Tubi's DASH rendition for DRM titles. Clear titles remain on HLS and play
-without DRM. The anonymous device token is enough for encrypted playback too:
-a guest token with `is_guest: true` and no `user_id` was seen carrying a
+`inputstream.adaptive` with `com.widevine.alpha` and the title's own licence
+server, which needs a working Widevine CDM on the device (see
+[Widevine](#widevine)). The add-on prefers Tubi's DASH rendition for DRM
+titles. Clear titles remain on HLS and play without DRM. The anonymous device
+token is enough for encrypted playback too: a guest token was seen carrying a
 Widevine licence through to a decoded picture on supported devices.
-
-The final ARM32 Widevine CDM 4.10.2662.3 uses packed `DT_RELR` relocations.
-Loading it with an older ELF loader that does not understand RELR can jump to
-an invalid address and terminate Kodi before a manifest segment or licence is
-requested. This was reproduced outside Kodi with a plain `dlopen()` and fixed
-on the Vero 4K+ by installing OSMC's RELR-enabled `libc6`/`libc-bin` build
-`2.31-113`. The same official Shaka Widevine test then played through the
-Amlogic H.264 hardware decoder.
-
-That loader repair fixes the process crash, but it cannot make an obsolete CDM
-current. Widevine retired old CDM generations in 2025; Tubi now answers the
-final ARM32 CDM `4.10.2662.3` with HTTP 401 / error code 403. This was unchanged
-across two Privado US locations, both DASH and HLS manifests, and both legacy
-and current browser User-Agents. The few seconds visible before failure are the
-unencrypted clear lead; encrypted samples start immediately afterwards.
-
-For Tubi, the add-on therefore rejects a detected CDM older than
-`4.10.2891.0` before playback. This is a service capability check, not a device
-model check. On a 32-bit Kodi build the final available ARM CDM is older than
-that threshold, so encrypted titles cannot be played there without moving to a
-supported 64-bit platform. Clear films and all current Live TV channels remain
-available.
-
-The add-on does not identify this problem by device name. Before starting an
-encrypted stream it safely inspects the CDM and active loader. A CDM containing
-`.relr.dyn` is blocked only when the loader lacks RELR support; updated Vero
-devices and unrelated working ARM systems are not blocked. InputStream Helper
-remains the supported way to install Widevine, but is not invoked
-interactively while Kodi is resolving a stream: Kodi 21 may abort if a second
-busy dialog opens at that point. Unencrypted content never needs this check.
 
 Across every capture taken, 70 titles carry DRM, and the HDCP grade tracks the
 resolution rather than the title — without a single exception in 810
@@ -157,8 +195,8 @@ renditions:
 | 1080 | `hdcp_v1` | 84 |
 
 A software CDM — which is all a desktop, Flatpak or LibreELEC Kodi has —
-cannot play the protected kind. Measured on Rush Hour with Widevine CDM
-4.10.3050.0, which reports Widevine level 3, the 576p rendition plays and the
+cannot play the protected kind. Measured on Rush Hour with a software CDM,
+which reports Widevine level 3, the 576p rendition plays and the
 720p one does not. Kodi 22 with inputstream.adaptive 22.3.20 names the reason:
 
 ```
@@ -201,7 +239,39 @@ web-client context, so the licence request keeps the API request's User-Agent
 and supplies Tubi's Origin and Referer. The Widevine challenge and response are
 still handed through unchanged.
 
-### DRM diagnostics
+## Widevine
+
+DRM-protected Tubi titles need a working Widevine CDM that Kodi's
+InputStream Adaptive can use. Clear titles and Live TV never need one.
+
+- On platforms with native Widevine support, such as many Android devices,
+  no extra configuration is normally needed.
+- On Linux, Windows and macOS, InputStream Helper is the usual way to install
+  Widevine for InputStream Adaptive.
+- Some older Linux, OSMC and ARM-based systems need InputStream Helper or a
+  manually maintained, compatible Widevine CDM setup.
+
+The add-on does not require or check a particular Widevine path, version or
+InputStream Helper layout. It hands encrypted titles to Kodi and InputStream
+Adaptive, and if they can use the installed CDM, playback goes ahead. Older
+or custom Linux installations can therefore work even when their Widevine
+setup differs from the standard InputStream Helper layout. Whether a given
+device can decode a given title is decided by Kodi, InputStream Adaptive, the
+CDM and Tubi's licence server, not by the add-on.
+
+The one case the add-on refuses is a CDM that would crash Kodi: a library that
+uses packed `DT_RELR` relocations on a system whose dynamic loader cannot
+process them. It is detected from the file without loading it, and you get a
+message instead of a crash.
+
+### Legacy Linux and OSMC
+
+Older Linux userlands, OSMC devices or non-standard ARM configurations may need
+a compatible Widevine CDM supplied by hand. Installing it is outside this
+add-on, which only delegates DRM playback to Kodi and InputStream Adaptive.
+Not every legacy system can play every encrypted title.
+
+## DRM diagnostics
 
 Enable **Detailed DRM diagnostics** under Playback for an opt-in report in
 `kodi.log`. It includes the OS, kernel machine, userspace bitness, Kodi, ISA and
@@ -220,9 +290,9 @@ explicit policy choice rather than assuming that every L3 device is limited to
 
 ## Live TV and IPTV Manager
 
-Tubi carries around 150 linear channels — 177 when first captured, 147 as
-delivered to IPTV Simple most recently. They show up under **Live TV** in the
-addon, and they are all unencrypted plain HLS, so they need no CDM.
+Tubi carries well over a hundred linear channels. They are unencrypted plain
+HLS and need no CDM. The add-on's **Live TV** page shows them in its own
+guide (see [The interface](#the-interface)).
 
 The addon also implements the
 [IPTV Manager](https://github.com/add-ons/service.iptv.manager/wiki/Integration)
@@ -246,10 +316,12 @@ written back over the callback socket IPTV Manager supplies.
 - **Logos and guide images** are Tubi's own public image URLs, never relay
   URLs, because IPTV Manager and IPTV Simple keep them for hours or days and
   a signed relay URL would expire in between.
-- **A failed refresh** does not empty the guide. Live calls retry a lost
-  connection, and if Tubi still cannot be reached the last line-up is served
-  again. IPTV Manager would otherwise write an empty playlist, and IPTV Simple
-  would remove every channel.
+- **A failed refresh** does not empty the channel list. Live calls retry a
+  lost connection, and if Tubi still cannot be reached the last line-up is
+  served again. IPTV Manager would otherwise write an empty playlist, and IPTV
+  Simple would remove every channel. Programme data comes from Tubi on each
+  refresh; if Tubi cannot be reached at all the guide has no programmes until
+  the next successful refresh.
 
 On Kodi 20 and later, IPTV Manager's *Configure IPTV Simple automatically*
 writes IPTV Simple's legacy add-on settings, not its per-instance settings.
@@ -265,8 +337,9 @@ from arriving empty.
 
 ## Adding to the Kodi library
 
-**Add Movie To Library** and **Add Show To Library** write `.strm` files — one
-per film, one per episode — that play back through this addon.
+**Add Movie To Library** and **Add Show To Library** in a title's context
+menu write `.strm` files — one per film, one per episode — that play back
+through this addon.
 
 They go under this addon's own profile directory:
 
@@ -299,8 +372,9 @@ A film reports as itself. An episode reports as itself too, with its series
 named alongside as a `parent_id` — a string, where the content id is a number.
 Trailers report nothing.
 
-The same history is read back to place resume points, so a film or episode
-started on another device carries on where it left off here. Removing a title
+The same history is read back when a page is loaded. If it holds a position
+for a film or episode, selecting the title offers **Resume from …** or
+**Play from beginning**, as Kodi does for its own bookmarks. Removing a title
 from Continue Watching keys on the history entry's own id rather than the
 title's, so the history is read first — the same shape as unsaving from My
 List.
@@ -316,14 +390,6 @@ picks between the three it has been seen serving — `en-US`, `es-MX` and `fr-CA
 A series is identified by its content id with a zero in front of it — `03321`
 for series `3321` — wherever ratings, related titles or a search's contents map
 are concerned. Films use their id unchanged.
-
-## Installation
-
-In Kodi: Settings → Add-ons → Install from repository → Breezyslasher
-Repository → Video add-ons → TubiTV.
-
-The one dependency, **t1m Library Routines** (`script.module.t1mlib`), comes
-from the official Kodi add-on repository, so Kodi pulls it in by itself.
 
 ## Configuration
 
@@ -351,6 +417,11 @@ sign-in.
   what is in settings, the addon stays anonymous. Changing either field
   changes the fingerprint and lifts the block by itself, so signing back in is
   just a matter of re-entering the password.
+
+Changing or clearing the email or password ends the previous sign-in as well:
+a cached session only counts for the credentials it was made with. If signing
+in with new credentials fails, the add-on carries on anonymously rather than
+with the previous account.
 
 ## How signing in works
 

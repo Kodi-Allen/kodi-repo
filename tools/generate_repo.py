@@ -17,6 +17,7 @@ SKIP_ADDONS = {
 SKIP_DIRS = {
     '@eaDir',
     '__pycache__',
+    'tests',
 }
 
 SKIP_FILES = {
