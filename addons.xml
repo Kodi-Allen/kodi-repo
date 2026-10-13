@@ -43,7 +43,7 @@ ParkStream is an independently maintained fork of plugin.video.southpark_unoffic
       </assets>
     </extension>
   </addon>
-  <addon id="plugin.video.tubitv" name="TubiTV" version="2026.10.13" provider-name="Lunatixz, Breezyslasher, Kodi Allen">
+  <addon id="plugin.video.tubitv" name="TubiTV" version="2026.10.13.1" provider-name="Lunatixz, Breezyslasher, Kodi Allen">
     <requires>
       <import addon="xbmc.python" version="3.0.0"/>
       <import addon="script.module.t1mlib" version="4.0.9"/>
@@ -74,6 +74,10 @@ ParkStream is an independently maintained fork of plugin.video.southpark_unoffic
       <website>https://tubitv.com/</website>
       <source>https://github.com/Kodi-Allen/kodi-repo/tree/main/plugin.video.tubitv</source>
       <news>
+2026.10.13.1 - Trakt compatibility
+- NEW: Films and episodes tell Kodi their title, year, series, season and
+  episode, so Kodi's Trakt add-on can scrobble them. Live TV and trailers
+  are excluded. Trakt stays optional; nothing else changes.
 2026.10.13 - The add-on's own interface
 - NEW: Home, Movies, TV Shows, Series, Search and a Live TV guide in the
   add-on's own interface, with a loading screen and a navigation bar.
