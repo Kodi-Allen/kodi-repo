@@ -1,6 +1,14 @@
 # Artwork Beef
 <span style="font-size: 1.2em; font-weight: 600">An add-on for Kodi</span>
 
+> **Kodi Allen distribution — version 0.28.10.** This is a maintained distribution of
+> [rmrector's Artwork Beef](https://github.com/rmrector/script.artwork.beef), with a Python 3
+> migration, Kodi 21 (Omega) compatibility changes, and later fixes for Kodi 19+ APIs and
+> dependencies. See the [changelog](changelog.txt) and current [requirements](addon.xml).
+> Install it through the [Kodi Allen Repository](../README.md#installation). The upstream
+> documentation below predates these changes; no complete platform or Kodi-version test
+> matrix is documented for this distribution.
+
 Artwork Beef automatically adds extra artwork for media in your video and music libraries. It is generally intended to
 handle extended artwork just as Kodi and scrapers already do for basic artwork. It grabs artwork from the wonderful web
 services [fanart.tv], [TheTVDB.com], [The Movie Database], and [TheAudioDB.com].
@@ -10,16 +18,22 @@ services [fanart.tv], [TheTVDB.com], [The Movie Database], and [TheAudioDB.com].
 [The Movie Database]: https://www.themoviedb.org/
 [TheAudioDB.com]: https://www.theaudiodb.com/
 
-It is developed for Kodi 17 **Krypton**, and should also work for 16 **Jarvis** and 18 **Leia**.
-15 Isengard should mostly still work, but it's really time to update. 19 Matrix is not supported.  
-[Support and feedback thread](https://forum.kodi.tv/showthread.php?tid=258886) on the Kodi forums.  
-[Source](https://github.com/rmrector/script.artwork.beef) hosted on GitHub.
+The original upstream release was developed for Kodi 17 **Krypton**, with notes for earlier
+Python 2-based Kodi versions. This distribution instead requires Python 3, as declared in
+`addon.xml`; its changelog records the port and subsequent Kodi 19+ fixes. The old upstream
+statement that Kodi 19 **Matrix** was unsupported does not describe this distribution.
+
+For this distribution, report problems in [Kodi Allen Repository issues](https://github.com/Kodi-Allen/kodi-repo/issues).
+
+Original upstream references: [forum thread](https://forum.kodi.tv/showthread.php?tid=258886) and
+[source code](https://github.com/rmrector/script.artwork.beef).
 
 Full documentation available at https://rmrector.github.io/script.artwork.beef/.
 
-### Current gotchas
+### Upstream notes
 
-- Music library support is for Kodi 18 Leia only
+- The original upstream documentation described music library support as Kodi 18 Leia only;
+  that note predates this distribution's Python 3 port.
 - It cannot set artwork for "all seasons". [related trac ticket](https://trac.kodi.tv/ticket/16139)
 
 ### Thoughts

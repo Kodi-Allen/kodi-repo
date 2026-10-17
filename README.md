@@ -1,247 +1,164 @@
 # Kodi Allen Repository
 
-Kodi add-on repository for Kodi 21 (Omega). It distributes
-[ParkStream](docs/parkstream/README.md), an unofficial South Park Kodi add-on, together with the
-MPLS STRM Player, Artwork Beef, MyMovies Back Artwork Copy and the Aeon Tajo skin.
+**Community add-ons for streaming, Blu-ray playback and a richer Kodi library.**
 
-**Contents:** [Installation](#-installation) · [Available add-ons](#-available-add-ons) ·
-[ParkStream – South Park for Kodi](#parkstream--south-park-for-kodi) ·
-[For developers](#%EF%B8%8F-for-developers) · [License](#-license)
+Discover TubiTV and ParkStream, play disc playlists with MPLS STRM Player, manage library
+artwork, and customise Kodi with Aeon Tajo. This repository distributes original tools and
+maintained community forks, with Kodi 21 (Omega) as its main target.
 
-## 📦 Installation
+**[Download repository installer](https://raw.githubusercontent.com/Kodi-Allen/kodi-repo/main/repository.kodiallen/repository.kodiallen-1.0.1.zip)**
+ · [Installation](#installation) · [Add-ons](#available-add-ons) · [Screenshots](#a-look-inside)
+ · [Help and feedback](#help-and-feedback)
 
-### Method 1: Via ZIP File (Recommended)
+## Installation
 
-1. **Download the repository ZIP:**
-   - Go to [Releases](https://github.com/Kodi-Allen/kodi-repo/releases)
-   - Download `repository.kodiallen-1.0.0.zip`
+Install the repository once, then choose your add-ons inside Kodi. The repository supplies
+updates through Kodi's normal add-on update system.
 
-2. **Install in Kodi:**
-   - Open Kodi
-   - Go to: **Settings** → **Add-ons** → **Install from zip file**
-   - Select the downloaded `repository.kodiallen-1.0.0.zip`
-   - Wait for confirmation
+1. Download **[`repository.kodiallen-1.0.1.zip`](https://raw.githubusercontent.com/Kodi-Allen/kodi-repo/main/repository.kodiallen/repository.kodiallen-1.0.1.zip)**
+   and save it somewhere Kodi can access, such as a local folder, USB drive or network share.
+2. In Kodi, open **Settings → System → Add-ons**, enable **Unknown sources**, and confirm
+   Kodi's warning. This allows installation from community repositories.
+3. Open **Settings → Add-ons → Install from zip file**, select the downloaded ZIP, and
+   wait for the installation confirmation.
+4. Choose **Install from repository → Kodi Allen Repository** and open the appropriate
+   category from the table below. Select an add-on and choose **Install**.
 
-3. **Install add-ons:**
-   - Go to: **Settings** → **Add-ons** → **Install from repository**
-   - Select **Kodi Allen Repository**
-   - Choose your desired add-on and install
+Use the **repository installer ZIP** above. GitHub's **Code → Download ZIP** contains the
+source tree and cannot be installed as a Kodi add-on.
 
-### Method 2: Direct Download
+Already using repository version 1.0.0? Install version 1.0.1 over it if Kodi has not updated it
+yet. Version 1.0.1 includes the additional release feed used to distribute Aeon Tajo.
 
-You can also download individual add-ons directly:
+## Available add-ons
 
-1. Go to the add-on folder (e.g. `script.artwork.beef/`)
-2. Download the ZIP file
-3. Install via: **Settings** → **Add-ons** → **Install from zip file**
+Versions below match the repository's published add-on feeds.
 
----
-
-## 📋 Available Add-ons
-
-| Add-on | Version | Category | Description |
+| Add-on | What it does | Version | Kodi category |
 |---|---|---|---|
-| ParkStream | 1.0.2+matrix.1 | Video add-ons | Unofficial South Park Kodi add-on ([documentation](docs/parkstream/README.md), [source](https://github.com/Kodi-Allen/plugin.video.parkstream)) |
-| MPLS STRM Player | 4.1.0 | Video add-ons | Play Blu-ray MPLS playlists from .strm files and create them via thediscdb.com |
-| Artwork Beef | 0.28.10 | Program add-ons | Automatically adds extra artwork for your media |
-| MyMovies Back Artwork Copy | 1.3.0 | Program add-ons | Copies mymovies-back.jpg to back.jpg in video library folders |
-| Aeon Tajo | 7.7.4 | Look and feel (skin) | Distributed through [GitHub Releases](https://github.com/Kodi-Allen/kodi-repo/releases/tag/skin.aeon.tajo) |
-| Kodi Allen Repository | 1.0.1 | Add-on repository | Updates itself automatically after installing 1.0.0 |
+| **[TubiTV](plugin.video.tubitv/README.md)** | Browse free, ad-supported films, series and live channels, with its own interface, library export and optional account features. | `2026.10.13.1` | Video add-ons |
+| **[ParkStream](docs/parkstream/README.md)** | Browse South Park seasons and episodes from the official regional websites, with artwork, descriptions and a random episode option. | `1.0.2+matrix.1` | Video add-ons |
+| **[MPLS STRM Player](plugin.video.mpls.strm.player)** | Play Blu-ray/UHD MPLS playlists from `.strm` files and create STRM files using thediscdb.com. | `4.1.0` | Video add-ons |
+| **[Artwork Beef](script.artwork.beef)** | Download and manage extra artwork for movies, TV shows and music. This distribution includes Python 3 and Kodi Omega fixes. | `0.28.10` | Program add-ons |
+| **[MyMovies Back Artwork Copy](script.mymovies.backcopy/README.md)** | Copy `mymovies-back.jpg` to `back.jpg` in your video library folders, manually or on a schedule. | `1.3.0` | Program add-ons |
+| **[Aeon Tajo](https://github.com/Kodi-Allen/kodi-repo/releases/tag/skin.aeon.tajo)** | A Kodi skin by manfeed, distributed here through GitHub Releases. | `7.7.4` | Look and feel → Skin |
 
-## ParkStream – South Park for Kodi
+The repository add-on itself is **Kodi Allen Repository `1.0.1`**.
 
-ParkStream is an unofficial Kodi video add-on for watching South Park episodes from the official
-South Park websites. It lists all seasons with season covers and descriptions, shows episode stills
-with plots, runtimes and air dates, offers a random episode and lets you choose the regional site
-that matches your audio language. Tested with Kodi 21.1 (Omega).
+### Compatibility and availability
 
-![ParkStream season list in Kodi with the season 1 cover and season description](docs/parkstream/screenshots/parkstream-kodi-season-list.jpg)
+- **Kodi 21 (Omega)** is the main target. ParkStream is documented as tested on Kodi 21.1;
+  TubiTV's interface is tested on Kodi 21. Check each add-on's documentation for its requirements.
+- **Kodi 19, 20 and 22:** compatibility varies by add-on. A version being accepted by Kodi does
+  not mean it has been tested. See the [branch notes](BRANCHES.md) for the separate version feeds.
+- **TubiTV** is unofficial. Tubi's country availability and regional catalogue still apply.
+  Encrypted titles require a working Widevine CDM for InputStream Adaptive; see the
+  [TubiTV requirements](plugin.video.tubitv/README.md#requirements-and-installation).
+- **ParkStream** is unofficial. Episode availability and audio language depend on the official
+  regional site. See its [known limitations](docs/parkstream/README.md#known-limitations).
 
-**Install:** add the Kodi Allen Repository (see [Installation](#-installation)), then choose
-**Install from repository → Kodi Allen Repository → Video add-ons → ParkStream**.
+## A look inside
 
-Full documentation with screenshots, settings, known limitations and troubleshooting:
-**[ParkStream documentation](docs/parkstream/README.md)** ·
-Source code: [Kodi-Allen/plugin.video.parkstream](https://github.com/Kodi-Allen/plugin.video.parkstream)
+These screenshots are included in this repository. Select an image to open the full version.
 
----
+| TubiTV — Home | ParkStream — Seasons |
+|---|---|
+| [![TubiTV home screen with navigation, featured titles and film posters](plugin.video.tubitv/resources/screenshots/home.jpg)](plugin.video.tubitv/resources/screenshots/home.jpg) | [![ParkStream season list in Kodi with season cover and description](docs/parkstream/screenshots/parkstream-kodi-season-list.jpg)](docs/parkstream/screenshots/parkstream-kodi-season-list.jpg) |
+| [Features, settings and more screenshots](plugin.video.tubitv/README.md) | [Installation, settings and more screenshots](docs/parkstream/README.md) |
 
-### Script: Artwork Beef (v0.28.10)
-**Automatic artwork management for your Kodi library**
+ParkStream's screenshots show Kodi 21.1 with the Aeon Tajo skin. Its appearance changes with
+your Kodi skin; TubiTV provides its own interface.
 
-- ✅ Kodi Omega (v21) compatible
-- ✅ Fully migrated to Python 3
-- ✅ All GUI dialogs working
-- ✅ Supports: fanart.tv, TheTVDB.com, The Movie Database, TheAudioDB
+## Help and feedback
 
-**Features:**
-- Automatic artwork download for movies, TV shows and music
-- Manual artwork selection with GUI
-- Context menu integration (right-click menu)
-- Background service for automatic updates
-- Local artwork caching
+- **Installation or repository problem:** open an
+  [issue in kodi-repo](https://github.com/Kodi-Allen/kodi-repo/issues).
+- **ParkStream problem:** check the
+  [troubleshooting guide](docs/parkstream/README.md#troubleshooting), then use
+  [ParkStream issues](https://github.com/Kodi-Allen/plugin.video.parkstream/issues).
+- **TubiTV problem:** read the [TubiTV documentation](plugin.video.tubitv/README.md), then
+  [report it here](https://github.com/Kodi-Allen/kodi-repo/issues).
+- **General Kodi help:** visit the [Kodi community forum](https://forum.kodi.tv/).
 
-**Installation:** Via repository or [direct download](script.artwork.beef/script.artwork.beef-0.28.10.zip)
+For a useful report, include the add-on name and version, Kodi version, operating system,
+what you expected, what happened, and steps to reproduce it. Remove passwords, tokens and
+other private information from any logs you share. English and German reports are welcome.
 
----
+## For contributors and maintainers
 
-## 🛠️ For Developers
+The root of this repository is a distribution feed. Some add-ons are developed here; others
+are maintained in separate repositories. ParkStream's source is
+[Kodi-Allen/plugin.video.parkstream](https://github.com/Kodi-Allen/plugin.video.parkstream).
+Keep the original authors' credits and licenses when contributing to a community fork.
 
-### Updating the Repository
+<details>
+<summary>Repository layout and publishing workflow</summary>
+
+```text
+kodi-repo/
+├── repository.kodiallen/       # Repository installer and metadata
+├── plugin.video.*/            # Video add-ons and their versioned ZIP files
+├── script.*/                  # Library and artwork tools with ZIP files
+├── docs/parkstream/           # User documentation and Kodi screenshots
+├── skin.aeon.tajo/resources/  # Skin artwork; installable ZIP is in Releases
+├── addons.xml                 # Main add-on feed
+├── addons.xml.md5             # Main feed checksum
+├── addons-releases.xml        # Feed for add-ons hosted in GitHub Releases
+├── addons-releases.xml.md5    # Release feed checksum
+└── tools/generate_repo.py     # Main feed and ZIP generator
+```
 
 To add or update an add-on:
 
-1. **Add an add-on:**
+1. Add its folder at the repository root with a valid `addon.xml` and a unique add-on ID.
+   Include the appropriate license, original credits, artwork and changelog.
+2. Make the changes, increase the version in `addon.xml`, and update the changelog.
+3. Run the generator **from the repository root**:
+
    ```bash
-   # Copy your addon directory into the repository
-   cp -r /path/to/script.myaddon ./
+   python3 tools/generate_repo.py
    ```
 
-2. **Generate repository:**
-   ```bash
-   cd tools
-   python3 generate_repo.py
-   ```
+   On Windows, use `python .\tools\generate_repo.py`; set `PYTHONIOENCODING=utf-8` if your
+   terminal cannot display the generator's status symbols.
+4. Review the changed source, generated versioned ZIPs, `addons.xml` and its checksum before
+   committing. The generator scans the current directory; running it from `tools/` will not
+   find the add-ons.
+5. For add-ons distributed through GitHub Releases, maintain `addons-releases.xml`, its
+   checksum and the release assets separately. The generator does not update this second feed.
 
-3. **Push to GitHub:**
-   ```bash
-   git add .
-   git commit -m "Add/Update: script.myaddon v1.0.0"
-   git push
-   ```
+See [Kodi version branches](BRANCHES.md) before publishing to `kodi-21` or `kodi-22`, and the
+[quick-start guide](QUICKSTART.md) for installation and repository maintenance.
 
-### Repository Structure
+</details>
 
-```
-kodi-repo/
-├── repository.kodiallen/        # Repository add-on
-│   ├── addon.xml
-│   ├── icon.png
-│   └── fanart.jpg
-├── script.artwork.beef/         # Example add-on
-│   ├── addon.xml
-│   ├── icon.png
-│   ├── changelog.txt
-│   ├── ... (all addon files)
-│   └── script.artwork.beef-0.28.6.zip  # Auto-generated
-├── addons.xml                   # Index of all add-ons (auto-generated)
-├── addons.xml.md5               # Checksum (auto-generated)
-├── tools/
-│   └── generate_repo.py         # Generator script
-└── README.md
-```
+## Credits and licenses
 
-### Creating ZIP Files
+- **TubiTV:** based on the add-on by [Lunatixz](https://github.com/Lunatixz), with contributions
+  credited to Lunatixz, Breezyslasher and Kodi Allen in its metadata; uses t1m Library Routines
+  by [t1m](https://github.com/learningit). See its [credits and license](plugin.video.tubitv/README.md#credits).
+- **ParkStream:** independently maintained fork of
+  [plugin.video.southpark_unofficial](https://github.com/wargio/plugin.video.southpark_unofficial)
+  by Giovanni Dante Grazioli (wargio). See its
+  [full credits and license](docs/parkstream/README.md#credits-license-and-disclaimer).
+- **Artwork Beef:** based on [rmrector/script.artwork.beef](https://github.com/rmrector/script.artwork.beef)
+  by rmrector; see [LICENSE.txt](script.artwork.beef/LICENSE.txt).
+- **Aeon Tajo:** by [manfeed](https://github.com/manfeed/skin.aeon.tajo), licensed under
+  CC BY-NC-SA 4.0 as declared in the release feed.
+- **Repository framework:** inspired by the Kodi community.
+- **Maintainer:** Kodi Allen.
 
-The `generate_repo.py` script automatically creates:
-- ZIP files for each add-on
-- `addons.xml` index
-- `addons.xml.md5` checksum
+Each add-on has its own license. Refer to its `addon.xml`, license file and documentation;
+also preserve any license notices in individual source files. No separate root license file
+is included for the repository framework, and there is no single license covering every
+add-on and all included artwork.
 
-**Important:** Run the script after every change!
+## Disclaimer
 
----
+These add-ons are community ports and tools for Kodi Omega. Use at your own risk.
+This is an independent community repository, not an official Kodi repository.
 
-## 📝 Adding an Add-on
-
-### Requirements
-- Add-on must have a valid `addon.xml`
-- Add-on ID should be unique
-- Must be Kodi Omega (v21) compatible
-
-### Steps
-
-1. **Create add-on folder:**
-   ```
-   script.myaddon/
-   ├── addon.xml
-   ├── icon.png (512x512 recommended)
-   ├── fanart.jpg (1920x1080 recommended)
-   ├── changelog.txt
-   ├── LICENSE.txt
-   └── ... (other files)
-   ```
-
-2. **addon.xml example:**
-   ```xml
-   <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-   <addon id="script.myaddon" name="My Add-on" version="1.0.0" provider-name="Your Name">
-       <requires>
-           <import addon="xbmc.python" version="3.0.1"/>
-       </requires>
-       <extension point="xbmc.python.script" library="default.py">
-           <provides>executable</provides>
-       </extension>
-       <extension point="xbmc.addon.metadata">
-           <summary lang="en">Short description</summary>
-           <description lang="en">Detailed description</description>
-           <platform>all</platform>
-           <license>GPL-3.0</license>
-           <source>https://github.com/Kodi-Allen/kodi-repo</source>
-           <assets>
-               <icon>icon.png</icon>
-               <fanart>fanart.jpg</fanart>
-           </assets>
-       </extension>
-   </addon>
-   ```
-
-3. **Regenerate repository:**
-   ```bash
-   cd tools
-   python3 generate_repo.py
-   ```
-
-4. **Commit and push:**
-   ```bash
-   git add .
-   git commit -m "Add: script.myaddon v1.0.0"
-   git push
-   ```
-
----
-
-## 🔄 Updating an Add-on
-
-1. Update files in your add-on folder
-2. Increase version number in `addon.xml`
-3. Update `changelog.txt`
-4. Run `python3 tools/generate_repo.py`
-5. Commit and push changes
-
-Kodi will detect updates automatically!
-
----
-
-## 🆘 Support
-
-For issues or questions:
-- Open an [Issue](https://github.com/Kodi-Allen/kodi-repo/issues)
-- Visit the Kodi Forum
-
----
-
-## 📜 License
-
-Each add-on has its own license. See the respective LICENSE.txt files.
-
-The repository framework is available under MIT License.
-
----
-
-## 🙏 Credits
-
-- **Artwork Beef:** Based on [script.artwork.beef](https://github.com/rmrector/script.artwork.beef) by rmrector
-- **Repository Framework:** Inspired by the Kodi community
-- **Maintainer:** Kodi Allen
-
----
-
-## ⚠️ Disclaimer
-
-These add-ons are community ports for Kodi Omega. Use at your own risk.
-For issues, please create an issue in this repository.
-
----
-
-**Enjoy your add-ons! 🎉**
+ParkStream is not affiliated with or endorsed by South Park Studios, Comedy Central or
+Paramount. South Park titles, characters and artwork belong to their respective owners.
+TubiTV is not affiliated with or endorsed by Tubi. Content availability is controlled by the
+respective service and your location. Check your local laws before use.

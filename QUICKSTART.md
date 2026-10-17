@@ -1,149 +1,75 @@
-# 🚀 Quick Start: GitHub Repository Setup
+# Quick start
 
-## Step 1: Create GitHub Repository
+## Install the repository in Kodi
 
-1. Go to [GitHub](https://github.com) and sign in
-2. Click **"New Repository"** (green button)
-3. Repository settings:
-   - **Name:** `kodi-repo` (or another name)
-   - **Description:** "Kodi Omega compatible add-ons repository"
-   - **Public** or **Private** (your choice)
-   - ❌ **DO NOT** check "Initialize with README"
-4. Click **"Create repository"**
+1. Download **[`repository.kodiallen-1.0.1.zip`](https://raw.githubusercontent.com/Kodi-Allen/kodi-repo/main/repository.kodiallen/repository.kodiallen-1.0.1.zip)**
+   and save it to a location Kodi can access.
+2. In Kodi, open **Settings → System → Add-ons**, enable **Unknown sources**, and confirm
+   Kodi's warning.
+3. Open **Settings → Add-ons → Install from zip file** and select the downloaded ZIP.
+4. Wait for confirmation, then open **Install from repository → Kodi Allen Repository**.
+   Choose an add-on and select **Install**.
 
-## Step 2: Upload Repository
+The installer is an add-on ZIP. GitHub's **Code → Download ZIP** is a source archive and
+cannot be installed as a Kodi add-on. Version 1.0.1 includes both the main add-on feed and
+the GitHub Releases feed used by Aeon Tajo.
 
-### Option A: With Git Command Line (recommended)
+See the [main README](README.md) for the add-on catalogue, compatibility notes and help.
+The steps below are for maintainers publishing repository changes.
 
-```bash
-# 1. Go to your repository directory
-cd /path/to/kodi-repo
+## Prepare a repository update
 
-# 2. Initialize Git
-git init
+Work in a checkout of [Kodi-Allen/kodi-repo](https://github.com/Kodi-Allen/kodi-repo).
+Read the [version branch notes](BRANCHES.md) before choosing `main`, `kodi-21` or `kodi-22`.
+When maintaining a fork, update the URLs in `repository.kodiallen/addon.xml` to point to
+your own public repository and the intended branch.
 
-# 3. Add files to staging
-git add .
+1. Add or update the add-on folder at the repository root. It needs a valid `addon.xml`,
+   a unique add-on ID, its license and original credits.
+2. Increase the add-on version in `addon.xml` and update its changelog.
+3. Run the generator **from the repository root**:
 
-# 4. Create first commit
-git commit -m "Initial commit: Kodi Allen Repository"
-
-# 5. Rename branch (if needed)
-git branch -M main
-
-# 6. Add remote
-git remote add origin https://github.com/Kodi-Allen/kodi-repo.git
-
-# 7. Upload
-git push -u origin main
-```
-
-### Option B: With GitHub Desktop
-
-1. Open [GitHub Desktop](https://desktop.github.com/)
-2. **File** → **Add local repository**
-3. Select your `kodi-repo` folder
-4. Click **"Publish repository"**
-
-### Option C: Directly via GitHub Web Interface
-
-1. Go to your repository on GitHub
-2. Click **"uploading an existing file"**
-3. Drag all files into the window
-4. Commit message: "Initial commit"
-5. Click **"Commit changes"**
-
-## Step 3: Create Repository ZIP (for installation)
-
-```bash
-# Regenerate repository
-cd tools
-python3 generate_repo.py
-cd ..
-
-# Repository ZIP is now available at:
-# repository.kodiallen/repository.kodiallen-1.0.0.zip
-```
-
-## Step 4: Create GitHub Release (optional)
-
-1. Go to your repository on GitHub
-2. Click **"Releases"** → **"Create a new release"**
-3. Tag: `v1.0.0`
-4. Title: `Repository v1.0.0 - Initial Release`
-5. **Add these files:**
-   - `repository.kodiallen/repository.kodiallen-1.0.0.zip`
-   - All add-on ZIPs (e.g. `script.artwork.beef/script.artwork.beef-0.28.6.zip`)
-6. Click **"Publish release"**
-
-## Step 5: Install in Kodi
-
-### Installation via Repository ZIP:
-
-1. Download `repository.kodiallen-1.0.0.zip`:
-   - From GitHub Releases OR
-   - Direct: `https://raw.githubusercontent.com/Kodi-Allen/kodi-repo/main/repository.kodiallen/repository.kodiallen-1.0.0.zip`
-
-2. In Kodi:
-   - **Settings** → **Add-ons** → **Install from zip file**
-   - Select `repository.kodiallen-1.0.0.zip`
-
-3. Done! Your repository is now installed.
-
-### Installation via direct URL (Alternative):
-
-You can also install the repository directly with this URL:
-```
-https://raw.githubusercontent.com/Kodi-Allen/kodi-repo/main/repository.kodiallen/repository.kodiallen-1.0.0.zip
-```
-
-## Common Problems
-
-### Problem: "Unable to connect"
-- Check your internet connection
-- Make sure the repository is **Public** (not Private)
-- Wait 2-3 minutes after push (GitHub cache)
-
-### Problem: "Installation failed"
-- Check if all URLs are correct
-- Make sure `addons.xml` and `addons.xml.md5` exist
-- Regenerate the repository with `python3 tools/generate_repo.py`
-
-### Problem: "No addons found"
-- Run `python3 tools/generate_repo.py`
-- Commit and push the generated files
-- Clear cache in Kodi: **Settings** → **System** → **Add-ons** → Clear cache
-
-## Next Steps
-
-1. **Add more add-ons:**
    ```bash
-   # Copy your add-on
-   cp -r /path/to/script.myaddon ./
-   
-   # Regenerate repository
-   cd tools && python3 generate_repo.py && cd ..
-   
-   # Push to GitHub
-   git add .
-   git commit -m "Add: script.myaddon"
-   git push
+   python3 tools/generate_repo.py
    ```
 
-2. **Update an add-on:**
-   - Change version in `addon.xml`
-   - Update `changelog.txt`
-   - Regenerate: `python3 tools/generate_repo.py`
-   - Push to GitHub
+   On Windows PowerShell:
 
-3. **Share your repository:**
-   - GitHub URL: `https://github.com/Kodi-Allen/kodi-repo`
-   - Installation link: `https://raw.githubusercontent.com/Kodi-Allen/kodi-repo/main/repository.kodiallen/repository.kodiallen-1.0.0.zip`
+   ```powershell
+   $env:PYTHONIOENCODING = 'utf-8'
+   python .\tools\generate_repo.py
+   ```
 
-## Support
+The generator scans the current directory. Running it from `tools/` will not find the
+add-ons. It creates the versioned ZIP for each add-on with a root `addon.xml`, plus
+`addons.xml` and `addons.xml.md5`. With the current repository metadata, the installer
+is `repository.kodiallen/repository.kodiallen-1.0.1.zip`.
 
-For questions:
-- GitHub Issues: `https://github.com/Kodi-Allen/kodi-repo/issues`
-- Kodi Forum: https://forum.kodi.tv
+## Review and publish
 
-**Good luck! 🎉**
+1. Review the source changes, generated ZIPs, `addons.xml` and its checksum.
+   Check that versions and URLs match the intended feed.
+2. Commit the intended source, ZIP and feed changes, then push them to the chosen branch.
+3. Confirm that the repository installer and feeds are publicly downloadable, then test
+   installation or updating in Kodi.
+
+GitHub Releases are optional for ZIPs served directly from the repository. For add-ons
+distributed through the separate release feed, such as Aeon Tajo, upload the versioned ZIP
+to the matching release tag and maintain `addons-releases.xml` and
+`addons-releases.xml.md5` separately. The generator does not update this feed.
+
+The existing `v1.0.0` release contains the older repository installer. Share the current
+1.0.1 direct download linked above for installations using both feeds.
+
+## Troubleshooting
+
+| Problem | What to check |
+|---|---|
+| Kodi cannot open the ZIP | Download the repository installer ZIP to a local folder or share that Kodi can access. A GitHub web page or source archive is not the installer. |
+| The generator reports no add-ons | Run it from the repository root, where the add-on folders are located. |
+| An add-on is missing | Check its category, the installed repository version and the relevant feed. Aeon Tajo uses the second feed included in repository version 1.0.1. |
+| A new version is missing | Check the published `addon.xml` version, ZIP filename, feed contents and checksum. In Kodi, open the repository's context menu and choose **Check for updates**. |
+| A fork cannot load its feed | Confirm that the repository URLs point to the correct public repository and branch, and that the files exist there. |
+
+Repository questions and bugs: [GitHub issues](https://github.com/Kodi-Allen/kodi-repo/issues).
+General Kodi help: [Kodi community forum](https://forum.kodi.tv/).
