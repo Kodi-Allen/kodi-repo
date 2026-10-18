@@ -41,7 +41,7 @@ Versions below match the repository's published add-on feeds.
 | **[MPLS STRM Player](plugin.video.mpls.strm.player)** | Play Blu-ray/UHD MPLS playlists from `.strm` files and create STRM files using thediscdb.com. | `4.1.0` | Video add-ons |
 | **[Artwork Beef](script.artwork.beef)** | Download and manage extra artwork for movies, TV shows and music. This distribution includes Python 3 and Kodi Omega fixes. | `0.28.10` | Program add-ons |
 | **[MyMovies Back Artwork Copy](script.mymovies.backcopy/README.md)** | Copy `mymovies-back.jpg` to `back.jpg` in your video library folders, manually or on a schedule. | `1.3.0` | Program add-ons |
-| **[Aeon Tajo Tweaked](https://github.com/Kodi-Allen/skin.aeon.tajo-tweaked)** | Independent Kodi 21 skin fork with artwork-rich movie, TV, music and Live TV/PVR views. | `1.0.0` | Look and feel → Skin |
+| **[Aeon Tajo Tweaked](https://github.com/Kodi-Allen/skin.aeon.tajo-tweaked)** | Restores the classic Aeon Tajo Leia-style horizontal home menu and bold typography on Kodi 21 Omega, with maintained Live TV/PVR fixes. | `1.0.1` | Look and feel → Skin |
 | **[Aeon Tajo (original ID)](https://github.com/Kodi-Allen/kodi-repo/releases/tag/skin.aeon.tajo)** | Earlier Aeon Tajo package by manfeed, retained separately for existing installations. | `7.7.4` | Look and feel → Skin |
 
 The repository add-on itself is **Kodi Allen Repository `1.0.1`**.
@@ -62,9 +62,9 @@ The repository add-on itself is **Kodi Allen Repository `1.0.1`**.
 
 These screenshots show the published add-ons. Select an image to open the full version or its documentation.
 
-| Aeon Tajo Tweaked — standard Live TV infobar | Aeon Tajo Tweaked — compact Live TV infobar |
+| Aeon Tajo Tweaked — classic Leia home menu | Aeon Tajo Tweaked — Live TV home menu |
 |---|---|
-| [![Aeon Tajo Tweaked standard Kodi 21 PVR infobar with a four-digit channel number](https://raw.githubusercontent.com/Kodi-Allen/skin.aeon.tajo-tweaked/omega/docs/screenshots/aeon-tajo-tweaked-kodi-21-live-tv-infobar-standard.png)](https://github.com/Kodi-Allen/skin.aeon.tajo-tweaked#live-tv--pvr) | [![Aeon Tajo Tweaked compact Kodi 21 PVR infobar with a four-digit channel number](https://raw.githubusercontent.com/Kodi-Allen/skin.aeon.tajo-tweaked/omega/docs/screenshots/aeon-tajo-tweaked-kodi-21-live-tv-infobar-compact.jpg)](https://github.com/Kodi-Allen/skin.aeon.tajo-tweaked#live-tv--pvr) |
+| [![Aeon Tajo Tweaked classic Leia-style horizontal home menu on Kodi 21 Omega](https://raw.githubusercontent.com/Kodi-Allen/skin.aeon.tajo-tweaked/omega/docs/screenshots/aeon-tajo-tweaked-kodi-21-leia-home-menu-tv-shows.jpg)](https://github.com/Kodi-Allen/skin.aeon.tajo-tweaked#screenshots-from-the-maintained-kodi-installation) | [![Aeon Tajo Tweaked Leia-style Live TV home menu on Kodi 21 Omega](https://raw.githubusercontent.com/Kodi-Allen/skin.aeon.tajo-tweaked/omega/docs/screenshots/aeon-tajo-tweaked-kodi-21-leia-home-menu-live-tv.jpg)](https://github.com/Kodi-Allen/skin.aeon.tajo-tweaked#screenshots-from-the-maintained-kodi-installation) |
 
 | TubiTV — Home | ParkStream — Seasons |
 |---|---|
