@@ -3,7 +3,7 @@
 **Community add-ons for streaming, Blu-ray playback and a richer Kodi library.**
 
 Discover TubiTV and ParkStream, play disc playlists with MPLS STRM Player, manage library
-artwork, and customise Kodi with Aeon Tajo. This repository distributes original tools and
+artwork, and customise Kodi with Aeon Tajo Tweaked. This repository distributes original tools and
 maintained community forks, with Kodi 21 (Omega) as its main target.
 
 **[Download repository installer](https://raw.githubusercontent.com/Kodi-Allen/kodi-repo/main/repository.kodiallen/repository.kodiallen-1.0.1.zip)**
@@ -41,7 +41,8 @@ Versions below match the repository's published add-on feeds.
 | **[MPLS STRM Player](plugin.video.mpls.strm.player)** | Play Blu-ray/UHD MPLS playlists from `.strm` files and create STRM files using thediscdb.com. | `4.1.0` | Video add-ons |
 | **[Artwork Beef](script.artwork.beef)** | Download and manage extra artwork for movies, TV shows and music. This distribution includes Python 3 and Kodi Omega fixes. | `0.28.10` | Program add-ons |
 | **[MyMovies Back Artwork Copy](script.mymovies.backcopy/README.md)** | Copy `mymovies-back.jpg` to `back.jpg` in your video library folders, manually or on a schedule. | `1.3.0` | Program add-ons |
-| **[Aeon Tajo](https://github.com/Kodi-Allen/kodi-repo/releases/tag/skin.aeon.tajo)** | A Kodi skin by manfeed, distributed here through GitHub Releases. | `7.7.4` | Look and feel → Skin |
+| **[Aeon Tajo Tweaked](https://github.com/Kodi-Allen/skin.aeon.tajo-tweaked)** | Independent Kodi 21 skin fork with artwork-rich movie, TV, music and Live TV/PVR views. | `1.0.0` | Look and feel → Skin |
+| **[Aeon Tajo (original ID)](https://github.com/Kodi-Allen/kodi-repo/releases/tag/skin.aeon.tajo)** | Earlier Aeon Tajo package by manfeed, retained separately for existing installations. | `7.7.4` | Look and feel → Skin |
 
 The repository add-on itself is **Kodi Allen Repository `1.0.1`**.
 
@@ -59,7 +60,11 @@ The repository add-on itself is **Kodi Allen Repository `1.0.1`**.
 
 ## A look inside
 
-These screenshots are included in this repository. Select an image to open the full version.
+These screenshots show the published add-ons. Select an image to open the full version or its documentation.
+
+| Aeon Tajo Tweaked — standard Live TV infobar | Aeon Tajo Tweaked — compact Live TV infobar |
+|---|---|
+| [![Aeon Tajo Tweaked standard Kodi 21 PVR infobar with a four-digit channel number](https://raw.githubusercontent.com/Kodi-Allen/skin.aeon.tajo-tweaked/omega/docs/screenshots/aeon-tajo-tweaked-kodi-21-live-tv-infobar-standard.png)](https://github.com/Kodi-Allen/skin.aeon.tajo-tweaked#live-tv--pvr) | [![Aeon Tajo Tweaked compact Kodi 21 PVR infobar with a four-digit channel number](https://raw.githubusercontent.com/Kodi-Allen/skin.aeon.tajo-tweaked/omega/docs/screenshots/aeon-tajo-tweaked-kodi-21-live-tv-infobar-compact.jpg)](https://github.com/Kodi-Allen/skin.aeon.tajo-tweaked#live-tv--pvr) |
 
 | TubiTV — Home | ParkStream — Seasons |
 |---|---|
@@ -100,7 +105,8 @@ kodi-repo/
 ├── plugin.video.*/            # Video add-ons and their versioned ZIP files
 ├── script.*/                  # Library and artwork tools with ZIP files
 ├── docs/parkstream/           # User documentation and Kodi screenshots
-├── skin.aeon.tajo/resources/  # Skin artwork; installable ZIP is in Releases
+├── skin.aeon.tajo/resources/  # Earlier skin package artwork
+├── skin.aeon.tajo.tweaked/    # Tweaked skin artwork; ZIP is in Releases
 ├── addons.xml                 # Main add-on feed
 ├── addons.xml.md5             # Main feed checksum
 ├── addons-releases.xml        # Feed for add-ons hosted in GitHub Releases
@@ -143,8 +149,11 @@ See [Kodi version branches](BRANCHES.md) before publishing to `kodi-21` or `kodi
   [full credits and license](docs/parkstream/README.md#credits-license-and-disclaimer).
 - **Artwork Beef:** based on [rmrector/script.artwork.beef](https://github.com/rmrector/script.artwork.beef)
   by rmrector; see [LICENSE.txt](script.artwork.beef/LICENSE.txt).
-- **Aeon Tajo:** by [manfeed](https://github.com/manfeed/skin.aeon.tajo), licensed under
+- **Aeon Tajo Tweaked:** independently maintained by Kodi Allen, based on
+  [Aeon Tajo by manfeed](https://github.com/manfeed/skin.aeon.tajo) and licensed under
   CC BY-NC-SA 4.0 as declared in the release feed.
+- **Aeon Tajo (original ID):** by [manfeed](https://github.com/manfeed/skin.aeon.tajo), retained
+  as a separate legacy package.
 - **Repository framework:** inspired by the Kodi community.
 - **Maintainer:** Kodi Allen.
 
