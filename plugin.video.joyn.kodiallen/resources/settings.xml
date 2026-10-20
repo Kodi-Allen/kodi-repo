@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+    <category label="30500">
+        <setting id="region" type="text" default="at" visible="false" />
+        <setting type="action" label="30217" action="RunPlugin(plugin://plugin.video.joyn.kodiallen/?mode=region)" />
+    </category>
+    <category label="30201">
+        <setting id="at.route_mode" type="select" label="30501" default="0" lvalues="30502|30503" />
+        <setting id="at.proxy_host" type="text" label="30504" default="" visible="eq(-1,1)" />
+        <setting id="at.proxy_port" type="number" label="30509" default="8883" visible="eq(-2,1)" />
+        <setting id="at.proxy_username" type="text" label="30510" default="" visible="eq(-3,1)" />
+        <setting id="at.proxy_password" type="text" label="30511" option="hidden" default="" visible="eq(-4,1)" />
+        <setting type="sep" visible="eq(-5,1)" />
+        <setting id="at.relay_host" type="text" label="30512" default="" visible="eq(-6,1)" />
+        <setting id="at.relay_port" type="number" label="30513" default="8893" visible="eq(-7,1)" />
+        <setting id="at.relay_signing_key" type="text" label="30514" option="hidden" default="" visible="eq(-8,1)" />
+        <setting type="sep" visible="eq(-9,1)" />
+        <setting type="action" label="30219" action="RunPlugin(plugin://plugin.video.joyn.kodiallen/?mode=login&amp;region=at)" />
+        <setting type="action" label="30220" action="RunPlugin(plugin://plugin.video.joyn.kodiallen/?mode=logout&amp;region=at)" />
+        <setting type="action" label="30508" action="RunPlugin(plugin://plugin.video.joyn.kodiallen/?mode=nettest&amp;region=at)" />
+        <setting type="action" label="30515" action="RunPlugin(plugin://plugin.video.joyn.kodiallen/?mode=reset&amp;region=at)" />
+    </category>
+    <category label="30202">
+        <setting id="de.route_mode" type="select" label="30501" default="0" lvalues="30502|30503" />
+        <setting id="de.proxy_host" type="text" label="30504" default="" visible="eq(-1,1)" />
+        <setting id="de.proxy_port" type="number" label="30509" default="8883" visible="eq(-2,1)" />
+        <setting id="de.proxy_username" type="text" label="30510" default="" visible="eq(-3,1)" />
+        <setting id="de.proxy_password" type="text" label="30511" option="hidden" default="" visible="eq(-4,1)" />
+        <setting type="sep" visible="eq(-5,1)" />
+        <setting id="de.relay_host" type="text" label="30512" default="" visible="eq(-6,1)" />
+        <setting id="de.relay_port" type="number" label="30513" default="8893" visible="eq(-7,1)" />
+        <setting id="de.relay_signing_key" type="text" label="30514" option="hidden" default="" visible="eq(-8,1)" />
+        <setting type="sep" visible="eq(-9,1)" />
+        <setting type="action" label="30219" action="RunPlugin(plugin://plugin.video.joyn.kodiallen/?mode=login&amp;region=de)" />
+        <setting type="action" label="30220" action="RunPlugin(plugin://plugin.video.joyn.kodiallen/?mode=logout&amp;region=de)" />
+        <setting type="action" label="30508" action="RunPlugin(plugin://plugin.video.joyn.kodiallen/?mode=nettest&amp;region=de)" />
+        <setting type="action" label="30515" action="RunPlugin(plugin://plugin.video.joyn.kodiallen/?mode=reset&amp;region=de)" />
+    </category>
+    <category label="30203">
+        <setting id="ch.route_mode" type="select" label="30501" default="0" lvalues="30502|30503" />
+        <setting id="ch.proxy_host" type="text" label="30504" default="" visible="eq(-1,1)" />
+        <setting id="ch.proxy_port" type="number" label="30509" default="8883" visible="eq(-2,1)" />
+        <setting id="ch.proxy_username" type="text" label="30510" default="" visible="eq(-3,1)" />
+        <setting id="ch.proxy_password" type="text" label="30511" option="hidden" default="" visible="eq(-4,1)" />
+        <setting type="sep" visible="eq(-5,1)" />
+        <setting id="ch.relay_host" type="text" label="30512" default="" visible="eq(-6,1)" />
+        <setting id="ch.relay_port" type="number" label="30513" default="8893" visible="eq(-7,1)" />
+        <setting id="ch.relay_signing_key" type="text" label="30514" option="hidden" default="" visible="eq(-8,1)" />
+        <setting type="sep" visible="eq(-9,1)" />
+        <setting type="action" label="30219" action="RunPlugin(plugin://plugin.video.joyn.kodiallen/?mode=login&amp;region=ch)" />
+        <setting type="action" label="30220" action="RunPlugin(plugin://plugin.video.joyn.kodiallen/?mode=logout&amp;region=ch)" />
+        <setting type="action" label="30508" action="RunPlugin(plugin://plugin.video.joyn.kodiallen/?mode=nettest&amp;region=ch)" />
+        <setting type="action" label="30515" action="RunPlugin(plugin://plugin.video.joyn.kodiallen/?mode=reset&amp;region=ch)" />
+    </category>
+    <category label="30520">
+        <setting id="iptv.enabled" type="bool" label="30521" default="false" />
+        <setting id="iptv.at" type="bool" label="30522" default="true" enable="eq(-1,true)" />
+        <setting id="iptv.de" type="bool" label="30523" default="false" enable="eq(-2,true)" />
+        <setting id="iptv.ch" type="bool" label="30524" default="false" enable="eq(-3,true)" />
+        <setting id="iptv.skip_existing" type="bool" label="30525" default="false" enable="eq(-4,true)" />
+        <setting type="action" label="30526" action="RunPlugin(plugin://plugin.video.joyn.kodiallen/?mode=overlaps)" />
+        <setting id="iptv.channels_uri" type="text" default="plugin://plugin.video.joyn.kodiallen/iptv/channels" visible="false" />
+        <setting id="iptv.epg_uri" type="text" default="plugin://plugin.video.joyn.kodiallen/iptv/epg" visible="false" />
+    </category>
+</settings>

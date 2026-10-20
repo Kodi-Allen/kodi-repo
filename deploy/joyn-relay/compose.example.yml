@@ -1,0 +1,45 @@
+# Example only: one region's exit for the Joyn add-on (here Switzerland).
+# An HTTP CONNECT proxy for the add-on's API calls and the Joyn relay for
+# Kodi's media and licence requests, both leaving through the same exit.
+# Nothing here is started automatically; copy, fill .env and review first.
+name: joyn-ch
+
+services:
+  exit-ch:
+    image: qmcgaw/gluetun:v3.41.3
+    container_name: joyn-exit-ch
+    cap_add: [NET_ADMIN]
+    devices: [/dev/net/tun:/dev/net/tun]
+    ports:
+      # LAN address of the Docker host only; never forward at the router.
+      - "${BIND_ADDRESS:-192.0.2.10}:34411:8888/tcp"   # CONNECT proxy for the add-on's API calls
+      - "${BIND_ADDRESS:-192.0.2.10}:34410:34410/tcp"  # Joyn relay for Kodi
+    environment:
+      VPN_SERVICE_PROVIDER: ${VPN_PROVIDER:?set VPN_PROVIDER in .env}
+      VPN_TYPE: ${VPN_TYPE:-wireguard}
+      WIREGUARD_PRIVATE_KEY: ${WIREGUARD_PRIVATE_KEY:-}
+      WIREGUARD_ADDRESSES: ${WIREGUARD_ADDRESSES:-}
+      SERVER_COUNTRIES: "Switzerland"
+      HTTPPROXY: "on"
+      HTTPPROXY_LOG: "off"
+      HTTPPROXY_USER: ${HTTPPROXY_USER:?set HTTPPROXY_USER in .env}
+      HTTPPROXY_PASSWORD: ${HTTPPROXY_PASSWORD:?set HTTPPROXY_PASSWORD in .env}
+      FIREWALL_INPUT_PORTS: "34410"
+    restart: unless-stopped
+
+  joyn-relay:
+    build: .
+    image: joyn-relay:1.0.0
+    container_name: joyn-relay-ch
+    network_mode: service:exit-ch
+    depends_on:
+      exit-ch:
+        condition: service_healthy
+    environment:
+      RELAY_LISTEN_PORT: "34410"
+      RELAY_PUBLIC_BASE: "http://${BIND_ADDRESS:-192.0.2.10}:34410"
+      RELAY_SIGNING_KEY: ${RELAY_SIGNING_KEY:?set RELAY_SIGNING_KEY in .env (openssl rand -hex 32)}
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped

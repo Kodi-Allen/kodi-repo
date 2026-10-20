@@ -1,0 +1,257 @@
+# Kodi Media Center language file
+# Addon Name: Joyn
+# Addon id: plugin.video.joyn.kodiallen
+msgid ""
+msgstr ""
+"Project-Id-Version: plugin.video.joyn.kodiallen\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de_DE\n"
+
+msgctxt "#30022"
+msgid "Could not reach Joyn"
+msgstr "Joyn ist nicht erreichbar"
+
+msgctxt "#30072"
+msgid "Loading…"
+msgstr "Wird geladen …"
+
+msgctxt "#30073"
+msgid "No titles available."
+msgstr "Keine Titel verfügbar."
+
+msgctxt "#30074"
+msgid "Could not load titles."
+msgstr "Titel konnten nicht geladen werden."
+
+msgctxt "#30076"
+msgid "%d categories"
+msgstr "%d Kategorien"
+
+msgctxt "#30201"
+msgid "Austria"
+msgstr "Österreich"
+
+msgctxt "#30202"
+msgid "Germany"
+msgstr "Deutschland"
+
+msgctxt "#30203"
+msgid "Switzerland"
+msgstr "Schweiz"
+
+msgctxt "#30210"
+msgid "Home"
+msgstr "Home"
+
+msgctxt "#30211"
+msgid "Live TV"
+msgstr "Live TV"
+
+msgctxt "#30212"
+msgid "Series"
+msgstr "Serien"
+
+msgctxt "#30213"
+msgid "Movies"
+msgstr "Filme"
+
+msgctxt "#30214"
+msgid "Shows"
+msgstr "Shows"
+
+msgctxt "#30215"
+msgid "Search"
+msgstr "Suche"
+
+msgctxt "#30216"
+msgid "Region"
+msgstr "Region"
+
+msgctxt "#30217"
+msgid "Choose region"
+msgstr "Region wählen"
+
+msgctxt "#30218"
+msgid "Session for %s reset"
+msgstr "Sitzung für %s zurückgesetzt"
+
+msgctxt "#30301"
+msgid "Not available from this connection in this region. Check the region's network route."
+msgstr "In dieser Region über diese Verbindung nicht verfügbar. Netzwerkroute der Region prüfen."
+
+msgctxt "#30302"
+msgid "Joyn detected a VPN connection and refuses playback."
+msgstr "Joyn hat eine VPN-Verbindung erkannt und verweigert die Wiedergabe."
+
+msgctxt "#30303"
+msgid "Only available with Joyn+."
+msgstr "Nur mit Joyn+ verfügbar."
+
+msgctxt "#30304"
+msgid "Age-restricted: needs a Joyn account with a youth protection PIN."
+msgstr "Altersbeschränkt: Nur mit Joyn-Konto und Jugendschutz-PIN."
+
+msgctxt "#30305"
+msgid "Joyn allows no further playback on this device without signing in."
+msgstr "Joyn erlaubt auf diesem Gerät ohne Anmeldung keine weitere Wiedergabe."
+
+msgctxt "#30306"
+msgid "Joyn refused playback (%s)."
+msgstr "Joyn hat die Wiedergabe abgelehnt (%s)."
+
+msgctxt "#30401"
+msgid "All channels"
+msgstr "Alle Sender"
+
+msgctxt "#30402"
+msgid "Sport"
+msgstr "Sport"
+
+msgctxt "#30403"
+msgid "Public service"
+msgstr "Öffentlich-rechtlich"
+
+msgctxt "#30404"
+msgid "Theme channels"
+msgstr "Themenkanäle"
+
+msgctxt "#30405"
+msgid "Joyn+"
+msgstr "Joyn+"
+
+msgctxt "#30500"
+msgid "General"
+msgstr "Allgemein"
+
+msgctxt "#30501"
+msgid "Network route"
+msgstr "Netzwerkroute"
+
+msgctxt "#30502"
+msgid "Direct"
+msgstr "Direkt"
+
+msgctxt "#30503"
+msgid "Custom"
+msgstr "Benutzerdefiniert"
+
+msgctxt "#30504"
+msgid "HTTP CONNECT proxy host"
+msgstr "HTTP-CONNECT-Proxy-Host"
+
+msgctxt "#30505"
+msgid "Playback right"
+msgstr "Wiedergaberecht"
+
+msgctxt "#30506"
+msgid "Media relay"
+msgstr "Medien-Relay"
+
+msgctxt "#30507"
+msgid "Manifest through the relay"
+msgstr "Manifest über den Relay"
+
+msgctxt "#30508"
+msgid "Connection test"
+msgstr "Verbindungstest"
+
+msgctxt "#30509"
+msgid "Proxy port"
+msgstr "Proxy-Port"
+
+msgctxt "#30510"
+msgid "Proxy user name"
+msgstr "Proxy-Benutzername"
+
+msgctxt "#30511"
+msgid "Proxy password"
+msgstr "Proxy-Passwort"
+
+msgctxt "#30512"
+msgid "Media relay host"
+msgstr "Medien-Relay-Host"
+
+msgctxt "#30513"
+msgid "Media relay port"
+msgstr "Medien-Relay-Port"
+
+msgctxt "#30514"
+msgid "Relay signing key"
+msgstr "Relay-Schlüssel"
+
+msgctxt "#30515"
+msgid "Reset session"
+msgstr "Sitzung zurücksetzen"
+
+msgctxt "#30520"
+msgid "Kodi TV"
+msgstr "Kodi TV"
+
+msgctxt "#30521"
+msgid "Add live channels to Kodi TV (IPTV Manager)"
+msgstr "Live-TV-Sender in Kodi TV integrieren (IPTV Manager)"
+
+msgctxt "#30522"
+msgid "Export Austria"
+msgstr "Österreich exportieren"
+
+msgctxt "#30523"
+msgid "Export Germany"
+msgstr "Deutschland exportieren"
+
+msgctxt "#30524"
+msgid "Export Switzerland"
+msgstr "Schweiz exportieren"
+
+msgctxt "#30525"
+msgid "Leave out channels Kodi already has"
+msgstr "Bereits in Kodi vorhandene Sender auslassen"
+
+msgctxt "#30526"
+msgid "Show channels Kodi already has"
+msgstr "Bereits in Kodi vorhandene Sender anzeigen"
+
+msgctxt "#30219"
+msgid "Sign in to Joyn"
+msgstr "Bei Joyn anmelden"
+
+msgctxt "#30220"
+msgid "Sign out"
+msgstr "Abmelden"
+
+msgctxt "#30221"
+msgid "E-mail"
+msgstr "E-Mail"
+
+msgctxt "#30222"
+msgid "Password"
+msgstr "Passwort"
+
+msgctxt "#30223"
+msgid "Signed in as %s (%s)"
+msgstr "Angemeldet als %s (%s)"
+
+msgctxt "#30224"
+msgid "Signed out (%s)"
+msgstr "Abgemeldet (%s)"
+
+msgctxt "#30225"
+msgid "Joyn did not accept the e-mail or password."
+msgstr "Joyn hat E-Mail oder Passwort nicht akzeptiert."
+
+msgctxt "#30226"
+msgid "Joyn needs more details or consents for this region. Sign in once at %s in a browser and complete your profile, then try again."
+msgstr "Joyn braucht für diese Region weitere Angaben oder Zustimmungen. Einmal im Browser auf %s anmelden und das Profil ergänzen, dann erneut versuchen."
+
+msgctxt "#30227"
+msgid "Two-factor sign-in is not supported."
+msgstr "Anmeldung mit Zwei-Faktor wird nicht unterstützt."
+
+msgctxt "#30228"
+msgid "Account"
+msgstr "Konto"
+
+msgctxt "#30229"
+msgid "not signed in"
+msgstr "nicht angemeldet"

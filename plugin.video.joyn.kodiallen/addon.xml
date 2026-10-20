@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.joyn.kodiallen" name="Joyn" version="0.1.0" provider-name="Kodi Allen">
+	<requires>
+		<import addon="xbmc.python" version="3.0.0"/>
+		<import addon="script.module.requests" version="2.22.0"/>
+		<import addon="inputstream.adaptive" version="2.6.0"/>
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+	</extension>
+	<extension point="xbmc.service" library="service.py"/>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en_GB">Joyn Austria, Germany and Switzerland: live TV and on-demand catalogue</summary>
+		<summary lang="de_DE">Joyn Österreich, Deutschland und Schweiz: Live TV und Mediathek</summary>
+		<description lang="en_GB">Browse and watch the free Joyn offer of Austria, Germany and Switzerland. Unofficial add-on, not affiliated with Joyn.
+
+* Home, Live TV, Series, Movies, Shows and Search in the add-on's own interface
+* One region selector for Joyn AT, DE and CH, each with its own catalogue and session
+* Series with their seasons and episodes
+* Live TV guide from Joyn's own programme data
+* Optional IPTV Manager integration for the Kodi TV guide
+* Add-on-local direct or custom network route per region, with a media relay</description>
+		<description lang="de_DE">Das kostenlose Joyn-Angebot aus Österreich, Deutschland und der Schweiz. Inoffizielles Add-on, nicht mit Joyn verbunden.
+
+* Home, Live TV, Serien, Filme, Shows und Suche in einer eigenen Oberfläche
+* Regionsauswahl für Joyn AT, DE und CH, jede mit eigenem Katalog und eigener Sitzung
+* Serien mit Staffeln und Episoden
+* Live-TV-Programmführer aus Joyns eigenen Programmdaten
+* Optionale IPTV-Manager-Anbindung für Kodis TV-Bereich
+* Add-on-eigene direkte oder benutzerdefinierte Netzwerkroute pro Region, mit Medien-Relay</description>
+		<disclaimer lang="en_GB">Unofficial add-on, not affiliated with or endorsed by Joyn. Joyn decides per title and channel where it may play. Playback needs a working Widevine CDM for InputStream Adaptive.</disclaimer>
+		<disclaimer lang="de_DE">Inoffizielles Add-on, nicht mit Joyn verbunden. Joyn entscheidet je Titel und Sender, wo er abgespielt werden darf. Die Wiedergabe benötigt ein funktionierendes Widevine-CDM für InputStream Adaptive.</disclaimer>
+		<platform>all</platform>
+		<language>de</language>
+		<license>GPL-3.0-or-later</license>
+		<website>https://www.joyn.at/</website>
+		<source>https://github.com/Kodi-Allen/kodi-repo/tree/main/plugin.video.joyn.kodiallen</source>
+		<news>
+0.1.0 - First release
+- Joyn AT, DE and CH with a region selector and one session per region
+- Home, Live TV guide, Series, Movies, Shows and Search
+- DASH and Widevine playback through InputStream Adaptive
+- Optional IPTV Manager integration, off by default
+		</news>
+		<assets>
+			<icon>resources/images/icon.png</icon>
+			<fanart>resources/images/fanart.jpg</fanart>
+			<screenshot>resources/screenshots/home.jpg</screenshot>
+			<screenshot>resources/screenshots/live-tv.jpg</screenshot>
+			<screenshot>resources/screenshots/series-page.jpg</screenshot>
+			<screenshot>resources/screenshots/series.jpg</screenshot>
+			<screenshot>resources/screenshots/search.jpg</screenshot>
+		</assets>
+	</extension>
+</addon>

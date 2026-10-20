@@ -1,0 +1,257 @@
+# Kodi Media Center language file
+# Addon Name: Joyn
+# Addon id: plugin.video.joyn.kodiallen
+msgid ""
+msgstr ""
+"Project-Id-Version: plugin.video.joyn.kodiallen\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en_GB\n"
+
+msgctxt "#30022"
+msgid "Could not reach Joyn"
+msgstr ""
+
+msgctxt "#30072"
+msgid "Loading…"
+msgstr ""
+
+msgctxt "#30073"
+msgid "No titles available."
+msgstr ""
+
+msgctxt "#30074"
+msgid "Could not load titles."
+msgstr ""
+
+msgctxt "#30076"
+msgid "%d categories"
+msgstr ""
+
+msgctxt "#30201"
+msgid "Austria"
+msgstr ""
+
+msgctxt "#30202"
+msgid "Germany"
+msgstr ""
+
+msgctxt "#30203"
+msgid "Switzerland"
+msgstr ""
+
+msgctxt "#30210"
+msgid "Home"
+msgstr ""
+
+msgctxt "#30211"
+msgid "Live TV"
+msgstr ""
+
+msgctxt "#30212"
+msgid "Series"
+msgstr ""
+
+msgctxt "#30213"
+msgid "Movies"
+msgstr ""
+
+msgctxt "#30214"
+msgid "Shows"
+msgstr ""
+
+msgctxt "#30215"
+msgid "Search"
+msgstr ""
+
+msgctxt "#30216"
+msgid "Region"
+msgstr ""
+
+msgctxt "#30217"
+msgid "Choose region"
+msgstr ""
+
+msgctxt "#30218"
+msgid "Session for %s reset"
+msgstr ""
+
+msgctxt "#30301"
+msgid "Not available from this connection in this region. Check the region's network route."
+msgstr ""
+
+msgctxt "#30302"
+msgid "Joyn detected a VPN connection and refuses playback."
+msgstr ""
+
+msgctxt "#30303"
+msgid "Only available with Joyn+."
+msgstr ""
+
+msgctxt "#30304"
+msgid "Age-restricted: needs a Joyn account with a youth protection PIN."
+msgstr ""
+
+msgctxt "#30305"
+msgid "Joyn allows no further playback on this device without signing in."
+msgstr ""
+
+msgctxt "#30306"
+msgid "Joyn refused playback (%s)."
+msgstr ""
+
+msgctxt "#30401"
+msgid "All channels"
+msgstr ""
+
+msgctxt "#30402"
+msgid "Sport"
+msgstr ""
+
+msgctxt "#30403"
+msgid "Public service"
+msgstr ""
+
+msgctxt "#30404"
+msgid "Theme channels"
+msgstr ""
+
+msgctxt "#30405"
+msgid "Joyn+"
+msgstr ""
+
+msgctxt "#30500"
+msgid "General"
+msgstr ""
+
+msgctxt "#30501"
+msgid "Network route"
+msgstr ""
+
+msgctxt "#30502"
+msgid "Direct"
+msgstr ""
+
+msgctxt "#30503"
+msgid "Custom"
+msgstr ""
+
+msgctxt "#30504"
+msgid "HTTP CONNECT proxy host"
+msgstr ""
+
+msgctxt "#30505"
+msgid "Playback right"
+msgstr ""
+
+msgctxt "#30506"
+msgid "Media relay"
+msgstr ""
+
+msgctxt "#30507"
+msgid "Manifest through the relay"
+msgstr ""
+
+msgctxt "#30508"
+msgid "Connection test"
+msgstr ""
+
+msgctxt "#30509"
+msgid "Proxy port"
+msgstr ""
+
+msgctxt "#30510"
+msgid "Proxy user name"
+msgstr ""
+
+msgctxt "#30511"
+msgid "Proxy password"
+msgstr ""
+
+msgctxt "#30512"
+msgid "Media relay host"
+msgstr ""
+
+msgctxt "#30513"
+msgid "Media relay port"
+msgstr ""
+
+msgctxt "#30514"
+msgid "Relay signing key"
+msgstr ""
+
+msgctxt "#30515"
+msgid "Reset session"
+msgstr ""
+
+msgctxt "#30520"
+msgid "Kodi TV"
+msgstr ""
+
+msgctxt "#30521"
+msgid "Add live channels to Kodi TV (IPTV Manager)"
+msgstr ""
+
+msgctxt "#30522"
+msgid "Export Austria"
+msgstr ""
+
+msgctxt "#30523"
+msgid "Export Germany"
+msgstr ""
+
+msgctxt "#30524"
+msgid "Export Switzerland"
+msgstr ""
+
+msgctxt "#30525"
+msgid "Leave out channels Kodi already has"
+msgstr ""
+
+msgctxt "#30526"
+msgid "Show channels Kodi already has"
+msgstr ""
+
+msgctxt "#30219"
+msgid "Sign in to Joyn"
+msgstr ""
+
+msgctxt "#30220"
+msgid "Sign out"
+msgstr ""
+
+msgctxt "#30221"
+msgid "E-mail"
+msgstr ""
+
+msgctxt "#30222"
+msgid "Password"
+msgstr ""
+
+msgctxt "#30223"
+msgid "Signed in as %s (%s)"
+msgstr ""
+
+msgctxt "#30224"
+msgid "Signed out (%s)"
+msgstr ""
+
+msgctxt "#30225"
+msgid "Joyn did not accept the e-mail or password."
+msgstr ""
+
+msgctxt "#30226"
+msgid "Joyn needs more details or consents for this region. Sign in once at %s in a browser and complete your profile, then try again."
+msgstr ""
+
+msgctxt "#30227"
+msgid "Two-factor sign-in is not supported."
+msgstr ""
+
+msgctxt "#30228"
+msgid "Account"
+msgstr ""
+
+msgctxt "#30229"
+msgid "not signed in"
+msgstr ""

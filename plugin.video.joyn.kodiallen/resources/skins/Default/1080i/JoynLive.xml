@@ -1,0 +1,1961 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Joyn Live TV: the region's channels over a time-proportional programme guide. -->
+<window>
+    <defaultcontrol>700</defaultcontrol>
+    <backgroundcolor>FF0B0E14</backgroundcolor>
+    <controls>
+        <control type="image">
+            <left>0</left><top>0</top><width>1920</width><height>1080</height>
+            <texture colordiffuse="FF0B0E14">joyn-white.png</texture>
+        </control>
+        <control type="image">
+            <left>0</left><top>0</top><width>1920</width><height>660</height>
+            <texture colordiffuse="A6006B62">joyn-ambient.png</texture>
+        </control>
+        <control type="image">
+            <left>100</left><top>24</top><width>76</width><height>32</height>
+            <aspectratio>keep</aspectratio><texture>joyn-logo.png</texture>
+        </control>
+        <control type="grouplist" id="9300">
+            <left>264</left><top>20</top><width>1160</width><height>40</height>
+            <orientation>horizontal</orientation><itemgap>37</itemgap>
+            <onright>307</onright><ondown>400</ondown>
+            <control type="button" id="301">
+                <width>auto</width><height>40</height>
+                <texturefocus border="0,0,0,3">joyn-underline.png</texturefocus><texturenofocus />
+                <label>$ADDON[plugin.video.joyn.kodiallen 30210]</label><font>font13</font><textoffsetx>0</textoffsetx><aligny>center</aligny>
+                <textcolor>FFC0C0C0</textcolor><focusedcolor>FFF0F0F0</focusedcolor>
+                <ondown>400</ondown>
+            </control>
+            <control type="button" id="302">
+                <width>auto</width><height>40</height>
+                <texturefocus border="0,0,0,3">joyn-underline.png</texturefocus><texturenofocus />
+                <label>$ADDON[plugin.video.joyn.kodiallen 30211]</label><font>font13</font><textoffsetx>0</textoffsetx><aligny>center</aligny>
+                <textcolor>FFC0C0C0</textcolor><focusedcolor>FFF0F0F0</focusedcolor>
+                <ondown>400</ondown>
+            </control>
+            <control type="button" id="303">
+                <width>auto</width><height>40</height>
+                <texturefocus border="0,0,0,3">joyn-underline.png</texturefocus><texturenofocus />
+                <label>$ADDON[plugin.video.joyn.kodiallen 30212]</label><font>font13</font><textoffsetx>0</textoffsetx><aligny>center</aligny>
+                <textcolor>FFC0C0C0</textcolor><focusedcolor>FFF0F0F0</focusedcolor>
+                <ondown>400</ondown>
+            </control>
+            <control type="button" id="304">
+                <width>auto</width><height>40</height>
+                <texturefocus border="0,0,0,3">joyn-underline.png</texturefocus><texturenofocus />
+                <label>$ADDON[plugin.video.joyn.kodiallen 30213]</label><font>font13</font><textoffsetx>0</textoffsetx><aligny>center</aligny>
+                <textcolor>FFC0C0C0</textcolor><focusedcolor>FFF0F0F0</focusedcolor>
+                <ondown>400</ondown>
+            </control>
+            <control type="button" id="305">
+                <width>auto</width><height>40</height>
+                <texturefocus border="0,0,0,3">joyn-underline.png</texturefocus><texturenofocus />
+                <label>$ADDON[plugin.video.joyn.kodiallen 30214]</label><font>font13</font><textoffsetx>0</textoffsetx><aligny>center</aligny>
+                <textcolor>FFC0C0C0</textcolor><focusedcolor>FFF0F0F0</focusedcolor>
+                <ondown>400</ondown>
+            </control>
+            <control type="button" id="306">
+                <width>auto</width><height>40</height>
+                <texturefocus border="0,0,0,3">joyn-underline.png</texturefocus><texturenofocus />
+                <label>$ADDON[plugin.video.joyn.kodiallen 30215]</label><font>font13</font><textoffsetx>0</textoffsetx><aligny>center</aligny>
+                <textcolor>FFC0C0C0</textcolor><focusedcolor>FFF0F0F0</focusedcolor>
+                <ondown>400</ondown>
+            </control>
+        </control>
+        <control type="button" id="307">
+            <left>1440</left><top>20</top><width>380</width><height>40</height>
+            <texturefocus colordiffuse="33F0F0F0">joyn-white.png</texturefocus><texturenofocus />
+            <label>$ADDON[plugin.video.joyn.kodiallen 30216]: [B]$INFO[Window.Property(joyn.live.region)][/B]</label><font>font13</font>
+            <align>right</align><aligny>center</aligny><textoffsetx>16</textoffsetx>
+            <textcolor>FFC0C0C0</textcolor><focusedcolor>FFF0F0F0</focusedcolor>
+            <onleft>306</onleft><ondown>400</ondown>
+        </control>
+        <control type="list" id="400">
+            <left>88</left><top>84</top><width>1744</width><height>52</height>
+            <orientation>horizontal</orientation>
+            <onup>302</onup><ondown>700</ondown>
+            <scrolltime>150</scrolltime>
+            <itemlayout width="260" height="52">
+                <control type="label">
+                    <left>12</left><top>0</top><width>236</width><height>52</height>
+                    <font>font12</font><aligny>center</aligny><align>center</align><textcolor>FFB0B0B8</textcolor>
+                    <label>$INFO[ListItem.Label]</label>
+                    <visible>!String.IsEqual(ListItem.Property(active),true)</visible>
+                </control>
+                <control type="label">
+                    <left>12</left><top>0</top><width>236</width><height>52</height>
+                    <font>font12</font><aligny>center</aligny><align>center</align><textcolor>FFFFFFFF</textcolor>
+                    <label>[B]$INFO[ListItem.Label][/B]</label>
+                    <visible>String.IsEqual(ListItem.Property(active),true)</visible>
+                </control>
+                <control type="image">
+                    <left>40</left><top>46</top><width>180</width><height>3</height>
+                    <texture colordiffuse="FF00E1C1">joyn-white.png</texture>
+                    <visible>String.IsEqual(ListItem.Property(active),true)</visible>
+                </control>
+            </itemlayout>
+            <focusedlayout width="260" height="52">
+                <control type="image">
+                    <left>6</left><top>4</top><width>248</width><height>44</height>
+                    <texture colordiffuse="FF007F73">joyn-white.png</texture>
+                    <visible>Control.HasFocus(400)</visible>
+                </control>
+                <control type="label">
+                    <left>12</left><top>0</top><width>236</width><height>52</height>
+                    <font>font12</font><aligny>center</aligny><align>center</align><textcolor>FFFFFFFF</textcolor>
+                    <label>[B]$INFO[ListItem.Label][/B]</label>
+                    <visible>Control.HasFocus(400) | String.IsEqual(ListItem.Property(active),true)</visible>
+                </control>
+                <control type="label">
+                    <left>12</left><top>0</top><width>236</width><height>52</height>
+                    <font>font12</font><aligny>center</aligny><align>center</align><textcolor>FFB0B0B8</textcolor>
+                    <label>$INFO[ListItem.Label]</label>
+                    <visible>!Control.HasFocus(400) + !String.IsEqual(ListItem.Property(active),true)</visible>
+                </control>
+                <control type="image">
+                    <left>40</left><top>46</top><width>180</width><height>3</height>
+                    <texture colordiffuse="FF00E1C1">joyn-white.png</texture>
+                    <visible>!Control.HasFocus(400) + String.IsEqual(ListItem.Property(active),true)</visible>
+                </control>
+            </focusedlayout>
+        </control>
+        <control type="label" id="2800">
+            <left>100</left><top>944</top><width>1300</width><height>40</height>
+            <font>font13</font><textcolor>FFFFFFFF</textcolor><align>left</align><aligny>center</aligny>
+            <label>[B]$INFO[Window.Property(joyn.live.title)][/B]</label>
+        </control>
+        <control type="label" id="2801">
+            <left>1400</left><top>944</top><width>420</width><height>40</height>
+            <font>font12</font><textcolor>FFC0C0C0</textcolor><align>right</align><aligny>center</aligny>
+            <label>$INFO[Window.Property(joyn.live.channel)]</label>
+        </control>
+        <control type="label" id="2802">
+            <left>100</left><top>984</top><width>1720</width><height>32</height>
+            <font>font12</font><textcolor>FF00E1C1</textcolor><align>left</align><aligny>center</aligny>
+            <label>$INFO[Window.Property(joyn.live.when)]</label>
+        </control>
+        <control type="label" id="2803">
+            <left>100</left><top>1016</top><width>1720</width><height>50</height>
+            <font>font10</font><textcolor>FFB4B9C2</textcolor><wrapmultiline>true</wrapmultiline>
+            <label>$INFO[Window.Property(joyn.live.plot)]</label>
+        </control>
+        <control type="image">
+            <left>392</left><top>168</top><width>1428</width><height>40</height>
+            <texture colordiffuse="661A1030">joyn-white.png</texture>
+        </control>
+        <control type="image">
+            <left>392</left><top>194</top><width>2</width><height>14</height>
+            <texture colordiffuse="FF666C78">joyn-white.png</texture>
+        </control>
+        <control type="label" id="2500">
+            <left>400</left><top>168</top><width>150</width><height>40</height>
+            <font>font12</font><textcolor>FFC0C0C0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image">
+            <left>552</left><top>194</top><width>2</width><height>14</height>
+            <texture colordiffuse="FF666C78">joyn-white.png</texture>
+        </control>
+        <control type="label" id="2501">
+            <left>560</left><top>168</top><width>150</width><height>40</height>
+            <font>font12</font><textcolor>FFC0C0C0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image">
+            <left>712</left><top>194</top><width>2</width><height>14</height>
+            <texture colordiffuse="FF666C78">joyn-white.png</texture>
+        </control>
+        <control type="label" id="2502">
+            <left>720</left><top>168</top><width>150</width><height>40</height>
+            <font>font12</font><textcolor>FFC0C0C0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image">
+            <left>872</left><top>194</top><width>2</width><height>14</height>
+            <texture colordiffuse="FF666C78">joyn-white.png</texture>
+        </control>
+        <control type="label" id="2503">
+            <left>880</left><top>168</top><width>150</width><height>40</height>
+            <font>font12</font><textcolor>FFC0C0C0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image">
+            <left>1032</left><top>194</top><width>2</width><height>14</height>
+            <texture colordiffuse="FF666C78">joyn-white.png</texture>
+        </control>
+        <control type="label" id="2504">
+            <left>1040</left><top>168</top><width>150</width><height>40</height>
+            <font>font12</font><textcolor>FFC0C0C0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image">
+            <left>1192</left><top>194</top><width>2</width><height>14</height>
+            <texture colordiffuse="FF666C78">joyn-white.png</texture>
+        </control>
+        <control type="label" id="2505">
+            <left>1200</left><top>168</top><width>150</width><height>40</height>
+            <font>font12</font><textcolor>FFC0C0C0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image">
+            <left>1352</left><top>194</top><width>2</width><height>14</height>
+            <texture colordiffuse="FF666C78">joyn-white.png</texture>
+        </control>
+        <control type="label" id="2506">
+            <left>1360</left><top>168</top><width>150</width><height>40</height>
+            <font>font12</font><textcolor>FFC0C0C0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image">
+            <left>1512</left><top>194</top><width>2</width><height>14</height>
+            <texture colordiffuse="FF666C78">joyn-white.png</texture>
+        </control>
+        <control type="label" id="2507">
+            <left>1520</left><top>168</top><width>150</width><height>40</height>
+            <font>font12</font><textcolor>FFC0C0C0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image">
+            <left>1672</left><top>194</top><width>2</width><height>14</height>
+            <texture colordiffuse="FF666C78">joyn-white.png</texture>
+        </control>
+        <control type="label" id="2508">
+            <left>1680</left><top>168</top><width>150</width><height>40</height>
+            <font>font12</font><textcolor>FFC0C0C0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image" id="2000">
+            <left>100</left><top>216</top><width>280</width><height>84</height>
+            <texture colordiffuse="FF161A22">joyn-white.png</texture>
+        </control>
+        <control type="image" id="2001">
+            <left>100</left><top>306</top><width>280</width><height>84</height>
+            <texture colordiffuse="FF161A22">joyn-white.png</texture>
+        </control>
+        <control type="image" id="2002">
+            <left>100</left><top>396</top><width>280</width><height>84</height>
+            <texture colordiffuse="FF161A22">joyn-white.png</texture>
+        </control>
+        <control type="image" id="2003">
+            <left>100</left><top>486</top><width>280</width><height>84</height>
+            <texture colordiffuse="FF161A22">joyn-white.png</texture>
+        </control>
+        <control type="image" id="2004">
+            <left>100</left><top>576</top><width>280</width><height>84</height>
+            <texture colordiffuse="FF161A22">joyn-white.png</texture>
+        </control>
+        <control type="image" id="2005">
+            <left>100</left><top>666</top><width>280</width><height>84</height>
+            <texture colordiffuse="FF161A22">joyn-white.png</texture>
+        </control>
+        <control type="image" id="2006">
+            <left>100</left><top>756</top><width>280</width><height>84</height>
+            <texture colordiffuse="FF161A22">joyn-white.png</texture>
+        </control>
+        <control type="image" id="2007">
+            <left>100</left><top>846</top><width>280</width><height>84</height>
+            <texture colordiffuse="FF161A22">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3000">
+            <left>2000</left><top>216</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3001">
+            <left>2000</left><top>216</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3002">
+            <left>2000</left><top>216</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3003">
+            <left>2000</left><top>216</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3004">
+            <left>2000</left><top>216</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3005">
+            <left>2000</left><top>216</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3006">
+            <left>2000</left><top>216</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3007">
+            <left>2000</left><top>216</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3008">
+            <left>2000</left><top>216</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3009">
+            <left>2000</left><top>216</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3010">
+            <left>2000</left><top>216</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3011">
+            <left>2000</left><top>216</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3012">
+            <left>2000</left><top>216</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3013">
+            <left>2000</left><top>216</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3020">
+            <left>2000</left><top>306</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3021">
+            <left>2000</left><top>306</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3022">
+            <left>2000</left><top>306</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3023">
+            <left>2000</left><top>306</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3024">
+            <left>2000</left><top>306</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3025">
+            <left>2000</left><top>306</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3026">
+            <left>2000</left><top>306</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3027">
+            <left>2000</left><top>306</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3028">
+            <left>2000</left><top>306</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3029">
+            <left>2000</left><top>306</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3030">
+            <left>2000</left><top>306</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3031">
+            <left>2000</left><top>306</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3032">
+            <left>2000</left><top>306</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3033">
+            <left>2000</left><top>306</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3040">
+            <left>2000</left><top>396</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3041">
+            <left>2000</left><top>396</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3042">
+            <left>2000</left><top>396</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3043">
+            <left>2000</left><top>396</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3044">
+            <left>2000</left><top>396</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3045">
+            <left>2000</left><top>396</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3046">
+            <left>2000</left><top>396</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3047">
+            <left>2000</left><top>396</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3048">
+            <left>2000</left><top>396</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3049">
+            <left>2000</left><top>396</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3050">
+            <left>2000</left><top>396</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3051">
+            <left>2000</left><top>396</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3052">
+            <left>2000</left><top>396</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3053">
+            <left>2000</left><top>396</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3060">
+            <left>2000</left><top>486</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3061">
+            <left>2000</left><top>486</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3062">
+            <left>2000</left><top>486</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3063">
+            <left>2000</left><top>486</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3064">
+            <left>2000</left><top>486</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3065">
+            <left>2000</left><top>486</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3066">
+            <left>2000</left><top>486</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3067">
+            <left>2000</left><top>486</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3068">
+            <left>2000</left><top>486</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3069">
+            <left>2000</left><top>486</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3070">
+            <left>2000</left><top>486</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3071">
+            <left>2000</left><top>486</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3072">
+            <left>2000</left><top>486</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3073">
+            <left>2000</left><top>486</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3080">
+            <left>2000</left><top>576</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3081">
+            <left>2000</left><top>576</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3082">
+            <left>2000</left><top>576</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3083">
+            <left>2000</left><top>576</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3084">
+            <left>2000</left><top>576</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3085">
+            <left>2000</left><top>576</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3086">
+            <left>2000</left><top>576</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3087">
+            <left>2000</left><top>576</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3088">
+            <left>2000</left><top>576</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3089">
+            <left>2000</left><top>576</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3090">
+            <left>2000</left><top>576</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3091">
+            <left>2000</left><top>576</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3092">
+            <left>2000</left><top>576</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3093">
+            <left>2000</left><top>576</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3100">
+            <left>2000</left><top>666</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3101">
+            <left>2000</left><top>666</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3102">
+            <left>2000</left><top>666</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3103">
+            <left>2000</left><top>666</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3104">
+            <left>2000</left><top>666</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3105">
+            <left>2000</left><top>666</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3106">
+            <left>2000</left><top>666</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3107">
+            <left>2000</left><top>666</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3108">
+            <left>2000</left><top>666</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3109">
+            <left>2000</left><top>666</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3110">
+            <left>2000</left><top>666</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3111">
+            <left>2000</left><top>666</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3112">
+            <left>2000</left><top>666</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3113">
+            <left>2000</left><top>666</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3120">
+            <left>2000</left><top>756</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3121">
+            <left>2000</left><top>756</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3122">
+            <left>2000</left><top>756</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3123">
+            <left>2000</left><top>756</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3124">
+            <left>2000</left><top>756</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3125">
+            <left>2000</left><top>756</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3126">
+            <left>2000</left><top>756</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3127">
+            <left>2000</left><top>756</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3128">
+            <left>2000</left><top>756</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3129">
+            <left>2000</left><top>756</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3130">
+            <left>2000</left><top>756</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3131">
+            <left>2000</left><top>756</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3132">
+            <left>2000</left><top>756</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3133">
+            <left>2000</left><top>756</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3140">
+            <left>2000</left><top>846</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3141">
+            <left>2000</left><top>846</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3142">
+            <left>2000</left><top>846</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3143">
+            <left>2000</left><top>846</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3144">
+            <left>2000</left><top>846</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3145">
+            <left>2000</left><top>846</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3146">
+            <left>2000</left><top>846</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3147">
+            <left>2000</left><top>846</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3148">
+            <left>2000</left><top>846</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3149">
+            <left>2000</left><top>846</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3150">
+            <left>2000</left><top>846</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3151">
+            <left>2000</left><top>846</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3152">
+            <left>2000</left><top>846</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="3153">
+            <left>2000</left><top>846</top><width>10</width><height>84</height>
+            <texture colordiffuse="FF1A1E27">joyn-white.png</texture>
+        </control>
+        <control type="image" id="2300">
+            <left>392</left><top>216</top><width>100</width><height>90</height>
+            <texture colordiffuse="FFF0F0F0">joyn-white.png</texture>
+            <visible>Control.HasFocus(700)</visible>
+        </control>
+        <control type="image" id="2301">
+            <left>392</left><top>216</top><width>100</width><height>84</height>
+            <texture colordiffuse="FF007F73">joyn-white.png</texture>
+            <visible>Control.HasFocus(700)</visible>
+        </control>
+        <control type="image" id="2100">
+            <left>140</left><top>224</top><width>200</width><height>68</height>
+            <aspectratio>keep</aspectratio><texture background="true"></texture>
+        </control>
+        <control type="label" id="2150">
+            <left>116</left><top>216</top><width>248</width><height>84</height>
+            <font>font12</font><textcolor>FFE0E0E0</textcolor><align>center</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image" id="2200">
+            <left>2000</left><top>294</top><width>10</width><height>4</height>
+            <texture colordiffuse="FF00E1C1">joyn-white.png</texture>
+        </control>
+        <control type="label" id="4000">
+            <left>392</left><top>222</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5000">
+            <left>392</left><top>256</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4001">
+            <left>392</left><top>222</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5001">
+            <left>392</left><top>256</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4002">
+            <left>392</left><top>222</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5002">
+            <left>392</left><top>256</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4003">
+            <left>392</left><top>222</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5003">
+            <left>392</left><top>256</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4004">
+            <left>392</left><top>222</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5004">
+            <left>392</left><top>256</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4005">
+            <left>392</left><top>222</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5005">
+            <left>392</left><top>256</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4006">
+            <left>392</left><top>222</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5006">
+            <left>392</left><top>256</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4007">
+            <left>392</left><top>222</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5007">
+            <left>392</left><top>256</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4008">
+            <left>392</left><top>222</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5008">
+            <left>392</left><top>256</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4009">
+            <left>392</left><top>222</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5009">
+            <left>392</left><top>256</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4010">
+            <left>392</left><top>222</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5010">
+            <left>392</left><top>256</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4011">
+            <left>392</left><top>222</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5011">
+            <left>392</left><top>256</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4012">
+            <left>392</left><top>222</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5012">
+            <left>392</left><top>256</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4013">
+            <left>392</left><top>222</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5013">
+            <left>392</left><top>256</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image" id="2101">
+            <left>140</left><top>314</top><width>200</width><height>68</height>
+            <aspectratio>keep</aspectratio><texture background="true"></texture>
+        </control>
+        <control type="label" id="2151">
+            <left>116</left><top>306</top><width>248</width><height>84</height>
+            <font>font12</font><textcolor>FFE0E0E0</textcolor><align>center</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image" id="2201">
+            <left>2000</left><top>384</top><width>10</width><height>4</height>
+            <texture colordiffuse="FF00E1C1">joyn-white.png</texture>
+        </control>
+        <control type="label" id="4020">
+            <left>392</left><top>312</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5020">
+            <left>392</left><top>346</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4021">
+            <left>392</left><top>312</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5021">
+            <left>392</left><top>346</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4022">
+            <left>392</left><top>312</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5022">
+            <left>392</left><top>346</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4023">
+            <left>392</left><top>312</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5023">
+            <left>392</left><top>346</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4024">
+            <left>392</left><top>312</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5024">
+            <left>392</left><top>346</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4025">
+            <left>392</left><top>312</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5025">
+            <left>392</left><top>346</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4026">
+            <left>392</left><top>312</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5026">
+            <left>392</left><top>346</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4027">
+            <left>392</left><top>312</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5027">
+            <left>392</left><top>346</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4028">
+            <left>392</left><top>312</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5028">
+            <left>392</left><top>346</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4029">
+            <left>392</left><top>312</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5029">
+            <left>392</left><top>346</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4030">
+            <left>392</left><top>312</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5030">
+            <left>392</left><top>346</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4031">
+            <left>392</left><top>312</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5031">
+            <left>392</left><top>346</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4032">
+            <left>392</left><top>312</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5032">
+            <left>392</left><top>346</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4033">
+            <left>392</left><top>312</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5033">
+            <left>392</left><top>346</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image" id="2102">
+            <left>140</left><top>404</top><width>200</width><height>68</height>
+            <aspectratio>keep</aspectratio><texture background="true"></texture>
+        </control>
+        <control type="label" id="2152">
+            <left>116</left><top>396</top><width>248</width><height>84</height>
+            <font>font12</font><textcolor>FFE0E0E0</textcolor><align>center</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image" id="2202">
+            <left>2000</left><top>474</top><width>10</width><height>4</height>
+            <texture colordiffuse="FF00E1C1">joyn-white.png</texture>
+        </control>
+        <control type="label" id="4040">
+            <left>392</left><top>402</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5040">
+            <left>392</left><top>436</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4041">
+            <left>392</left><top>402</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5041">
+            <left>392</left><top>436</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4042">
+            <left>392</left><top>402</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5042">
+            <left>392</left><top>436</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4043">
+            <left>392</left><top>402</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5043">
+            <left>392</left><top>436</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4044">
+            <left>392</left><top>402</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5044">
+            <left>392</left><top>436</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4045">
+            <left>392</left><top>402</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5045">
+            <left>392</left><top>436</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4046">
+            <left>392</left><top>402</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5046">
+            <left>392</left><top>436</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4047">
+            <left>392</left><top>402</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5047">
+            <left>392</left><top>436</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4048">
+            <left>392</left><top>402</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5048">
+            <left>392</left><top>436</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4049">
+            <left>392</left><top>402</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5049">
+            <left>392</left><top>436</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4050">
+            <left>392</left><top>402</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5050">
+            <left>392</left><top>436</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4051">
+            <left>392</left><top>402</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5051">
+            <left>392</left><top>436</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4052">
+            <left>392</left><top>402</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5052">
+            <left>392</left><top>436</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4053">
+            <left>392</left><top>402</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5053">
+            <left>392</left><top>436</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image" id="2103">
+            <left>140</left><top>494</top><width>200</width><height>68</height>
+            <aspectratio>keep</aspectratio><texture background="true"></texture>
+        </control>
+        <control type="label" id="2153">
+            <left>116</left><top>486</top><width>248</width><height>84</height>
+            <font>font12</font><textcolor>FFE0E0E0</textcolor><align>center</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image" id="2203">
+            <left>2000</left><top>564</top><width>10</width><height>4</height>
+            <texture colordiffuse="FF00E1C1">joyn-white.png</texture>
+        </control>
+        <control type="label" id="4060">
+            <left>392</left><top>492</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5060">
+            <left>392</left><top>526</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4061">
+            <left>392</left><top>492</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5061">
+            <left>392</left><top>526</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4062">
+            <left>392</left><top>492</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5062">
+            <left>392</left><top>526</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4063">
+            <left>392</left><top>492</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5063">
+            <left>392</left><top>526</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4064">
+            <left>392</left><top>492</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5064">
+            <left>392</left><top>526</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4065">
+            <left>392</left><top>492</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5065">
+            <left>392</left><top>526</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4066">
+            <left>392</left><top>492</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5066">
+            <left>392</left><top>526</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4067">
+            <left>392</left><top>492</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5067">
+            <left>392</left><top>526</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4068">
+            <left>392</left><top>492</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5068">
+            <left>392</left><top>526</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4069">
+            <left>392</left><top>492</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5069">
+            <left>392</left><top>526</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4070">
+            <left>392</left><top>492</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5070">
+            <left>392</left><top>526</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4071">
+            <left>392</left><top>492</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5071">
+            <left>392</left><top>526</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4072">
+            <left>392</left><top>492</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5072">
+            <left>392</left><top>526</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4073">
+            <left>392</left><top>492</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5073">
+            <left>392</left><top>526</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image" id="2104">
+            <left>140</left><top>584</top><width>200</width><height>68</height>
+            <aspectratio>keep</aspectratio><texture background="true"></texture>
+        </control>
+        <control type="label" id="2154">
+            <left>116</left><top>576</top><width>248</width><height>84</height>
+            <font>font12</font><textcolor>FFE0E0E0</textcolor><align>center</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image" id="2204">
+            <left>2000</left><top>654</top><width>10</width><height>4</height>
+            <texture colordiffuse="FF00E1C1">joyn-white.png</texture>
+        </control>
+        <control type="label" id="4080">
+            <left>392</left><top>582</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5080">
+            <left>392</left><top>616</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4081">
+            <left>392</left><top>582</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5081">
+            <left>392</left><top>616</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4082">
+            <left>392</left><top>582</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5082">
+            <left>392</left><top>616</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4083">
+            <left>392</left><top>582</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5083">
+            <left>392</left><top>616</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4084">
+            <left>392</left><top>582</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5084">
+            <left>392</left><top>616</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4085">
+            <left>392</left><top>582</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5085">
+            <left>392</left><top>616</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4086">
+            <left>392</left><top>582</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5086">
+            <left>392</left><top>616</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4087">
+            <left>392</left><top>582</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5087">
+            <left>392</left><top>616</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4088">
+            <left>392</left><top>582</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5088">
+            <left>392</left><top>616</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4089">
+            <left>392</left><top>582</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5089">
+            <left>392</left><top>616</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4090">
+            <left>392</left><top>582</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5090">
+            <left>392</left><top>616</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4091">
+            <left>392</left><top>582</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5091">
+            <left>392</left><top>616</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4092">
+            <left>392</left><top>582</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5092">
+            <left>392</left><top>616</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4093">
+            <left>392</left><top>582</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5093">
+            <left>392</left><top>616</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image" id="2105">
+            <left>140</left><top>674</top><width>200</width><height>68</height>
+            <aspectratio>keep</aspectratio><texture background="true"></texture>
+        </control>
+        <control type="label" id="2155">
+            <left>116</left><top>666</top><width>248</width><height>84</height>
+            <font>font12</font><textcolor>FFE0E0E0</textcolor><align>center</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image" id="2205">
+            <left>2000</left><top>744</top><width>10</width><height>4</height>
+            <texture colordiffuse="FF00E1C1">joyn-white.png</texture>
+        </control>
+        <control type="label" id="4100">
+            <left>392</left><top>672</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5100">
+            <left>392</left><top>706</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4101">
+            <left>392</left><top>672</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5101">
+            <left>392</left><top>706</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4102">
+            <left>392</left><top>672</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5102">
+            <left>392</left><top>706</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4103">
+            <left>392</left><top>672</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5103">
+            <left>392</left><top>706</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4104">
+            <left>392</left><top>672</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5104">
+            <left>392</left><top>706</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4105">
+            <left>392</left><top>672</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5105">
+            <left>392</left><top>706</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4106">
+            <left>392</left><top>672</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5106">
+            <left>392</left><top>706</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4107">
+            <left>392</left><top>672</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5107">
+            <left>392</left><top>706</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4108">
+            <left>392</left><top>672</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5108">
+            <left>392</left><top>706</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4109">
+            <left>392</left><top>672</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5109">
+            <left>392</left><top>706</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4110">
+            <left>392</left><top>672</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5110">
+            <left>392</left><top>706</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4111">
+            <left>392</left><top>672</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5111">
+            <left>392</left><top>706</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4112">
+            <left>392</left><top>672</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5112">
+            <left>392</left><top>706</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4113">
+            <left>392</left><top>672</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5113">
+            <left>392</left><top>706</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image" id="2106">
+            <left>140</left><top>764</top><width>200</width><height>68</height>
+            <aspectratio>keep</aspectratio><texture background="true"></texture>
+        </control>
+        <control type="label" id="2156">
+            <left>116</left><top>756</top><width>248</width><height>84</height>
+            <font>font12</font><textcolor>FFE0E0E0</textcolor><align>center</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image" id="2206">
+            <left>2000</left><top>834</top><width>10</width><height>4</height>
+            <texture colordiffuse="FF00E1C1">joyn-white.png</texture>
+        </control>
+        <control type="label" id="4120">
+            <left>392</left><top>762</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5120">
+            <left>392</left><top>796</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4121">
+            <left>392</left><top>762</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5121">
+            <left>392</left><top>796</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4122">
+            <left>392</left><top>762</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5122">
+            <left>392</left><top>796</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4123">
+            <left>392</left><top>762</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5123">
+            <left>392</left><top>796</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4124">
+            <left>392</left><top>762</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5124">
+            <left>392</left><top>796</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4125">
+            <left>392</left><top>762</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5125">
+            <left>392</left><top>796</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4126">
+            <left>392</left><top>762</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5126">
+            <left>392</left><top>796</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4127">
+            <left>392</left><top>762</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5127">
+            <left>392</left><top>796</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4128">
+            <left>392</left><top>762</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5128">
+            <left>392</left><top>796</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4129">
+            <left>392</left><top>762</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5129">
+            <left>392</left><top>796</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4130">
+            <left>392</left><top>762</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5130">
+            <left>392</left><top>796</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4131">
+            <left>392</left><top>762</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5131">
+            <left>392</left><top>796</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4132">
+            <left>392</left><top>762</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5132">
+            <left>392</left><top>796</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4133">
+            <left>392</left><top>762</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5133">
+            <left>392</left><top>796</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image" id="2107">
+            <left>140</left><top>854</top><width>200</width><height>68</height>
+            <aspectratio>keep</aspectratio><texture background="true"></texture>
+        </control>
+        <control type="label" id="2157">
+            <left>116</left><top>846</top><width>248</width><height>84</height>
+            <font>font12</font><textcolor>FFE0E0E0</textcolor><align>center</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image" id="2207">
+            <left>2000</left><top>924</top><width>10</width><height>4</height>
+            <texture colordiffuse="FF00E1C1">joyn-white.png</texture>
+        </control>
+        <control type="label" id="4140">
+            <left>392</left><top>852</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5140">
+            <left>392</left><top>886</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4141">
+            <left>392</left><top>852</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5141">
+            <left>392</left><top>886</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4142">
+            <left>392</left><top>852</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5142">
+            <left>392</left><top>886</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4143">
+            <left>392</left><top>852</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5143">
+            <left>392</left><top>886</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4144">
+            <left>392</left><top>852</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5144">
+            <left>392</left><top>886</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4145">
+            <left>392</left><top>852</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5145">
+            <left>392</left><top>886</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4146">
+            <left>392</left><top>852</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5146">
+            <left>392</left><top>886</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4147">
+            <left>392</left><top>852</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5147">
+            <left>392</left><top>886</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4148">
+            <left>392</left><top>852</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5148">
+            <left>392</left><top>886</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4149">
+            <left>392</left><top>852</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5149">
+            <left>392</left><top>886</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4150">
+            <left>392</left><top>852</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5150">
+            <left>392</left><top>886</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4151">
+            <left>392</left><top>852</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5151">
+            <left>392</left><top>886</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4152">
+            <left>392</left><top>852</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5152">
+            <left>392</left><top>886</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="4153">
+            <left>392</left><top>852</top><width>10</width><height>38</height>
+            <font>font12</font><textcolor>FFF0F0F0</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="5153">
+            <left>392</left><top>886</top><width>10</width><height>32</height>
+            <font>font10</font><textcolor>FFA4A9B4</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="image" id="2400">
+            <left>2000</left><top>168</top><width>3</width><height>762</height>
+            <texture colordiffuse="FFFF3B4E">joyn-white.png</texture>
+        </control>
+        <control type="label" id="2401">
+            <left>392</left><top>164</top><width>140</width><height>30</height>
+            <font>font10</font><textcolor>FFFFFFFF</textcolor><align>left</align><aligny>center</aligny>
+            <label></label>
+        </control>
+        <control type="label" id="2700">
+            <left>412</left><top>236</top><width>1200</width><height>50</height>
+            <font>font13</font><textcolor>FFC0C0C0</textcolor><align>left</align><aligny>center</aligny>
+            <label>$INFO[Window.Property(joyn.live.status)]</label>
+        </control>
+        <control type="button" id="700">
+            <left>100</left><top>216</top><width>1720</width><height>714</height>
+            <texturefocus /><texturenofocus /><label></label>
+        </control>
+    </controls>
+</window>
