@@ -1,0 +1,113 @@
+# Kodi Media Center language file
+# Addon Name: Samsung TV Plus
+# Addon id: plugin.video.samsungtvplus.kodiallen
+msgid ""
+msgstr ""
+"Project-Id-Version: plugin.video.samsungtvplus.kodiallen\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: it_IT\n"
+
+msgctxt "#30022"
+msgid "Could not reach Samsung TV Plus"
+msgstr "Impossibile raggiungere Samsung TV Plus"
+
+msgctxt "#30072"
+msgid "Loading…"
+msgstr "Caricamento…"
+
+msgctxt "#30073"
+msgid "No channels available."
+msgstr "Nessun canale disponibile."
+
+msgctxt "#30074"
+msgid "Could not load the channels."
+msgstr "Impossibile caricare i canali."
+
+msgctxt "#30201"
+msgid "Italy"
+msgstr "Italia"
+
+msgctxt "#30203"
+msgid "Search"
+msgstr "Cerca"
+
+msgctxt "#30210"
+msgid "Home"
+msgstr "Home"
+
+msgctxt "#30211"
+msgid "Live TV"
+msgstr "Diretta TV"
+
+msgctxt "#30301"
+msgid "This channel is not available right now."
+msgstr "Questo canale non è disponibile al momento."
+
+msgctxt "#30401"
+msgid "All channels"
+msgstr "Tutti i canali"
+
+msgctxt "#30402"
+msgid "Favourites"
+msgstr "Preferiti"
+
+msgctxt "#30403"
+msgid "%s added to favourites"
+msgstr "%s aggiunto ai preferiti"
+
+msgctxt "#30404"
+msgid "%s removed from favourites"
+msgstr "%s rimosso dai preferiti"
+
+msgctxt "#30405"
+msgid "Add to favourites"
+msgstr "Aggiungi ai preferiti"
+
+msgctxt "#30406"
+msgid "Remove from favourites"
+msgstr "Rimuovi dai preferiti"
+
+msgctxt "#30411"
+msgid "Next:"
+msgstr "Dopo:"
+
+msgctxt "#30500"
+msgid "Network"
+msgstr "Rete"
+
+msgctxt "#30501"
+msgid "Route"
+msgstr "Percorso"
+
+msgctxt "#30502"
+msgid "Direct"
+msgstr "Diretto"
+
+msgctxt "#30503"
+msgid "Italian relay"
+msgstr "Relay italiano"
+
+msgctxt "#30512"
+msgid "Media relay host"
+msgstr "Host del relay"
+
+msgctxt "#30513"
+msgid "Media relay port"
+msgstr "Porta del relay"
+
+msgctxt "#30514"
+msgid "Relay signing key"
+msgstr "Chiave del relay"
+
+msgctxt "#30520"
+msgid "Kodi TV"
+msgstr "Kodi TV"
+
+msgctxt "#30521"
+msgid "Add Samsung TV Plus to Kodi Live TV (IPTV Manager)"
+msgstr "Aggiungi Samsung TV Plus alla TV di Kodi (IPTV Manager)"
+
+msgctxt "#30522"
+msgid "Leave off if another source already adds these channels to Kodi."
+msgstr "Lascia disattivato se un'altra fonte aggiunge già questi canali a Kodi."

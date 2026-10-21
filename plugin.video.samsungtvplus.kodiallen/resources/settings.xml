@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+    <category label="30500">
+        <setting id="route_mode" type="select" label="30501" default="0" lvalues="30502|30503" />
+        <setting id="relay_host" type="text" label="30512" default="" visible="eq(-1,1)" />
+        <setting id="relay_port" type="number" label="30513" default="34405" visible="eq(-2,1)" />
+        <setting id="relay_signing_key" type="text" label="30514" option="hidden" default="" visible="eq(-3,1)" />
+    </category>
+    <category label="30520">
+        <setting id="iptv.enabled" type="bool" label="30521" default="false" />
+        <setting type="lsep" label="30522" />
+        <setting id="iptv.channels_uri" type="text" default="plugin://plugin.video.samsungtvplus.kodiallen/iptv/channels" visible="false" />
+        <setting id="iptv.epg_uri" type="text" default="plugin://plugin.video.samsungtvplus.kodiallen/iptv/epg" visible="false" />
+    </category>
+</settings>

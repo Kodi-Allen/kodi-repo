@@ -95,6 +95,60 @@ ParkStream is an independently maintained fork of plugin.video.southpark_unoffic
       </assets>
     </extension>
   </addon>
+  <addon id="plugin.video.samsungtvplus.kodiallen" name="Samsung TV Plus" version="0.1.0" provider-name="Kodi Allen">
+    <requires>
+      <import addon="xbmc.python" version="3.0.0"/>
+      <import addon="script.module.requests" version="2.22.0"/>
+      <import addon="inputstream.adaptive" version="2.6.0"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+      <provides>video</provides>
+    </extension>
+    <extension point="xbmc.service" library="service.py"/>
+    <extension point="xbmc.addon.metadata">
+      <summary lang="en_GB">Samsung TV Plus Italy: free live channels with a programme guide</summary>
+      <summary lang="de_DE">Samsung TV Plus Italien: kostenlose Live-Sender mit Programmführer</summary>
+      <summary lang="it_IT">Samsung TV Plus Italia: canali gratuiti in diretta con guida TV</summary>
+      <description lang="en_GB">Watch the free Samsung TV Plus channels for Italy. Unofficial add-on, not affiliated with or endorsed by Samsung.
+* Home with what is on now, channel rows by Samsung's groups
+* Live TV guide with channel logos, now and next and a half-hour timeline
+* Favourites and search by channel name or programme
+* Direct playback, or through an Italian relay for channels that only play in Italy
+* Optional IPTV Manager integration for the Kodi TV guide, off by default</description>
+      <description lang="de_DE">Die kostenlosen Samsung-TV-Plus-Sender für Italien. Inoffizielles Add-on, nicht mit Samsung verbunden.
+* Home mit dem laufenden Programm, Senderreihen nach Samsungs Gruppen
+* Live-TV-Programmführer mit Senderlogos, Jetzt/Danach und Halbstunden-Raster
+* Favoriten und Suche nach Sender oder Sendung
+* Direkte Wiedergabe oder über einen italienischen Relay für Sender, die nur in Italien laufen
+* Optionale IPTV-Manager-Anbindung für Kodis TV-Bereich, standardmäßig aus</description>
+      <description lang="it_IT">I canali gratuiti di Samsung TV Plus per l'Italia. Add-on non ufficiale, non affiliato a Samsung.
+* Home con i programmi in onda, file di canali per gruppo
+* Guida TV con loghi, ora e dopo e griglia a mezz'ora
+* Preferiti e ricerca per canale o programma
+* Riproduzione diretta o tramite un relay italiano per i canali disponibili solo in Italia
+* Integrazione opzionale con IPTV Manager per la TV di Kodi, disattivata di default</description>
+      <disclaimer lang="en_GB">Unofficial add-on, not affiliated with or endorsed by Samsung. Channel availability is decided by Samsung and the channel providers; some channels play only in Italy. Widevine-protected channels are licensed to Samsung devices only and are not listed.</disclaimer>
+      <disclaimer lang="de_DE">Inoffizielles Add-on, nicht mit Samsung verbunden. Welche Sender wo laufen, entscheiden Samsung und die Anbieter; manche Sender laufen nur in Italien. Widevine-geschützte Sender sind nur für Samsung-Geräte lizenziert und werden nicht angezeigt.</disclaimer>
+      <platform>all</platform>
+      <language>it</language>
+      <license>GPL-3.0-or-later</license>
+      <website>https://www.samsung.com/it/tvplus/</website>
+      <source>https://github.com/Kodi-Allen/kodi-repo/tree/main/plugin.video.samsungtvplus.kodiallen</source>
+      <news>
+0.1.0 - First release
+- Samsung TV Plus Italy: Home, Live TV guide, favourites and search
+- Direct playback or through an Italian relay
+- Optional IPTV Manager integration, off by default
+		</news>
+      <assets>
+        <icon>resources/images/icon.png</icon>
+        <fanart>resources/images/fanart.jpg</fanart>
+        <screenshot>resources/screenshots/home.jpg</screenshot>
+        <screenshot>resources/screenshots/live-tv.jpg</screenshot>
+        <screenshot>resources/screenshots/search.jpg</screenshot>
+      </assets>
+    </extension>
+  </addon>
   <addon id="plugin.video.tubitv" name="TubiTV" version="2026.10.13.1" provider-name="Lunatixz, Breezyslasher, Kodi Allen">
     <requires>
       <import addon="xbmc.python" version="3.0.0"/>

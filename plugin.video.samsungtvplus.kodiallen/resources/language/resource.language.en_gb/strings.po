@@ -1,0 +1,113 @@
+# Kodi Media Center language file
+# Addon Name: Samsung TV Plus
+# Addon id: plugin.video.samsungtvplus.kodiallen
+msgid ""
+msgstr ""
+"Project-Id-Version: plugin.video.samsungtvplus.kodiallen\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en_GB\n"
+
+msgctxt "#30022"
+msgid "Could not reach Samsung TV Plus"
+msgstr ""
+
+msgctxt "#30072"
+msgid "Loading…"
+msgstr ""
+
+msgctxt "#30073"
+msgid "No channels available."
+msgstr ""
+
+msgctxt "#30074"
+msgid "Could not load the channels."
+msgstr ""
+
+msgctxt "#30201"
+msgid "Italy"
+msgstr ""
+
+msgctxt "#30203"
+msgid "Search"
+msgstr ""
+
+msgctxt "#30210"
+msgid "Home"
+msgstr ""
+
+msgctxt "#30211"
+msgid "Live TV"
+msgstr ""
+
+msgctxt "#30301"
+msgid "This channel is not available right now."
+msgstr ""
+
+msgctxt "#30401"
+msgid "All channels"
+msgstr ""
+
+msgctxt "#30402"
+msgid "Favourites"
+msgstr ""
+
+msgctxt "#30403"
+msgid "%s added to favourites"
+msgstr ""
+
+msgctxt "#30404"
+msgid "%s removed from favourites"
+msgstr ""
+
+msgctxt "#30405"
+msgid "Add to favourites"
+msgstr ""
+
+msgctxt "#30406"
+msgid "Remove from favourites"
+msgstr ""
+
+msgctxt "#30411"
+msgid "Next:"
+msgstr ""
+
+msgctxt "#30500"
+msgid "Network"
+msgstr ""
+
+msgctxt "#30501"
+msgid "Route"
+msgstr ""
+
+msgctxt "#30502"
+msgid "Direct"
+msgstr ""
+
+msgctxt "#30503"
+msgid "Italian relay"
+msgstr ""
+
+msgctxt "#30512"
+msgid "Media relay host"
+msgstr ""
+
+msgctxt "#30513"
+msgid "Media relay port"
+msgstr ""
+
+msgctxt "#30514"
+msgid "Relay signing key"
+msgstr ""
+
+msgctxt "#30520"
+msgid "Kodi TV"
+msgstr ""
+
+msgctxt "#30521"
+msgid "Add Samsung TV Plus to Kodi Live TV (IPTV Manager)"
+msgstr ""
+
+msgctxt "#30522"
+msgid "Leave off if another source already adds these channels to Kodi."
+msgstr ""

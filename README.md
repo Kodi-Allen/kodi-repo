@@ -2,7 +2,7 @@
 
 **Community add-ons for streaming, Blu-ray playback and a richer Kodi library.**
 
-Discover TubiTV, Joyn and ParkStream, play disc playlists with MPLS STRM Player, manage library
+Discover TubiTV, Joyn, Samsung TV Plus and ParkStream, play disc playlists with MPLS STRM Player, manage library
 artwork, and customise Kodi with Aeon Tajo Tweaked. This repository distributes original tools and
 maintained community forks, with Kodi 21 (Omega) as its main target.
 
@@ -38,6 +38,7 @@ Versions below match the repository's published add-on feeds.
 |---|---|---|---|
 | **[TubiTV](plugin.video.tubitv/README.md)** | Browse free, ad-supported films, series and live channels, with its own interface, library export and optional account features. | `2026.10.13.1` | Video add-ons |
 | **[Joyn](plugin.video.joyn.kodiallen/README.md)** | Joyn Austria, Germany and Switzerland: live TV guide, series, films and shows in its own interface, with a region selector and optional sign-in. | `0.1.0` | Video add-ons |
+| **[Samsung TV Plus](plugin.video.samsungtvplus.kodiallen/README.md)** | The free Samsung TV Plus channels for Italy: live TV guide with now and next, channel rows, favourites and search in its own interface. | `0.1.0` | Video add-ons |
 | **[ParkStream](docs/parkstream/README.md)** | Browse South Park seasons and episodes from the official regional websites, with artwork, descriptions and a random episode option. | `1.0.2+matrix.1` | Video add-ons |
 | **[MPLS STRM Player](plugin.video.mpls.strm.player)** | Play Blu-ray/UHD MPLS playlists from `.strm` files and create STRM files using thediscdb.com. | `4.1.0` | Video add-ons |
 | **[Artwork Beef](script.artwork.beef)** | Download and manage extra artwork for movies, TV shows and music. This distribution includes Python 3 and Kodi Omega fixes. | `0.28.10` | Program add-ons |
@@ -59,6 +60,9 @@ The repository add-on itself is **Kodi Allen Repository `1.0.1`**.
 - **Joyn** is unofficial. Joyn decides per title and connection where something may play and
   refuses VPN addresses; Widevine is required. See the
   [Joyn documentation](plugin.video.joyn.kodiallen/README.md#regions-and-connections).
+- **Samsung TV Plus** is unofficial and covers Italy. Some channels play only from an Italian
+  connection; Samsung's Widevine channels are licensed to Samsung devices only and are not
+  listed. See the [Samsung TV Plus documentation](plugin.video.samsungtvplus.kodiallen/README.md#region-and-network).
 - **ParkStream** is unofficial. Episode availability and audio language depend on the official
   regional site. See its [known limitations](docs/parkstream/README.md#known-limitations).
 
@@ -88,6 +92,9 @@ your Kodi skin; TubiTV provides its own interface.
 - **TubiTV problem:** read the [TubiTV documentation](plugin.video.tubitv/README.md), then
   [report it here](https://github.com/Kodi-Allen/kodi-repo/issues).
 - **Joyn problem:** read the [Joyn documentation](plugin.video.joyn.kodiallen/README.md), then
+  [report it here](https://github.com/Kodi-Allen/kodi-repo/issues).
+- **Samsung TV Plus problem:** read the
+  [Samsung TV Plus documentation](plugin.video.samsungtvplus.kodiallen/README.md), then
   [report it here](https://github.com/Kodi-Allen/kodi-repo/issues).
 - **General Kodi help:** visit the [Kodi community forum](https://forum.kodi.tv/).
 
